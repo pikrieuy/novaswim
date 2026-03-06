@@ -178,6 +178,7 @@ export function CheckoutPage({ cart, cartTotal, couponDiscount, addresses, selec
       courier: selectedShip,
       payment: selectedPay,
       address: addr,
+      
     });
     navigate("success");
   };

@@ -3,7 +3,7 @@
 // ─────────────────────────────────────────
 
 import { supabase } from '../supabase'
-import { useState, useMemo, useCallback, useEffect } from "react";
+import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { COUPONS } from "../data/products";
 import { genId } from "../utils";
 
@@ -13,13 +13,19 @@ export function useStore() {
   //  CURRENT USER
   // ─────────────────────────────────────────
   const [currentUser, setCurrentUser] = useState(null);
+  const currentUserRef = useRef(null);
+  const cartRef        = useRef([]);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setCurrentUser(session?.user ?? null);
+      const user = session?.user ?? null;
+      setCurrentUser(user);
+      currentUserRef.current = user;
     });
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setCurrentUser(session?.user ?? null);
+      const user = session?.user ?? null;
+      setCurrentUser(user);
+      currentUserRef.current = user;
     });
     return () => subscription.unsubscribe();
   }, []);
@@ -63,7 +69,6 @@ export function useStore() {
     })
   }, [currentUser])
 
-  // Load reviews dan distribute ke produk
   useEffect(() => {
     supabase.from('reviews').select('*').order('created_at', { ascending: false }).then(({ data, error }) => {
       if (error) { console.error('❌ Reviews error:', error); return; }
@@ -83,9 +88,10 @@ export function useStore() {
   //  CART
   // ─────────────────────────────────────────
   const [cart, setCart] = useState([]);
+  useEffect(() => { cartRef.current = cart; }, [cart]);
 
   // ─────────────────────────────────────────
-  //  ORDERS (per user)
+  //  ORDERS
   // ─────────────────────────────────────────
   const [orders, setOrders] = useState([]);
 
@@ -103,12 +109,11 @@ export function useStore() {
   }, [currentUser])
 
   // ─────────────────────────────────────────
-  //  ADDRESS — tersimpan ke Supabase
+  //  ADDRESS
   // ─────────────────────────────────────────
   const [addresses, setAddresses]                 = useState([]);
   const [selectedAddressId, setSelectedAddressId] = useState(null);
 
-  // Load alamat dari Supabase saat user login
   useEffect(() => {
     if (!currentUser) {
       setAddresses([]);
@@ -124,9 +129,8 @@ export function useStore() {
         if (error) { console.error('❌ Addresses error:', error); return; }
         const addrs = data || [];
         setAddresses(addrs);
-        // Auto-pilih alamat pertama kalau belum ada yang dipilih
-        if (addrs.length > 0 && !selectedAddressId) {
-          setSelectedAddressId(addrs[0].id);
+        if (addrs.length > 0) {
+          setSelectedAddressId(prev => prev || addrs[0].id);
         }
       })
   }, [currentUser])
@@ -205,9 +209,18 @@ export function useStore() {
   }, [cartTotal]);
 
   // ─────────────────────────────────────────
-  //  ORDER — + update sold & stock otomatis
+  //  ORDER — pakai ref supaya tidak stale closure
   // ─────────────────────────────────────────
   const placeOrder = useCallback(async (orderData) => {
+    // Pakai ref untuk dapat nilai terbaru, bukan closure yang bisa stale
+    const currentCart = cartRef.current;
+    const user        = currentUserRef.current;
+
+    console.log('🛒 placeOrder dipanggil, user:', user?.id, 'cart:', currentCart.length);
+
+    if (!user) { console.error('❌ User belum login!'); return; }
+    if (!currentCart.length) { console.error('❌ Cart kosong!'); return; }
+
     const newOrder = {
       total:   orderData.total,
       status:  'Dikemas',
@@ -215,15 +228,15 @@ export function useStore() {
       courier: orderData.courier,
       payment: orderData.payment,
       address: orderData.address,
-      user_id: currentUser?.id,
+      user_id: user.id,
     }
 
     const { data, error } = await supabase
       .from('orders').insert(newOrder).select().single()
-    if (error) { console.error('Gagal simpan order:', error); return; }
+    if (error) { console.error('❌ Gagal simpan order:', error); return; }
+    console.log('✅ Order tersimpan:', data.id)
 
-    // Simpan order items
-    const items = cart.map(item => ({
+    const items = currentCart.map(item => ({
       order_id:   data.id,
       product_id: String(item.productId || item.id),
       name:       item.name,
@@ -234,35 +247,45 @@ export function useStore() {
       emoji:      item.emoji,
       bg:         item.bg || '#0a0519',
     }))
-    await supabase.from('order_items').insert(items)
 
-    // Update sold & stock untuk setiap produk yang dibeli
-    for (const item of cart) {
-      const pid = String(item.productId || item.id);
+    const { error: itemsError } = await supabase.from('order_items').insert(items)
+    if (itemsError) { console.error('❌ Gagal simpan items:', itemsError); return; }
+    console.log('✅ Items tersimpan, update sold/stock...')
+
+    // Update sold & stock — fetch fresh dari DB supaya tidak stale
+    for (const item of currentCart) {
+      const pid       = String(item.productId || item.id);
       const qtyBought = item.qty;
 
       if (pid.startsWith('p')) {
         const numericId = parseInt(pid.replace('p', ''));
-        const prod = products.find(p => p.id === pid);
-        if (prod) {
-          const newSold  = (parseInt(prod.sold) || 0) + qtyBought;
-          const newStock = Math.max(0, (prod.stock ?? 100) - qtyBought);
-          await supabase.from('products').update({ sold: String(newSold), stock: newStock }).eq('id', numericId);
-          setProducts(prev => prev.map(p =>
-            p.id === pid ? { ...p, sold: String(newSold), stock: newStock } : p
-          ));
-        }
+        const { data: freshProd } = await supabase
+          .from('products').select('sold, stock').eq('id', numericId).single()
+        if (!freshProd) continue;
+
+        const newSold  = (freshProd.sold  || 0) + qtyBought;
+        const newStock = Math.max(0, (freshProd.stock ?? 100) - qtyBought);
+
+        await supabase.from('products').update({ sold: newSold, stock: newStock }).eq('id', numericId)
+        setProducts(prev => prev.map(p =>
+          p.id === pid ? { ...p, sold: newSold, stock: newStock } : p
+        ));
+        console.log(`✅ ${pid}: sold=${newSold}, stock=${newStock}`)
+
       } else {
-        const prod = sellerProducts.find(p => p.id === pid);
-        if (prod) {
-          const newSold    = (parseInt(prod.sold) || 0) + qtyBought;
-          const newStock   = Math.max(0, (prod.stock ?? 0) - qtyBought);
-          const newRevenue = (prod.revenue || 0) + (item.price * qtyBought);
-          await supabase.from('seller_products').update({ sold: String(newSold), stock: newStock, revenue: newRevenue }).eq('id', pid);
-          setSellerProducts(prev => prev.map(p =>
-            p.id === pid ? { ...p, sold: String(newSold), stock: newStock, revenue: newRevenue } : p
-          ));
-        }
+        const { data: freshProd } = await supabase
+          .from('seller_products').select('sold, stock, revenue').eq('id', pid).single()
+        if (!freshProd) continue;
+
+        const newSold    = (freshProd.sold    || 0) + qtyBought;
+        const newStock   = Math.max(0, (freshProd.stock   ?? 0) - qtyBought);
+        const newRevenue = (freshProd.revenue || 0) + (item.price * qtyBought);
+
+        await supabase.from('seller_products').update({ sold: newSold, stock: newStock, revenue: newRevenue }).eq('id', pid)
+        setSellerProducts(prev => prev.map(p =>
+          p.id === pid ? { ...p, sold: newSold, stock: newStock, revenue: newRevenue } : p
+        ));
+        console.log(`✅ seller ${pid}: sold=${newSold}, stock=${newStock}`)
       }
     }
 
@@ -270,7 +293,7 @@ export function useStore() {
     clearCart();
     setCouponDiscount(0);
     setShippingCost(0);
-  }, [cart, currentUser, products, sellerProducts, clearCart])
+  }, [clearCart])
 
   // ─────────────────────────────────────────
   //  ORDER STATUS ACTIONS
@@ -288,7 +311,7 @@ export function useStore() {
   }, []);
 
   // ─────────────────────────────────────────
-  //  REVIEWS — simpan ke Supabase
+  //  REVIEWS
   // ─────────────────────────────────────────
   const addReview = useCallback(async (productId, review) => {
     const record = {
@@ -299,12 +322,9 @@ export function useStore() {
       text:         review.text,
       date:         review.date,
     }
-
     const { data, error } = await supabase.from('reviews').insert(record).select().single()
     if (error) { console.error('Gagal simpan review:', error); return; }
-
     const newReview = { ...record, id: data.id };
-
     if (String(productId).startsWith('p')) {
       setProducts(prev => prev.map(p =>
         p.id === productId ? { ...p, reviews: [newReview, ...p.reviews] } : p
@@ -320,6 +340,7 @@ export function useStore() {
   //  SELLER PRODUCTS ACTIONS
   // ─────────────────────────────────────────
   const saveSellerProduct = useCallback(async (data, editingId) => {
+    const user = currentUserRef.current;
     const record = {
       id:          editingId || genId("sp"),
       name:        data.name        || "",
@@ -330,18 +351,17 @@ export function useStore() {
       cat:         data.cat         || "bikini",
       badge_class: data.badgeClass  || "pcb-new",
       badge_text:  data.badgeText   || "NEW",
-      sold:        data.sold        || "0",
+      sold:        0,
       rating:      data.rating      || 5,
       description: data.desc        || "",
       flash:       data.flash       || false,
       stock:       data.stock       || 0,
       revenue:     data.revenue     || 0,
       bonus:       data.bonus       || [],
-      user_id:     currentUser?.id,
+      user_id:     user?.id,
     }
-
     if (editingId) {
-      const { error } = await supabase.from('seller_products').update(record).eq('id', editingId).eq('user_id', currentUser?.id)
+      const { error } = await supabase.from('seller_products').update(record).eq('id', editingId).eq('user_id', user?.id)
       if (error) { console.error('Gagal update produk:', error); return; }
       setSellerProducts(prev => prev.map(p =>
         p.id === editingId
@@ -360,23 +380,24 @@ export function useStore() {
         reviews:    [],
       }])
     }
-  }, [currentUser])
+  }, [])
 
   const deleteSellerProduct = useCallback(async (id) => {
-    const { error } = await supabase.from('seller_products').delete().eq('id', id).eq('user_id', currentUser?.id)
+    const user = currentUserRef.current;
+    const { error } = await supabase.from('seller_products').delete().eq('id', id).eq('user_id', user?.id)
     if (error) { console.error('Gagal hapus produk:', error); return; }
     setSellerProducts(prev => prev.filter(p => p.id !== id))
-  }, [currentUser])
+  }, [])
 
   // ─────────────────────────────────────────
-  //  ADDRESS ACTIONS — tersimpan ke Supabase
+  //  ADDRESS ACTIONS
   // ─────────────────────────────────────────
   const saveAddress = useCallback(async (formData) => {
-    if (!currentUser) return null;
-
+    const user = currentUserRef.current;
+    if (!user) return null;
     const newAddr = {
       id:      genId("a"),
-      user_id: currentUser.id,
+      user_id: user.id,
       name:    formData.name,
       phone:   formData.phone,
       street:  formData.street,
@@ -384,21 +405,23 @@ export function useStore() {
       postal:  formData.postal,
       prov:    formData.prov,
     };
-
     const { error } = await supabase.from('addresses').insert(newAddr);
     if (error) { console.error('Gagal simpan alamat:', error); return null; }
-
     setAddresses(prev => [...prev, newAddr]);
     setSelectedAddressId(newAddr.id);
     return newAddr;
-  }, [currentUser]);
+  }, []);
 
   const deleteAddress = useCallback(async (id) => {
-    const { error } = await supabase.from('addresses').delete().eq('id', id).eq('user_id', currentUser?.id);
+    const user = currentUserRef.current;
+    const { error } = await supabase.from('addresses').delete().eq('id', id).eq('user_id', user?.id);
     if (error) { console.error('Gagal hapus alamat:', error); return; }
-    setAddresses(prev => prev.filter(a => a.id !== id));
-    setSelectedAddressId(prev => (prev === id ? (addresses.find(a => a.id !== id)?.id || null) : prev));
-  }, [currentUser, addresses]);
+    setAddresses(prev => {
+      const remaining = prev.filter(a => a.id !== id);
+      setSelectedAddressId(remaining.length > 0 ? remaining[0].id : null);
+      return remaining;
+    });
+  }, []);
 
   // ─────────────────────────────────────────
   //  RETURN
