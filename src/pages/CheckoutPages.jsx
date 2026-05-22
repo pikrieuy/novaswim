@@ -294,7 +294,13 @@ export function CheckoutPage({ cart, cartTotal, couponDiscount, addresses, selec
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               {cart.map((ci) => (
                 <div key={ci.id} style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                  <div style={{ width: 50, height: 50, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, border: "1px solid rgba(255,255,255,0.07)", flexShrink: 0, background: ci.bg }}>{ci.emoji}</div>
+                  <div style={{ width: 50, height: 50, position: "relative", flexShrink: 0, border: "1px solid rgba(255,255,255,0.07)", overflow: "hidden" }}>
+                    <div style={{ position: "absolute", inset: 0, background: ci.bg || "#0a0519" }} />
+                    {ci.image_url
+                      ? <img src={ci.image_url} alt={ci.name} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} onError={e => e.currentTarget.style.display = "none"} />
+                      : <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22 }}>{ci.emoji}</span>
+                    }
+                  </div>
                   <div style={{ flex: 1 }}>
                     <div style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 9, fontWeight: 700, color: "#fff", textTransform: "uppercase" }}>{ci.name}</div>
                     <div style={{ fontSize: 9, color: "rgba(255,255,255,0.4)", marginTop: 2 }}>{ci.size} · {ci.color} · x{ci.qty}</div>

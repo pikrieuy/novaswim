@@ -160,8 +160,8 @@ function MiniBanners() {
           <div style={{ position: "absolute", inset: 0, background: b.bg }} />
           <div style={{ position: "relative", zIndex: 1, textAlign: "center" }}>
             <span style={{ fontSize: 26, display: "block", marginBottom: 4 }}>{b.icon}</span>
-            <span style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 6, color: "#fff", letterSpacing: 1, textShadow: "0 0 8px rgba(0,0,0,0.8)", display: "block" }}>{b.label}</span>
-            <span style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: 9, color: "rgba(255,255,255,0.55)", letterSpacing: 1, marginTop: 3, display: "block" }}>{b.sub}</span>
+            <span style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 8, color: "#fff", letterSpacing: 1, textShadow: "0 0 8px rgba(0,0,0,0.8)", display: "block" }}>{b.label}</span>
+            <span style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: 11, color: "rgba(255,255,255,0.7)", letterSpacing: 1, marginTop: 3, display: "block" }}>{b.sub}</span>
           </div>
         </div>
       ))}
@@ -210,23 +210,23 @@ function SiteFooter({ navigate }) {
       <div className="footer-grid" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 32, marginBottom: 24 }}>
         <div>
           <span style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 14, color: "var(--cyan)", textShadow: "0 0 10px var(--cyan)", display: "block", marginBottom: 12 }}>NEX<em style={{ color: "var(--pink)", fontStyle: "normal" }}>WEAR</em></span>
-          <p style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", lineHeight: 1.8, letterSpacing: 0.5, marginBottom: 14 }}>Fashion dari masa depan. Dibuat untuk mereka yang berani tampil beda di alam semesta gaya.</p>
+          <p style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", lineHeight: 1.8, letterSpacing: 0.5, marginBottom: 14 }}>Fashion dari masa depan. Dibuat untuk mereka yang berani tampil beda di alam semesta gaya.</p>
           <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
             {["SSL", "VISA", "GOPAY", "OVO", "COD"].map((b) => (
-              <span key={b} style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", fontFamily: "'Press Start 2P',monospace", fontSize: 6, color: "rgba(255,255,255,0.5)", padding: "4px 8px" }}>{b}</span>
+              <span key={b} style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)", fontFamily: "'Press Start 2P',monospace", fontSize: 8, color: "rgba(255,255,255,0.7)", padding: "5px 10px" }}>{b}</span>
             ))}
           </div>
         </div>
         {COLS.map((col) => (
           <div key={col.h}>
-            <h4 style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 11, fontWeight: 700, color: "var(--cyan)", letterSpacing: 2, textTransform: "uppercase", marginBottom: 12 }}>{col.h}</h4>
-            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
-              {col.links.map((l) => <li key={l}><a href="#" style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", textDecoration: "none", letterSpacing: 0.5 }}>{l}</a></li>)}
+            <h4 style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 12, fontWeight: 700, color: "var(--cyan)", letterSpacing: 2, textTransform: "uppercase", marginBottom: 12 }}>{col.h}</h4>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
+              {col.links.map((l) => <li key={l}><a href="#" style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", textDecoration: "none", letterSpacing: 0.5 }}>{l}</a></li>)}
             </ul>
           </div>
         ))}
       </div>
-      <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 16, display: "flex", justifyContent: "space-between", fontSize: 9, color: "rgba(255,255,255,0.25)", letterSpacing: 1 }}>
+      <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 16, display: "flex", justifyContent: "space-between", fontSize: 11, color: "rgba(255,255,255,0.45)", letterSpacing: 1 }}>
         <p>© 2077 NEXWEAR · ALL RIGHTS RESERVED</p>
         <p>POWERED BY PIXEL TECHNOLOGY ⚡</p>
       </div>

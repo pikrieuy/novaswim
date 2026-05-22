@@ -1,0 +1,196 @@
+<mxfile host="app.diagrams.net" modified="2026-04-28T14:30:00.000Z" agent="GPT" version="24.7.17">
+  <diagram id="nexwear-usecase-clean" name="Use Case Nexwear Clean">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- System Boundary -->
+        <mxCell id="sys" value="Sistem Nexwear Store" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=2;fontStyle=1;align=center;verticalAlign=top;spacingTop=10;" vertex="1" parent="1">
+          <mxGeometry x="240" y="40" width="1120" height="860" as="geometry"/>
+        </mxCell>
+
+        <!-- Actors -->
+        <mxCell id="guest" value="Guest" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="100" width="60" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="buyer" value="Pembeli" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="360" width="60" height="120" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="seller" value="Penjual" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1430" y="360" width="60" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- Group Titles -->
+        <mxCell id="g1" value="Autentikasi" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="320" y="80" width="150" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="g2" value="Belanja" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="320" y="220" width="150" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="g3" value="Pesanan" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="320" y="540" width="150" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="g4" value="Akun" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="320" y="760" width="150" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="g5" value="Seller Center" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="930" y="220" width="180" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- Authentication -->
+        <mxCell id="uc1" value="Register Akun" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="120" width="190" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc2" value="Login" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="120" width="190" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Shopping -->
+        <mxCell id="uc3" value="Lihat Produk" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="270" width="190" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc4" value="Cari dan Filter Produk" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="270" width="210" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc5" value="Lihat Detail Produk" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="270" width="200" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc6" value="Tambah ke Keranjang" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="370" width="190" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc7" value="Kelola Keranjang" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="370" width="190" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc8" value="Kelola Alamat" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="370" width="190" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc9" value="Checkout" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="370" width="170" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Orders -->
+        <mxCell id="uc10" value="Pilih Pengiriman dan Pembayaran" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="590" width="280" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc11" value="Lihat / Lacak Pesanan" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="670" y="590" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc12" value="Batalkan Pesanan" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="940" y="590" width="190" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc13" value="Selesaikan Pesanan" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1180" y="590" width="190" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc14" value="Beri Ulasan" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="810" y="690" width="170" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Account -->
+        <mxCell id="uc15" value="Kelola Profil" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="580" y="800" width="190" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Seller Center -->
+        <mxCell id="uc16" value="Kelola Produk Jualan" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="270" width="210" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="uc17" value="Lihat Statistik Penjualan" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1080" y="470" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Guest Associations -->
+        <mxCell id="a1" style="endArrow=none;html=1;" edge="1" parent="1" source="guest" target="uc1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a2" style="endArrow=none;html=1;" edge="1" parent="1" source="guest" target="uc2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Buyer Associations -->
+        <mxCell id="a3" style="endArrow=none;html=1;" edge="1" parent="1" source="buyer" target="uc3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a4" style="endArrow=none;html=1;" edge="1" parent="1" source="buyer" target="uc4">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a5" style="endArrow=none;html=1;" edge="1" parent="1" source="buyer" target="uc5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a6" style="endArrow=none;html=1;" edge="1" parent="1" source="buyer" target="uc6">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a7" style="endArrow=none;html=1;" edge="1" parent="1" source="buyer" target="uc7">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a8" style="endArrow=none;html=1;" edge="1" parent="1" source="buyer" target="uc8">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a9" style="endArrow=none;html=1;" edge="1" parent="1" source="buyer" target="uc9">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a10" style="endArrow=none;html=1;" edge="1" parent="1" source="buyer" target="uc10">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a11" style="endArrow=none;html=1;" edge="1" parent="1" source="buyer" target="uc11">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a12" style="endArrow=none;html=1;" edge="1" parent="1" source="buyer" target="uc12">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a13" style="endArrow=none;html=1;" edge="1" parent="1" source="buyer" target="uc13">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a14" style="endArrow=none;html=1;" edge="1" parent="1" source="buyer" target="uc14">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a15" style="endArrow=none;html=1;" edge="1" parent="1" source="buyer" target="uc15">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Seller Associations -->
+        <mxCell id="a16" style="endArrow=none;html=1;" edge="1" parent="1" source="seller" target="uc16">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a17" style="endArrow=none;html=1;" edge="1" parent="1" source="seller" target="uc17">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="a18" style="endArrow=none;html=1;" edge="1" parent="1" source="seller" target="uc15">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Include relationships -->
+        <mxCell id="i1" value="&lt;&lt;include&gt;&gt;" style="dashed=1;endArrow=open;html=1;" edge="1" parent="1" source="uc9" target="uc10">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="i2" value="&lt;&lt;include&gt;&gt;" style="dashed=1;endArrow=open;html=1;" edge="1" parent="1" source="uc6" target="uc5">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="i3" value="&lt;&lt;include&gt;&gt;" style="dashed=1;endArrow=open;html=1;" edge="1" parent="1" source="uc14" target="uc11">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
