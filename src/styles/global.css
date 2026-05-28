@@ -91,6 +91,16 @@ body::before {
 /* ── Reusable Utility Classes ── */
 .page-anim { animation: pageIn .35s ease; }
 
+/* ── Focus Indicators (WCAG AA) ── */
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+.nav-tab:focus-visible, .cat-item:focus-visible {
+  outline: 2px solid var(--pink);
+  outline-offset: -2px;
+}
+
 /* ── Logo ── */
 .logo {
   font-family: 'Press Start 2P', monospace;
@@ -158,6 +168,9 @@ body::before {
 
 /* ── Panel Drawer animation ── */
 .panel-drawer { transition: right .35s ease; }
+@media (max-width: 480px) {
+  .panel-drawer { width: 100vw !important; }
+}
 
 /* ── Star Picker ── */
 .star-pick { transition: color 0.15s; cursor: pointer; }
@@ -188,4 +201,5 @@ body::before {
   .mini-banners { grid-template-columns: repeat(2,1fr) !important; }
   .cat-strip { grid-template-columns: repeat(3,1fr) !important; }
   .detail-layout { padding: 12px !important; gap: 16px !important; }
+  button { min-height: 44px; }
 }

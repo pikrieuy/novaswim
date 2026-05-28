@@ -23,6 +23,7 @@ export default function DetailPage({ productId, allProducts, navigate, addToCart
   const [selectedSize, setSelectedSize] = useState("");
   const [activeImg, setActiveImg] = useState(0);
   const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
+  const [selectedColor, setSelectedColor] = useState("");
 
   const [selectedStar, setSelectedStar] = useState(0);
   const [reviewName,   setReviewName]   = useState("");
@@ -32,8 +33,11 @@ export default function DetailPage({ productId, allProducts, navigate, addToCart
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(""), 2500); };
 
   if (!p) return (
-    <div className="page-anim" style={{ padding: 40, textAlign: "center", color: "rgba(255,255,255,0.3)" }}>
-      Produk tidak ditemukan
+    <div className="page-anim" style={{ padding: "60px 20px", textAlign: "center" }}>
+      <div style={{ fontSize: 64, marginBottom: 16 }}>🔍</div>
+      <div style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 18, fontWeight: 900, color: "var(--pink)", marginBottom: 12 }}>PRODUK TIDAK DITEMUKAN</div>
+      <div style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", marginBottom: 24, letterSpacing: 0.5 }}>Produk yang kamu cari mungkin sudah dihapus atau tidak tersedia.</div>
+      <button onClick={() => navigate("home")} style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 9, background: "transparent", border: "2px solid var(--cyan)", color: "var(--cyan)", padding: "12px 24px", cursor: "pointer" }}>KEMBALI KE BERANDA</button>
     </div>
   );
 
@@ -44,13 +48,15 @@ export default function DetailPage({ productId, allProducts, navigate, addToCart
 
   const handleAddCart = () => {
     if (!selectedSize) { showToast("⚠️ Pilih ukuran dulu!"); return; }
-    addToCart(p, selectedSize, "", qty);
-    showToast(`✓ ${p.name} (${selectedSize}) ditambahkan ke keranjang!`);
+    if (p.colors?.length > 0 && !selectedColor) { showToast("⚠️ Pilih warna dulu!"); return; }
+    addToCart(p, selectedSize, selectedColor, qty);
+    showToast(`✓ ${p.name} (${selectedSize}${selectedColor ? ', ' + selectedColor : ''}) ditambahkan ke keranjang!`);
   };
 
   const handleBuyNow = () => {
     if (!selectedSize) { showToast("⚠️ Pilih ukuran dulu!"); return; }
-    addToCart(p, selectedSize, "", qty);
+    if (p.colors?.length > 0 && !selectedColor) { showToast("⚠️ Pilih warna dulu!"); return; }
+    addToCart(p, selectedSize, selectedColor, qty);
     navigate("address");
   };
 
@@ -216,6 +222,31 @@ export default function DetailPage({ productId, allProducts, navigate, addToCart
               </button>
             ))}
           </div>
+
+          {/* Color Selector */}
+          {p.colors?.length > 0 && (
+            <>
+              <span style={labelStyle}>PILIH WARNA</span>
+              <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
+                {p.colors.map((color) => (
+                  <button
+                    key={color}
+                    onClick={() => setSelectedColor(color)}
+                    style={{
+                      fontFamily: "'Share Tech Mono', monospace", fontSize: 11,
+                      padding: "8px 14px",
+                      background: selectedColor === color ? "rgba(255,45,120,0.15)" : "rgba(255,255,255,0.05)",
+                      border: selectedColor === color ? "2px solid var(--pink)" : "1px solid rgba(255,255,255,0.2)",
+                      color: selectedColor === color ? "var(--pink)" : "rgba(255,255,255,0.7)",
+                      cursor: "pointer", transition: "all 0.2s", letterSpacing: 0.5,
+                    }}
+                  >
+                    {color}
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
 
           {/* Quantity */}
           <span style={labelStyle}>JUMLAH</span>

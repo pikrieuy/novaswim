@@ -23,7 +23,7 @@ export default function Header({ currentPage, navigate, cartCount, searchVal, se
   );
 }
 
-/* ── Top Bar ── */
+/* ── Top Bar (simplified) ── */
 function TopBar({ navigate, user, onLogout }) {
   const displayName = user?.user_metadata?.full_name || user?.email?.split("@")[0] || "User";
 
@@ -31,17 +31,15 @@ function TopBar({ navigate, user, onLogout }) {
     <div
       style={{
         background: "linear-gradient(90deg,#1a0040,#3d0010,#001a40)",
-        padding: "7px 24px",
+        padding: "5px 24px",
         display: "flex", justifyContent: "space-between", alignItems: "center",
         fontSize: 10, letterSpacing: "1.5px", color: "rgba(255,255,255,0.55)",
       }}
     >
-      <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
-        <span onClick={() => navigate("seller")} style={{ cursor: "pointer" }}>// Seller Center</span>
-        <span>·</span>
-        <span style={{ cursor: "pointer" }}>Download App</span>
-        <span>·</span>
+      <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
         <span onClick={() => navigate("orders")} style={{ cursor: "pointer" }}>Lacak Pesanan</span>
+        <span style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
+        <span onClick={() => navigate("seller")} style={{ cursor: "pointer" }}>Seller Center</span>
       </div>
 
       <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
