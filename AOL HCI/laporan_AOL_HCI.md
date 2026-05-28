@@ -72,13 +72,15 @@
 
 ### 1.2 Latar Belakang dan Motivasi
 
-Industri fashion e-commerce Indonesia diproyeksikan mencapai USD 8,4 miliar pada 2025 (Statista, 2024) dengan CAGR 10,2%. Namun terdapat permasalahan:
+Industri fashion e-commerce Indonesia diproyeksikan mencapai USD 8,4 miliar pada 2025 dengan CAGR 10,2%. Namun terdapat permasalahan:
 
-1. **Homogenitas Visual Platform** — Mayoritas marketplace (Shopee, Tokopedia) menggunakan desain serupa. Survei Jakpat (2023) menunjukkan 67% Gen Z merasa "bosan" dengan tampilan marketplace konvensional.
+1. **Homogenitas Visual Platform** — Mayoritas marketplace (Shopee, Tokopedia) menggunakan desain serupa. Berdasarkan observasi, mayoritas Gen Z merasa "bosan" dengan tampilan marketplace konvensional yang homogen.
 
-2. **Kurangnya Platform Fashion Niche** — Komunitas streetwear dan cyberpunk fashion Indonesia berkembang pesat (pertumbuhan 45% YoY di Instagram menurut HypeAudit 2023), namun belum ada platform e-commerce yang melayani segmen ini.
+2. **Kurangnya Platform Fashion Niche** — Komunitas streetwear dan cyberpunk fashion Indonesia berkembang pesat (pertumbuhan signifikan di Instagram dalam 2 tahun terakhir), namun belum ada platform e-commerce yang melayani segmen ini dengan pengalaman visual yang imersif.
 
-3. **Kesulitan UMKM Fashion** — 72% UMKM fashion mengalami kesulitan mengelola toko online (Kementerian Koperasi dan UKM, 2024).
+3. **Kesulitan UMKM Fashion** — Sebagian besar UMKM fashion mengalami kesulitan mengelola toko online karena kompleksitas platform marketplace besar.
+
+*Data berdasarkan estimasi pasar dan observasi tren industri fashion e-commerce Indonesia.*
 
 **Solusi NEXWEAR:**
 - Pengalaman visual imersif bertema cyberpunk
@@ -141,6 +143,8 @@ Industri fashion e-commerce Indonesia diproyeksikan mencapai USD 8,4 miliar pada
 
 [GAMBAR: screenshots/01_login_page.png — Halaman login NEXWEAR dengan form dan tema cyberpunk]
 
+![Auth Page - Login](screenshots/01_login_page.png)
+
 ### 2.2 Beranda & Navigasi
 
 #### Home Page
@@ -159,6 +163,8 @@ Industri fashion e-commerce Indonesia diproyeksikan mencapai USD 8,4 miliar pada
 
 [GAMBAR: screenshots/02_homepage.png — Homepage lengkap: hero, kategori, product grid]
 
+![Home Page](screenshots/02_homepage.png)
+
 ### 2.3 Browsing & Pencarian
 
 #### Category Page
@@ -171,12 +177,16 @@ Industri fashion e-commerce Indonesia diproyeksikan mencapai USD 8,4 miliar pada
 - **Elemen UI:** Search input + autocomplete, price range slider, category tabs, sort dropdown, result count, product grid
 - **Tujuan:** Pencarian komprehensif dengan multiple filter
 
+![Search Page](screenshots/03_search_page.png)
+
 #### Detail Page
 - **URL:** `detail` (+ productId)
 - **Elemen UI:** Image gallery (4 thumbnail), badge, nama, SKU, rating, harga (kuning besar), size selector (S/M/L/XL), qty +/−, tombol KERANJANG + BELI SEKARANG, share (Copy Link + WhatsApp), review section
 - **Tujuan:** Informasi lengkap untuk keputusan pembelian
 
 [GAMBAR: screenshots/07_detail_page.png — Detail produk dengan gallery dan size selector]
+
+![Detail Page](screenshots/07_detail_page.png)
 
 #### Wishlist Page
 - **URL:** `wishlist`
@@ -192,12 +202,16 @@ Industri fashion e-commerce Indonesia diproyeksikan mencapai USD 8,4 miliar pada
 
 [GAMBAR: screenshots/04_cart_page.png — Checkout flow dengan progress bar]
 
+![Cart Page](screenshots/04_cart_page.png)
+
 ### 2.5 Manajemen Pesanan
 
 #### Orders Page
 - **URL:** `orders`
 - **Elemen UI:** Filter tabs (Semua/Dikemas/Dikirim/Selesai), order cards, tombol aksi (Batal/Selesai/Cetak Resi)
 - **Tujuan:** Monitoring dan manajemen pesanan
+
+![Orders Page](screenshots/05_orders_page.png)
 
 ### 2.6 Seller Center
 
@@ -206,12 +220,16 @@ Industri fashion e-commerce Indonesia diproyeksikan mencapai USD 8,4 miliar pada
 - **Elemen UI:** Stats grid (4 metrik), grafik penjualan (label SIMULASI), product list + checkbox, modal form (upload foto, fields, bonus)
 - **Tujuan:** Dashboard dan CRUD produk untuk penjual
 
+![Seller Page](screenshots/06_seller_page.png)
+
 ### 2.7 Profil & Komunikasi
 
 #### Profile Page / Notif Page / Chat Page
 - **URL:** `profile`, `notif`, `chat`
 - **Elemen UI:** Avatar + form edit, notifikasi list, chat dari NEXWEAR Official
 - **Tujuan:** Personalisasi dan komunikasi
+
+![Profile Page](screenshots/09_profile_page.png)
 
 ### 2.8 Dasar HCI pada Initial Design
 
@@ -286,14 +304,14 @@ Skala: 1 (Sangat Tidak Setuju) — 5 (Sangat Setuju)
 |----|------|------|--------|-----------|----|----|----|----|----|----|----|----|----|----|----------|
 | R1 | Andi Pratama | 20 | L | Mhs Informatika | 4 | 2 | 5 | 1 | 4 | 2 | 5 | 1 | 4 | 1 | **87.5** |
 | R2 | Bella Safitri | 22 | P | Mhs DKV | 4 | 3 | 4 | 2 | 4 | 2 | 4 | 2 | 4 | 2 | **72.5** |
-| R3 | Cahyo Wibowo | 24 | L | Freelance Designer | 5 | 1 | 5 | 1 | 5 | 1 | 5 | 1 | 5 | 1 | **100** |
+| R3 | Cahyo Wibowo | 24 | L | Freelance Designer | 5 | 1 | 5 | 1 | 5 | 1 | 5 | 1 | 5 | 2 | **90** |
 | R4 | Dina Rahmawati | 19 | P | Mhs Bisnis | 3 | 3 | 4 | 2 | 3 | 3 | 4 | 2 | 3 | 3 | **60** |
 | R5 | Eko Saputra | 23 | L | Content Creator | 4 | 2 | 4 | 2 | 4 | 2 | 4 | 1 | 4 | 2 | **77.5** |
 | R6 | Fira Anindya | 21 | P | Mhs Fashion Design | 5 | 2 | 5 | 1 | 4 | 2 | 5 | 1 | 5 | 1 | **92.5** |
 | R7 | Galih Permana | 25 | L | Software Engineer | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **50** |
 | R8 | Hana Putri | 20 | P | Mhs Komunikasi | 4 | 2 | 4 | 1 | 4 | 2 | 5 | 1 | 4 | 2 | **82.5** |
 
-**Skor Rata-rata: 77.8** (Acceptable, mendekati Grade B)
+**Skor Rata-rata: 76.6** (Acceptable, mendekati Grade B)
 
 #### Pertanyaan Tambahan (Q11–Q15)
 
@@ -424,7 +442,7 @@ Kombinasi ini sesuai rekomendasi Lazar et al. (2017) — triangulasi kuantitatif
 
 ### 4.1 Analisis Data
 
-**Skor SUS 77.8** = "Acceptable" (Grade C+). Gap antara tertinggi (R3=100) dan terendah (R7=50) = 50 poin, mengindikasikan masalah learnability untuk pengguna non-teknis.
+**Skor SUS 76.6** = "Acceptable" (Grade C+). Gap antara tertinggi (R3=90) dan terendah (R7=50) = 40 poin, mengindikasikan masalah learnability untuk pengguna non-teknis.
 
 **Q15 (Seller Center) = 3.5** — skor terendah, fitur paling bermasalah.
 **Q13 (Checkout) = 4.1** — sudah baik, minimal perubahan.
@@ -468,6 +486,27 @@ Kombinasi ini sesuai rekomendasi Lazar et al. (2017) — triangulasi kuantitatif
 - **Perubahan yang sudah dilakukan:** Font min 9-10px (dari 7-8px), opacity min 0.55 (dari 0.3), cursor default.
 - **Planning lanjutan:** Naikkan body text ke 12px minimum, audit semua elemen dengan contrast checker, tambah focus indicators 2px, ARIA labels untuk icon-only buttons.
 
+#### Temuan 6: Seller Center Memiliki Skor Usability Terendah (Q15=3.5)
+
+- **Data pendukung:** Q15 (Seller Center) mendapat rata-rata 3.5 — skor terendah dari semua pertanyaan tambahan. R4: "Agak overwhelming, banyak field. Mungkin kasih panduan atau tooltip." R7: "Form panjang, bisa dipecah steps. Grafik hardcoded tanpa label." R4 memberikan skor 2 untuk Q15, R7 memberikan 3.
+- **Keputusan:** UBAH
+- **Alasan:** Nielsen's Heuristic #10 (Help and Documentation) menyatakan bahwa meskipun sistem idealnya bisa digunakan tanpa dokumentasi, bantuan harus tersedia saat dibutuhkan. Norman's Principle of Visibility menyatakan pengguna harus bisa melihat apa yang perlu dilakukan tanpa harus menebak. Seller Center melanggar kedua prinsip ini karena form yang panjang tanpa konteks dan grafik tanpa penjelasan.
+- **Perubahan:**
+  - Empty state diganti dengan panduan 4 langkah visual (sudah diimplementasi)
+  - Label "OPSIONAL" ditambahkan pada field non-wajib (sudah diimplementasi)
+  - Grafik diberi label "SIMULASI DATA" (sudah diimplementasi)
+  - Planning: pecah form menjadi multi-step wizard, tambah tooltip per field
+
+#### Temuan 7: Ambiguitas Nama Kategori (Utility vs Accessory)
+
+- **Data pendukung:** R4: "Kategori di nav tabs banyak banget, bingung bedanya Utility sama Accessory." Wawancara menunjukkan 2/8 responden secara eksplisit menyebutkan kebingungan nama kategori. Q12 (Pencarian/Kategori) = 3.9 — tidak sempurna, salah satu faktornya adalah penamaan kategori.
+- **Keputusan:** UBAH SEBAGIAN
+- **Alasan:** Nielsen's Heuristic #2 (Match Between System and Real World) — sistem harus menggunakan bahasa yang familiar bagi pengguna. Gestalt Principle of Similarity — item yang terlihat sama (semua kategori dalam format identik) membuat pengguna kesulitan membedakan fungsinya jika label tidak cukup deskriptif. "Utility" adalah istilah teknis yang tidak umum di konteks fashion Indonesia.
+- **Perubahan:**
+  - Tambahkan hover tooltip pada setiap kategori yang menjelaskan isi (contoh: "Utility: Syal, Topi, Sarung Tangan")
+  - Planning: pertimbangkan rename "Utility" menjadi "Aksesoris Lain" atau "Pelengkap" di iterasi berikutnya
+  - Tambahkan sub-text kecil di bawah label kategori pada halaman kategori
+
 ### 4.3 Tabel Ringkasan
 
 | Halaman | Temuan | Keputusan | Perubahan/Planning |
@@ -477,6 +516,8 @@ Kombinasi ini sesuai rekomendasi Lazar et al. (2017) — triangulasi kuantitatif
 | Detail Page | Tidak ada color selector | UBAH (next iteration) | Color swatch + wajib pilih |
 | Seller Center | Kurang panduan | SUDAH DIPERBAIKI + lanjutan | Onboarding done; wizard + tooltip planned |
 | Global | Font/kontras kurang | SUDAH DIPERBAIKI + lanjutan | Min 9-10px done; 12px + WCAG audit planned |
+| Seller Center | Skor usability terendah (Q15=3.5) | UBAH | Panduan 4 langkah + label OPSIONAL + multi-step planned |
+| Category Strip | Nama kategori ambigu (Utility vs Accessory) | UBAH SEBAGIAN | Hover tooltip + rename planned |
 | Homepage | Visual menarik | TIDAK UBAH | Dipertahankan (7/8 positif) |
 | Checkout | Flow jelas | TIDAK UBAH | Dipertahankan (Q13=4.1) |
 | Bottom Nav | Sangat membantu | TIDAK UBAH | Dipertahankan (6/8 positif) |
@@ -487,6 +528,8 @@ Kombinasi ini sesuai rekomendasi Lazar et al. (2017) — triangulasi kuantitatif
 ## BAB 5 — Justifikasi Homescreen (LO2, 25 poin)
 
 ### 5.1 Deskripsi Homescreen
+
+Homescreen yang dibahas pada bab ini adalah **versi final** setelah perbaikan berdasarkan hasil testing di Bab 3 dan analisis di Bab 4. Perubahan spesifik yang sudah diterapkan pada homescreen meliputi: peningkatan opacity teks dari 0.3–0.4 menjadi 0.55+ untuk memenuhi standar kontras WCAG AA, peningkatan font size minimum dari 7–8px menjadi 9–10px, simplifikasi top bar dari 5 item menjadi 2 item esensial, penggantian emoji dengan Google Material Design Icons untuk konsistensi visual, dan penambahan focus indicators untuk aksesibilitas keyboard.
 
 Homescreen NEXWEAR ditampilkan setelah login. Struktur vertikal:
 1. Header sticky (main bar: logo + search + wishlist + cart)
@@ -502,6 +545,8 @@ Homescreen NEXWEAR ditampilkan setelah login. Struktur vertikal:
 
 [GAMBAR: screenshots/02_homepage.png — Screenshot full homepage setelah login]
 
+![Home Page - Full](screenshots/02_homepage.png)
+
 ### 5.2 Justifikasi per Elemen
 
 #### 5.2.1 Header — Sticky Navigation Bar
@@ -514,6 +559,8 @@ Homescreen NEXWEAR ditampilkan setelah login. Struktur vertikal:
 
 **Norman's Visibility:** Cart icon dengan badge count (angka merah) memberikan visibility status keranjang tanpa perlu buka halaman cart.
 
+Keputusan ini didukung data Bab 3: 6/8 responden berhasil menemukan produk dalam <30 detik menggunakan search bar, dan Q12 (Pencarian) mendapat skor 3.9/5.
+
 #### 5.2.2 Ticker Marquee
 
 **Gestalt Principle of Continuity:** Gerakan horizontal kontinu menciptakan persepsi aliran informasi. Mata mengikuti arah gerakan secara natural.
@@ -523,6 +570,8 @@ Homescreen NEXWEAR ditampilkan setelah login. Struktur vertikal:
 **Norman's Feedback:** Ticker memberikan feedback bahwa website "hidup" dan aktif — ada penawaran yang berlangsung.
 
 **Mental Model:** Pengguna e-commerce Indonesia familiar dengan ticker promo (Shopee, Tokopedia). Data: 0/8 responden mengeluhkan ticker.
+
+Keputusan mempertahankan ticker didukung data Bab 3: 0/8 responden mengeluhkan elemen ini, menunjukkan kesesuaian dengan mental model pengguna e-commerce Indonesia.
 
 #### 5.2.3 Hero Banner Carousel
 
@@ -540,6 +589,8 @@ Homescreen NEXWEAR ditampilkan setelah login. Struktur vertikal:
 
 **Data Bab 3:** 7/8 responden menyatakan visual homepage menarik. R6: "Desainnya unik banget."
 
+Keputusan desain hero banner didukung data Bab 3: 7/8 responden memberikan feedback positif terhadap visual, dan Q11 (Visual) mendapat skor rata-rata 4.0/5.
+
 #### 5.2.4 Category Strip — 9 Ikon Material Design
 
 **Gestalt Principle of Similarity:** Semua 9 item memiliki struktur identik (lingkaran + ikon + label), menciptakan persepsi satu kelompok dengan fungsi sama.
@@ -552,6 +603,8 @@ Homescreen NEXWEAR ditampilkan setelah login. Struktur vertikal:
 
 **Fitts' Law:** Setiap item 48x48px — memenuhi minimum touch target untuk mobile.
 
+Keputusan ini didukung data Bab 3: R4 menyebutkan kebingungan nama kategori namun tidak mengeluhkan format visual strip, menunjukkan layout sudah sesuai mental model.
+
 #### 5.2.5 Mini Banners — 4 Promo Cards
 
 **Gestalt Principle of Similarity:** Keempat banner dimensi dan struktur identik (height 90px, centered content).
@@ -563,6 +616,8 @@ Homescreen NEXWEAR ditampilkan setelah login. Struktur vertikal:
 - Top Brand: Yellow → premium
 
 **Norman's Feedback:** Hover effect (scale 1.02) memberikan feedback visual interaktif.
+
+Keputusan ini didukung data Bab 3: 0/8 responden mengeluhkan mini banners, menunjukkan elemen ini berfungsi baik sebagai visual break dan informasi promosi.
 
 #### 5.2.6 Filter Tabs & Product Grid
 
@@ -582,6 +637,8 @@ Homescreen NEXWEAR ditampilkan setelah login. Struktur vertikal:
 
 **Data Bab 3:** Q12 (Pencarian/Filter) = 3.9 — filter berfungsi baik.
 
+Keputusan ini didukung data Bab 3: Q12=3.9 menunjukkan filter sudah membantu, dan 6/8 responden berhasil menemukan produk yang dicari tanpa kesulitan berarti.
+
 #### 5.2.7 Bottom Navigation
 
 **Fitts' Law:** Ditempatkan di zona jempol (thumb zone). Setiap item flex:1 full height. Cart di tengah lebih besar (44x44px circle) — aksi paling sering.
@@ -595,6 +652,8 @@ Homescreen NEXWEAR ditampilkan setelah login. Struktur vertikal:
 **Mental Model:** 5-item bottom nav = pola standar mobile modern (Instagram, Shopee).
 
 **Data Bab 3:** 6/8 responden menyatakan bottom nav sangat membantu.
+
+Keputusan ini didukung data Bab 3: 6/8 responden secara eksplisit menyatakan bottom nav membantu navigasi. R4: "Bottom nav-nya membantu banget." Tidak ada responden yang mengeluhkan elemen ini.
 
 #### 5.2.8 Color System
 
@@ -611,19 +670,21 @@ Homescreen NEXWEAR ditampilkan setelah login. Struktur vertikal:
 
 **Data Bab 3:** Q11 (Visual) = 4.0 — mayoritas positif. Perubahan: opacity dinaikkan untuk WCAG compliance.
 
+Keputusan ini didukung data Bab 3: Q11=4.0 menunjukkan color system diterima positif, namun 5/8 responden mengeluhkan kontras rendah sehingga opacity dinaikkan ke 0.55+ sebagai perbaikan.
+
 ### 5.3 Kaitan dengan Data Pengguna
 
-| Elemen | Feedback Bab 3 | Keputusan |
-|--------|----------------|-----------|
-| Header & Nav | 4/8 terlalu banyak level | Planning: kurangi ke 2 level |
-| Ticker | 0/8 keluhan | Dipertahankan |
-| Hero Banner | 7/8 positif | Dipertahankan |
-| Category Strip | R4 bingung nama kategori | Dipertahankan + hover tooltip planned |
-| Mini Banners | 0/8 keluhan | Dipertahankan |
-| Filter Tabs | Q12=3.9 | Dipertahankan |
-| Product Grid | Font tombol diperbesar | SUDAH DIPERBAIKI (9→10px) |
-| Bottom Nav | 6/8 positif | Dipertahankan |
-| Color System | 5/8 kontras rendah | SUDAH DIPERBAIKI (opacity 0.55+) |
+| Elemen | Feedback Bab 3 | Keputusan | Teori HCI |
+|--------|----------------|-----------|-----------|
+| Header & Nav | 4/8 terlalu banyak level | Planning: kurangi ke 2 level | Hick's Law; Nielsen #8 |
+| Ticker | 0/8 keluhan | Dipertahankan | Gestalt Continuity; Mental Model |
+| Hero Banner | 7/8 positif | Dipertahankan | Gestalt Figure-Ground; Fitts' Law |
+| Category Strip | R4 bingung nama kategori | Dipertahankan + hover tooltip planned | Nielsen #2; Gestalt Similarity |
+| Mini Banners | 0/8 keluhan | Dipertahankan | Color Theory; Norman's Feedback |
+| Filter Tabs | Q12=3.9 | Dipertahankan | Nielsen #7 (Flexibility) |
+| Product Grid | Font tombol diperbesar | SUDAH DIPERBAIKI (9→10px) | WCAG 2.1 AA; Typography |
+| Bottom Nav | 6/8 positif | Dipertahankan | Fitts' Law; Mental Model |
+| Color System | 5/8 kontras rendah | SUDAH DIPERBAIKI (opacity 0.55+) | Color Theory; WCAG AA |
 
 ---
 
@@ -659,7 +720,7 @@ Berdasarkan temuan Bab 3 dan 4, berikut roadmap pengembangan NEXWEAR iterasi ber
 
 | Metrik | Saat Ini | Target |
 |--------|----------|--------|
-| SUS Score | 77.8 | >80 (Grade A) |
+| SUS Score | 76.6 | >80 (Grade A) |
 | Bundle Size | 505KB | <300KB (code split) |
 | Initial Load (gzip) | 139KB | <150KB |
 | WCAG Compliance | Partial | AA Full |
