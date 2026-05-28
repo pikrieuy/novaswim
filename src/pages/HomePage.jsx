@@ -8,9 +8,9 @@ import { CAT_ITEMS } from "../data/products";
 import { fmt, discPct } from "../utils";
 import ProductGrid from "../components/ProductGrid";
 import SkeletonGrid from "../components/SkeletonGrid";
-import { Shirt, Gem, Watch, Scissors, Footprints, Package, Sparkles, Tag, Circle, Target, Truck, Zap, Trophy } from "lucide-react";
+import { MdCheckroom, MdDiamond, MdWatch, MdContentCut, MdDirectionsRun, MdInventory2, MdAutoAwesome, MdLocalOffer, MdCircle, MdGpsFixed, MdLocalShipping, MdFlashOn, MdEmojiEvents } from "react-icons/md";
 
-const ICON_MAP = { Shirt, Gem, Watch, Scissors, ShirtIcon: Shirt, Footprints, Package, Sparkles, Tag, Circle };
+const ICON_MAP = { Shirt: MdCheckroom, Gem: MdDiamond, Watch: MdWatch, Scissors: MdContentCut, ShirtIcon: MdCheckroom, Footprints: MdDirectionsRun, Package: MdInventory2, Sparkles: MdAutoAwesome, Tag: MdLocalOffer, Circle: MdCircle };
 
 /* ── Countdown Hook ── */
 function useCountdown(initialSecs) {
@@ -135,12 +135,12 @@ function CategoryStrip({ navigate }) {
   return (
     <div className="cat-strip" style={{ display: "grid", gridTemplateColumns: "repeat(9,1fr)", margin: "12px 12px 0", background: "var(--card)", border: "1px solid rgba(0,245,255,0.12)", padding: "16px 8px" }}>
       {CAT_ITEMS.map((c, i) => {
-        const IconComp = ICON_MAP[c.icon] || Circle;
+        const IconComp = ICON_MAP[c.icon] || MdCircle;
         return (
           <div key={i} className="cat-item" onClick={() => c.page && navigate(c.page)}
             style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, cursor: c.page ? "pointer" : "default", padding: "8px 4px" }}>
             <div style={{ width: 48, height: 48, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%", background: "rgba(0,245,255,0.07)", border: "1px solid rgba(0,245,255,0.15)", transition: "all 0.2s" }}>
-              <IconComp className="cat-icon" size={22} color="var(--cyan)" style={{ filter: "drop-shadow(0 0 6px rgba(0,245,255,0.5))" }} />
+              <IconComp className="cat-icon" size={24} color="var(--cyan)" style={{ filter: "drop-shadow(0 0 6px rgba(0,245,255,0.5))" }} />
             </div>
             <span className="cat-label" style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: 13, color: "rgba(255,255,255,0.7)", textAlign: "center", letterSpacing: 0.5 }}>{c.label}</span>
           </div>
@@ -152,10 +152,10 @@ function CategoryStrip({ navigate }) {
 
 function MiniBanners() {
   const banners = [
-    { bg: "linear-gradient(135deg,#1a0040,#ff2d78)", Icon: Target,   label: "CASHBACK 25%",  sub: "Min. Belanja 200rb" },
-    { bg: "linear-gradient(135deg,#001a40,#00f5ff)", Icon: Truck,    label: "FREE ONGKIR",   sub: "Setiap Hari"       },
-    { bg: "linear-gradient(135deg,#200050,#b400ff)", Icon: Zap,      label: "FLASH SALE",    sub: "Tiap Jam 12 & 20" },
-    { bg: "linear-gradient(135deg,#1a1000,#ffe500)", Icon: Trophy,   label: "TOP BRAND",     sub: "Produk Terpilih"  },
+    { bg: "linear-gradient(135deg,#1a0040,#ff2d78)", Icon: MdGpsFixed,       label: "CASHBACK 25%",  sub: "Min. Belanja 200rb" },
+    { bg: "linear-gradient(135deg,#001a40,#00f5ff)", Icon: MdLocalShipping,  label: "FREE ONGKIR",   sub: "Setiap Hari"       },
+    { bg: "linear-gradient(135deg,#200050,#b400ff)", Icon: MdFlashOn,        label: "FLASH SALE",    sub: "Tiap Jam 12 & 20" },
+    { bg: "linear-gradient(135deg,#1a1000,#ffe500)", Icon: MdEmojiEvents,    label: "TOP BRAND",     sub: "Produk Terpilih"  },
   ];
   return (
     <div className="mini-banners" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 4, margin: "12px 12px 0" }}>

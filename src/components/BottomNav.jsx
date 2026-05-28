@@ -1,16 +1,16 @@
 // ─────────────────────────────────────────
 //  src/components/BottomNav.jsx
-//  Navigasi bawah (mobile-friendly) — Lucide Icons
+//  Navigasi bawah — Material Design Icons
 // ─────────────────────────────────────────
 
-import { Home, Search, ShoppingCart, ClipboardList, Store } from "lucide-react";
+import { MdHome, MdSearch, MdShoppingCart, MdReceipt, MdStorefront } from "react-icons/md";
 
 const NAV_ITEMS = [
-  { page: "home",   Icon: Home,          label: "HOME"    },
-  { page: "search", Icon: Search,        label: "CARI"    },
-  { page: "cart",   Icon: null,          label: "CART", center: true },
-  { page: "orders", Icon: ClipboardList, label: "PESANAN" },
-  { page: "seller", Icon: Store,         label: "JUAL"    },
+  { page: "home",   Icon: MdHome,       label: "HOME"    },
+  { page: "search", Icon: MdSearch,     label: "CARI"    },
+  { page: "cart",   Icon: null,         label: "CART", center: true },
+  { page: "orders", Icon: MdReceipt,    label: "PESANAN" },
+  { page: "seller", Icon: MdStorefront, label: "JUAL"    },
 ];
 
 export default function BottomNav({ currentPage, navigate, cartCount }) {
@@ -64,7 +64,7 @@ function NavItem({ item, isActive, cartCount, onClick }) {
             animation: "pulse-pink 2s infinite", position: "relative",
           }}
         >
-          <ShoppingCart size={20} color="#fff" />
+          <MdShoppingCart size={22} color="#fff" />
           {cartCount > 0 && (
             <div
               style={{
@@ -97,7 +97,7 @@ function NavItem({ item, isActive, cartCount, onClick }) {
         borderRight: "1px solid rgba(255,255,255,0.04)",
       }}
     >
-      <item.Icon size={20} color={isActive ? activeColor : "rgba(255,255,255,0.6)"} />
+      <item.Icon size={22} color={isActive ? activeColor : "rgba(255,255,255,0.6)"} />
       <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 8, color: isActive ? activeColor : mutedColor, letterSpacing: 0.5 }}>
         {item.label}
       </span>

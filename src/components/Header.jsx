@@ -4,7 +4,7 @@
 // ─────────────────────────────────────────
 
 import { NAV_TABS } from "../data/products";
-import { ShoppingCart, Heart, Search, User, LogOut, Star, Package, Zap } from "lucide-react";
+import { MdShoppingCart, MdFavoriteBorder, MdSearch, MdPerson, MdStar, MdFlashOn, MdLogout } from "react-icons/md";
 
 export default function Header({ currentPage, navigate, cartCount, searchVal, setSearchVal, user, onLogout }) {
   return (
@@ -45,8 +45,8 @@ function TopBar({ navigate, user, onLogout }) {
       </div>
 
       <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
-        <span style={{ color: "var(--yellow)", display: "flex", alignItems: "center", gap: 4 }}><Star size={12} /> Free Ongkir</span>
-        <span onClick={() => navigate("flash")} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}><Zap size={12} /> Promo Hari Ini</span>
+        <span style={{ color: "var(--yellow)", display: "flex", alignItems: "center", gap: 4 }}><MdStar size={14} /> Free Ongkir</span>
+        <span onClick={() => navigate("flash")} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}><MdFlashOn size={14} /> Promo Hari Ini</span>
 
         {/* Separator */}
         <span style={{ color: "rgba(255,255,255,0.2)" }}>|</span>
@@ -55,7 +55,7 @@ function TopBar({ navigate, user, onLogout }) {
         {user && (
           <>
             <span onClick={() => navigate("profile")} style={{ color: "var(--neon-cyan, #00f5ff)", letterSpacing: 1, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
-              <User size={13} /> {displayName}
+              <MdPerson size={15} /> {displayName}
             </span>
             <button
               onClick={onLogout}
@@ -129,11 +129,11 @@ function MainBar({ navigate, cartCount, searchVal, setSearchVal }) {
       {/* Icons */}
       <div style={{ display: "flex", gap: 20, alignItems: "center", flexShrink: 0 }}>
         <div onClick={() => navigate("wishlist")} style={{ position: "relative", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
-          <Heart size={22} color="rgba(255,255,255,0.8)" />
+          <MdFavoriteBorder size={24} color="rgba(255,255,255,0.8)" />
           <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: "rgba(255,255,255,0.7)", letterSpacing: 0.5 }}>WISH</span>
         </div>
         <div onClick={() => navigate("cart_panel")} className="cart-icon-bounce" style={{ position: "relative", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
-          <ShoppingCart size={22} color="rgba(255,255,255,0.8)" />
+          <MdShoppingCart size={24} color="rgba(255,255,255,0.8)" />
           {cartCount > 0 && (
             <div style={{ position: "absolute", top: -4, right: -6, background: "var(--pink)", fontFamily: "'Press Start 2P', monospace", fontSize: 7, minWidth: 18, height: 18, display: "flex", alignItems: "center", justifyContent: "center", animation: "pulse-pink 2s infinite" }}>
               {cartCount}
