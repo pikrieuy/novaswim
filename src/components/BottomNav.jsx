@@ -1,14 +1,16 @@
 // ─────────────────────────────────────────
 //  src/components/BottomNav.jsx
-//  Navigasi bawah (mobile-friendly)
+//  Navigasi bawah (mobile-friendly) — Lucide Icons
 // ─────────────────────────────────────────
 
+import { Home, Search, ShoppingCart, ClipboardList, Store } from "lucide-react";
+
 const NAV_ITEMS = [
-  { page: "home",   icon: "🏠", label: "HOME"    },
-  { page: "search", icon: "🔍", label: "CARI"    },
-  { page: "cart",   icon: null,  label: "CART", center: true },
-  { page: "orders", icon: "📋", label: "PESANAN" },
-  { page: "seller", icon: "🏪", label: "JUAL"    },
+  { page: "home",   Icon: Home,          label: "HOME"    },
+  { page: "search", Icon: Search,        label: "CARI"    },
+  { page: "cart",   Icon: null,          label: "CART", center: true },
+  { page: "orders", Icon: ClipboardList, label: "PESANAN" },
+  { page: "seller", Icon: Store,         label: "JUAL"    },
 ];
 
 export default function BottomNav({ currentPage, navigate, cartCount }) {
@@ -58,11 +60,11 @@ function NavItem({ item, isActive, cartCount, onClick }) {
             width: 44, height: 44, background: "var(--pink)",
             borderRadius: "50%", display: "flex",
             alignItems: "center", justifyContent: "center",
-            fontSize: 20, marginBottom: -6,
+            marginBottom: -6,
             animation: "pulse-pink 2s infinite", position: "relative",
           }}
         >
-          🛒
+          <ShoppingCart size={20} color="#fff" />
           {cartCount > 0 && (
             <div
               style={{
@@ -95,9 +97,7 @@ function NavItem({ item, isActive, cartCount, onClick }) {
         borderRight: "1px solid rgba(255,255,255,0.04)",
       }}
     >
-      <span style={{ fontSize: 18, color: isActive ? activeColor : "rgba(255,255,255,0.6)" }}>
-        {item.icon}
-      </span>
+      <item.Icon size={20} color={isActive ? activeColor : "rgba(255,255,255,0.6)"} />
       <span style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 8, color: isActive ? activeColor : mutedColor, letterSpacing: 0.5 }}>
         {item.label}
       </span>

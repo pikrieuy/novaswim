@@ -4,6 +4,7 @@
 // ─────────────────────────────────────────
 
 import { NAV_TABS } from "../data/products";
+import { ShoppingCart, Heart, Search, User, LogOut, Star, Package, Zap } from "lucide-react";
 
 export default function Header({ currentPage, navigate, cartCount, searchVal, setSearchVal, user, onLogout }) {
   return (
@@ -44,8 +45,8 @@ function TopBar({ navigate, user, onLogout }) {
       </div>
 
       <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
-        <span style={{ color: "var(--yellow)" }}>★ Free Ongkir</span>
-        <span onClick={() => navigate("flash")} style={{ cursor: "pointer" }}>Promo Hari Ini</span>
+        <span style={{ color: "var(--yellow)", display: "flex", alignItems: "center", gap: 4 }}><Star size={12} /> Free Ongkir</span>
+        <span onClick={() => navigate("flash")} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}><Zap size={12} /> Promo Hari Ini</span>
 
         {/* Separator */}
         <span style={{ color: "rgba(255,255,255,0.2)" }}>|</span>
@@ -53,8 +54,8 @@ function TopBar({ navigate, user, onLogout }) {
         {/* User info */}
         {user && (
           <>
-            <span onClick={() => navigate("profile")} style={{ color: "var(--neon-cyan, #00f5ff)", letterSpacing: 1, cursor: "pointer" }}>
-              👤 {displayName}
+            <span onClick={() => navigate("profile")} style={{ color: "var(--neon-cyan, #00f5ff)", letterSpacing: 1, cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}>
+              <User size={13} /> {displayName}
             </span>
             <button
               onClick={onLogout}
@@ -126,42 +127,21 @@ function MainBar({ navigate, cartCount, searchVal, setSearchVal }) {
       </div>
 
       {/* Icons */}
-      <div style={{ display: "flex", gap: 24, alignItems: "center", flexShrink: 0 }}>
-        <HeaderIcon icon="❤️" label="WISH" onClick={() => navigate("wishlist")} />
-        <HeaderIcon icon="🛒" badge={cartCount} label="CART" onClick={() => navigate("cart_panel")} className="cart-icon-bounce" />
-      </div>
-    </div>
-  );
-}
-
-function HeaderIcon({ icon, badge, label, onClick, className }) {
-  return (
-    <div
-      onClick={onClick}
-      className={className || ''}
-      style={{
-        position: "relative", cursor: "pointer", fontSize: 22,
-        display: "flex", flexDirection: "column", alignItems: "center", gap: 3,
-      }}
-    >
-      {icon}
-      {badge > 0 && (
-        <div
-          style={{
-            position: "absolute", top: -4, right: -6,
-            background: "var(--pink)",
-            fontFamily: "'Press Start 2P', monospace", fontSize: 9,
-            minWidth: 18, height: 18,
-            display: "flex", alignItems: "center", justifyContent: "center",
-            animation: "pulse-pink 2s infinite",
-          }}
-        >
-          {badge}
+      <div style={{ display: "flex", gap: 20, alignItems: "center", flexShrink: 0 }}>
+        <div onClick={() => navigate("wishlist")} style={{ position: "relative", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
+          <Heart size={22} color="rgba(255,255,255,0.8)" />
+          <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: "rgba(255,255,255,0.7)", letterSpacing: 0.5 }}>WISH</span>
         </div>
-      )}
-      <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: "rgba(255,255,255,0.7)", letterSpacing: 0.5 }}>
-        {label}
-      </span>
+        <div onClick={() => navigate("cart_panel")} className="cart-icon-bounce" style={{ position: "relative", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
+          <ShoppingCart size={22} color="rgba(255,255,255,0.8)" />
+          {cartCount > 0 && (
+            <div style={{ position: "absolute", top: -4, right: -6, background: "var(--pink)", fontFamily: "'Press Start 2P', monospace", fontSize: 7, minWidth: 18, height: 18, display: "flex", alignItems: "center", justifyContent: "center", animation: "pulse-pink 2s infinite" }}>
+              {cartCount}
+            </div>
+          )}
+          <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: "rgba(255,255,255,0.7)", letterSpacing: 0.5 }}>CART</span>
+        </div>
+      </div>
     </div>
   );
 }

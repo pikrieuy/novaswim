@@ -27,29 +27,29 @@ export const CATEGORY_MAP = {
 };
 
 export const NAV_TABS = [
-  { page: "home", label: "🏠 BERANDA" },
-  { page: "outwear", label: "🧥 OUT WEAR" },
-  { page: "accessory", label: "👜 ACCESSORY" },
-  { page: "device", label: "⌚ DEVICE" },
-  { page: "utility", label: "🧣 UTILITY" },
-  { page: "clothing", label: "👗 CLOTHING" },
-  { page: "shoes", label: "👠 SHOES" },
-  { page: "set", label: "🛍️ SET" },
-  { page: "newarrivals", label: "🆕 NEW ARRIVALS" },
-  { page: "sale", label: "🏷️ SALE" },
-  { page: "seller", label: "📦 JUAL" },
+  { page: "home", label: "BERANDA" },
+  { page: "outwear", label: "OUT WEAR" },
+  { page: "accessory", label: "ACCESSORY" },
+  { page: "device", label: "DEVICE" },
+  { page: "utility", label: "UTILITY" },
+  { page: "clothing", label: "CLOTHING" },
+  { page: "shoes", label: "SHOES" },
+  { page: "set", label: "SET" },
+  { page: "newarrivals", label: "NEW ARRIVALS" },
+  { page: "sale", label: "SALE" },
+  { page: "seller", label: "JUAL" },
 ];
 
 export const CAT_ITEMS = [
-  { icon: "🧥", label: "OUT WEAR",     page: "outwear"     },
-  { icon: "👜", label: "ACCESSORY",    page: "accessory"   },
-  { icon: "⌚", label: "DEVICE",       page: "device"      },
-  { icon: "🧣", label: "UTILITY",      page: "utility"     },
-  { icon: "👗", label: "CLOTHING",     page: "clothing"    },
-  { icon: "👠", label: "SHOES",        page: "shoes"       },
-  { icon: "🛍️", label: "SET",          page: "set"         },
-  { icon: "🆕", label: "NEW ARRIVALS", page: "newarrivals" },
-  { icon: "🏷️", label: "SALE",         page: "sale"        },
+  { icon: "Shirt",       label: "OUT WEAR",     page: "outwear"     },
+  { icon: "Gem",         label: "ACCESSORY",    page: "accessory"   },
+  { icon: "Watch",       label: "DEVICE",       page: "device"      },
+  { icon: "Scissors",    label: "UTILITY",      page: "utility"     },
+  { icon: "ShirtIcon",   label: "CLOTHING",     page: "clothing"    },
+  { icon: "Footprints",  label: "SHOES",        page: "shoes"       },
+  { icon: "Package",     label: "SET",          page: "set"         },
+  { icon: "Sparkles",    label: "NEW ARRIVALS", page: "newarrivals" },
+  { icon: "Tag",         label: "SALE",         page: "sale"        },
 ];
 
 export const BG_OPTIONS = [
