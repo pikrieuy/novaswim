@@ -1,3 +1,32 @@
+---
+
+# LAPORAN PROYEK
+
+## Human and Computer Interaction (COMP6846031)
+
+### Assessment of Learning — Review II
+
+| | |
+|---|---|
+| **Nama Aplikasi** | NEXWEAR — Cyberpunk Fashion E-Commerce |
+| **Sektor** | E-Commerce (Fashion) |
+| **URL Aplikasi** | https://nexwear-store.vercel.app |
+| **Semester / Tahun** | Genap / 2025–2026 |
+| **Dosen** | Boby Siswanto |
+| **Kelas** | Computer Science |
+| **Tanggal** | Juni 2026 |
+
+### Anggota Kelompok
+
+| No | Nama Lengkap | NIM |
+|----|-------------|-----|
+| 1 | [NAMA 1] | [NIM 1] |
+| 2 | [NAMA 2] | [NIM 2] |
+| 3 | [NAMA 3] | [NIM 3] |
+| 4 | [NAMA 4] | [NIM 4] |
+
+---
+
 # LAPORAN AOL HCI — NEXWEAR STORE
 ## Assessment of Learning — Human and Computer Interaction
 ### BINUS University Bandung
@@ -141,7 +170,6 @@ Industri fashion e-commerce Indonesia diproyeksikan mencapai USD 8,4 miliar pada
 - **Elemen UI:** Logo NEXWEAR (glow pink), tab LOGIN/DAFTAR, form email+password, tombol submit, error/success message, link switch mode
 - **Tujuan:** Gerbang masuk, memastikan hanya user terautentikasi yang akses fitur
 
-[GAMBAR: screenshots/01_login_page.png — Halaman login NEXWEAR dengan form dan tema cyberpunk]
 
 ![Auth Page - Login](screenshots/01_login_page.png)
 
@@ -161,7 +189,6 @@ Industri fashion e-commerce Indonesia diproyeksikan mencapai USD 8,4 miliar pada
   - Bottom nav fixed (5 item Material Design Icons)
 - **Tujuan:** Landing page utama, discovery produk, navigasi ke semua fitur
 
-[GAMBAR: screenshots/02_homepage.png — Homepage lengkap: hero, kategori, product grid]
 
 ![Home Page](screenshots/02_homepage.png)
 
@@ -171,6 +198,8 @@ Industri fashion e-commerce Indonesia diproyeksikan mencapai USD 8,4 miliar pada
 - **URL:** `outwear`, `accessory`, `device`, `utility`, `clothing`, `shoes`, `set`, `newarrivals`, `sale`
 - **Elemen UI:** Tombol ← KEMBALI (history back), judul kategori, product grid
 - **Tujuan:** Produk terfilter per kategori
+
+![Category Page](screenshots/10_category_page.png)
 
 #### Search Page
 - **URL:** `search`
@@ -184,7 +213,6 @@ Industri fashion e-commerce Indonesia diproyeksikan mencapai USD 8,4 miliar pada
 - **Elemen UI:** Image gallery (4 thumbnail), badge, nama, SKU, rating, harga (kuning besar), size selector (S/M/L/XL), qty +/−, tombol KERANJANG + BELI SEKARANG, share (Copy Link + WhatsApp), review section
 - **Tujuan:** Informasi lengkap untuk keputusan pembelian
 
-[GAMBAR: screenshots/07_detail_page.png — Detail produk dengan gallery dan size selector]
 
 ![Detail Page](screenshots/07_detail_page.png)
 
@@ -193,16 +221,31 @@ Industri fashion e-commerce Indonesia diproyeksikan mencapai USD 8,4 miliar pada
 - **Elemen UI:** Judul + count, product grid (produk yang di-wishlist), empty state
 - **Tujuan:** Menyimpan produk favorit untuk dibeli nanti
 
+![Wishlist Page](screenshots/08_wishlist_page.png)
+
 ### 2.4 Transaksi & Checkout
 
-#### Cart Page → Address Page → Checkout Page → Success Page
-- **URL:** `cart` → `address` → `checkout` → `success`
-- **Elemen UI:** Progress bar 4 langkah, cart items + summary, address list + form, shipping/payment radio, total + tombol BAYAR (loading state)
-- **Tujuan:** Alur pembelian yang jelas dan linear
-
-[GAMBAR: screenshots/04_cart_page.png — Checkout flow dengan progress bar]
+#### Cart Page (Step 1)
+- **URL:** `cart`
+- **Elemen UI:** Progress bar step 1, daftar item keranjang, input kode voucher, ringkasan harga, tombol LANJUT KE ALAMAT
+- **Tujuan:** Review produk dan apply voucher sebelum checkout
 
 ![Cart Page](screenshots/04_cart_page.png)
+
+#### Address Page (Step 2)
+- **URL:** `address`
+- **Elemen UI:** Progress bar step 2, daftar alamat tersimpan, form tambah alamat baru (nama, telepon, alamat lengkap), tombol pilih alamat, tombol LANJUT
+- **Tujuan:** Konfirmasi atau tambah alamat pengiriman
+
+#### Checkout Page (Step 3)
+- **URL:** `checkout`
+- **Elemen UI:** Progress bar step 3, pilihan kurir (JNE/J&T/SiCepat) dengan estimasi ongkir, pilihan pembayaran (Transfer/GoPay/OVO/QRIS/COD), ringkasan total, tombol BAYAR (loading state saat diproses)
+- **Tujuan:** Konfirmasi pengiriman dan metode pembayaran
+
+#### Success Page (Step 4)
+- **URL:** `success`
+- **Elemen UI:** Animasi konfirmasi berhasil, ringkasan pesanan, tombol LACAK PESANAN dan BELANJA LAGI
+- **Tujuan:** Konfirmasi pesanan diterima dan navigasi selanjutnya
 
 ### 2.5 Manajemen Pesanan
 
@@ -224,12 +267,22 @@ Industri fashion e-commerce Indonesia diproyeksikan mencapai USD 8,4 miliar pada
 
 ### 2.7 Profil & Komunikasi
 
-#### Profile Page / Notif Page / Chat Page
-- **URL:** `profile`, `notif`, `chat`
-- **Elemen UI:** Avatar + form edit, notifikasi list, chat dari NEXWEAR Official
-- **Tujuan:** Personalisasi dan komunikasi
+#### Profile Page
+- **URL:** `profile`
+- **Elemen UI:** Avatar (klik untuk ganti foto), form edit nama tampilan, email (read-only), tombol SIMPAN PERUBAHAN, stats (bergabung, member, status)
+- **Tujuan:** Personalisasi akun pengguna
 
 ![Profile Page](screenshots/09_profile_page.png)
+
+#### Notifikasi Page
+- **URL:** `notif`
+- **Elemen UI:** List notifikasi dengan ikon, judul, dan deskripsi (Flash Sale, Pesanan dikirim, Voucher baru)
+- **Tujuan:** Informasi update pesanan dan promo
+
+#### Chat Page
+- **URL:** `chat`
+- **Elemen UI:** Chat bubble dari NEXWEAR Official, pesan selamat datang
+- **Tujuan:** Komunikasi antara user dan customer service NEXWEAR
 
 ### 2.8 Dasar HCI pada Initial Design
 
@@ -543,7 +596,6 @@ Homescreen NEXWEAR ditampilkan setelah login. Struktur vertikal:
 9. Footer (4 kolom)
 10. Bottom nav fixed (5 item)
 
-[GAMBAR: screenshots/02_homepage.png — Screenshot full homepage setelah login]
 
 ![Home Page - Full](screenshots/02_homepage.png)
 
