@@ -157,7 +157,7 @@ Industri fashion e-commerce Indonesia diproyeksikan mencapai USD 8,4 miliar pada
   - Bottom nav fixed (5 item Material Design Icons)
 - **Tujuan:** Landing page utama, discovery produk, navigasi ke semua fitur
 
-[GAMBAR: Screenshot homepage lengkap — hero, kategori, product grid]
+[GAMBAR: screenshots/02_homepage.png — Homepage lengkap: hero, kategori, product grid]
 
 ### 2.3 Browsing & Pencarian
 
@@ -176,7 +176,7 @@ Industri fashion e-commerce Indonesia diproyeksikan mencapai USD 8,4 miliar pada
 - **Elemen UI:** Image gallery (4 thumbnail), badge, nama, SKU, rating, harga (kuning besar), size selector (S/M/L/XL), qty +/−, tombol KERANJANG + BELI SEKARANG, share (Copy Link + WhatsApp), review section
 - **Tujuan:** Informasi lengkap untuk keputusan pembelian
 
-[GAMBAR: Screenshot detail produk dengan gallery dan size selector]
+[GAMBAR: screenshots/07_detail_page.png — Detail produk dengan gallery dan size selector]
 
 #### Wishlist Page
 - **URL:** `wishlist`
@@ -190,7 +190,7 @@ Industri fashion e-commerce Indonesia diproyeksikan mencapai USD 8,4 miliar pada
 - **Elemen UI:** Progress bar 4 langkah, cart items + summary, address list + form, shipping/payment radio, total + tombol BAYAR (loading state)
 - **Tujuan:** Alur pembelian yang jelas dan linear
 
-[GAMBAR: Screenshot checkout flow dengan progress bar]
+[GAMBAR: screenshots/04_cart_page.png — Checkout flow dengan progress bar]
 
 ### 2.5 Manajemen Pesanan
 
@@ -500,7 +500,7 @@ Homescreen NEXWEAR ditampilkan setelah login. Struktur vertikal:
 9. Footer (4 kolom)
 10. Bottom nav fixed (5 item)
 
-[GAMBAR: Screenshot full homepage setelah login]
+[GAMBAR: screenshots/02_homepage.png — Screenshot full homepage setelah login]
 
 ### 5.2 Justifikasi per Elemen
 
