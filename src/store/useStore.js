@@ -152,6 +152,28 @@ export function useStore() {
         if (error) console.error('Orders error:', error)
         else setOrders(data || [])
       })
+
+    // Realtime subscription for order status changes
+    const channel = supabase
+      .channel('order-status-changes')
+      .on('postgres_changes', {
+        event: 'UPDATE',
+        schema: 'public',
+        table: 'orders',
+        filter: `user_id=eq.${currentUser.id}`,
+      }, (payload) => {
+        const updated = payload.new;
+        setOrders(prev => prev.map(o => o.id === updated.id ? { ...o, ...updated } : o));
+        // Dispatch toast notification
+        if (updated.status === 'Dikirim') {
+          window.dispatchEvent(new CustomEvent('toast', { detail: `📦 Pesanan #${String(updated.id).slice(0,8).toUpperCase()} sedang dikirim!` }));
+        } else if (updated.status === 'Selesai') {
+          window.dispatchEvent(new CustomEvent('toast', { detail: `✅ Pesanan #${String(updated.id).slice(0,8).toUpperCase()} selesai!` }));
+        }
+      })
+      .subscribe();
+
+    return () => { supabase.removeChannel(channel); };
   }, [currentUser])
 
   // ─────────────────────────────────────────

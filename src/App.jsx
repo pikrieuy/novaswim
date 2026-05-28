@@ -88,6 +88,13 @@ export default function App() {
   const handleAddCart = useCallback((product) => {
     store.addToCart(product);
     showToast(`✓ ${product.name} ditambahkan ke keranjang!`);
+    // Trigger cart bounce animation
+    const cartIcon = document.querySelector('.cart-icon-bounce');
+    if (cartIcon) {
+      cartIcon.style.animation = 'none';
+      cartIcon.offsetHeight; // reflow
+      cartIcon.style.animation = 'cartBounce 0.4s ease';
+    }
   }, [store]);
 
   const handleLogout = async () => {

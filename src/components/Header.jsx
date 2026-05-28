@@ -128,16 +128,17 @@ function MainBar({ navigate, cartCount, searchVal, setSearchVal }) {
       {/* Icons */}
       <div style={{ display: "flex", gap: 24, alignItems: "center", flexShrink: 0 }}>
         <HeaderIcon icon="❤️" label="WISH" onClick={() => navigate("wishlist")} />
-        <HeaderIcon icon="🛒" badge={cartCount} label="CART" onClick={() => navigate("cart_panel")} />
+        <HeaderIcon icon="🛒" badge={cartCount} label="CART" onClick={() => navigate("cart_panel")} className="cart-icon-bounce" />
       </div>
     </div>
   );
 }
 
-function HeaderIcon({ icon, badge, label, onClick }) {
+function HeaderIcon({ icon, badge, label, onClick, className }) {
   return (
     <div
       onClick={onClick}
+      className={className || ''}
       style={{
         position: "relative", cursor: "pointer", fontSize: 22,
         display: "flex", flexDirection: "column", alignItems: "center", gap: 3,

@@ -20,6 +20,7 @@ export default function DetailPage({ productId, allProducts, navigate, addToCart
   const [qty,     setQty]     = useState(1);
   const [zoomImg, setZoomImg] = useState(false);
   const [selectedSize, setSelectedSize] = useState("");
+  const [activeImg, setActiveImg] = useState(0);
 
   const [selectedStar, setSelectedStar] = useState(0);
   const [reviewName,   setReviewName]   = useState("");
@@ -87,7 +88,7 @@ export default function DetailPage({ productId, allProducts, navigate, addToCart
       {/* ── Main Detail ── */}
       <div className="detail-layout" style={{ display: "grid", gridTemplateColumns: "400px 1fr", gap: 32, padding: "24px 24px 0" }}>
 
-        {/* LEFT: Visual */}
+        {/* LEFT: Visual Gallery */}
         <div>
           <div style={{ height: 380, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden", border: "1px solid rgba(0,245,255,0.2)" }}>
             <div style={{ position: "absolute", inset: 0, background: p.bg }} />
@@ -117,10 +118,33 @@ export default function DetailPage({ productId, allProducts, navigate, addToCart
               </div>
             )}
           </div>
+
+          {/* Thumbnail Strip */}
+          <div style={{ display: "flex", gap: 4, marginTop: 8 }}>
+            {[0, 1, 2, 3].map((idx) => (
+              <div
+                key={idx}
+                onClick={() => setActiveImg(idx)}
+                style={{
+                  flex: 1, height: 64, position: "relative", overflow: "hidden", cursor: "pointer",
+                  border: activeImg === idx ? "2px solid var(--cyan)" : "1px solid rgba(255,255,255,0.1)",
+                  opacity: activeImg === idx ? 1 : 0.6, transition: "all 0.2s",
+                }}
+              >
+                <div style={{ position: "absolute", inset: 0, background: p.bg }} />
+                {idx === 0 && p.image_url ? (
+                  <img src={p.image_url} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} onError={(e) => e.currentTarget.style.display = "none"} />
+                ) : (
+                  <span style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: idx === 0 ? 28 : 20, opacity: idx === 0 ? 1 : 0.4 }}>{p.emoji}</span>
+                )}
+              </div>
+            ))}
+          </div>
+
           {/* Bonus Banner */}
           {p.bonus?.length > 0 && (
             <div style={{ marginTop: 12, background: "linear-gradient(135deg,#1a0040,#3d0010)", border: "1px solid rgba(255,45,120,0.4)", padding: 14, animation: "pulse-pink 3s infinite" }}>
-              <div style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 8, color: "var(--yellow)", marginBottom: 8, letterSpacing: 1 }}>🎁 BONUS DARI SELLER</div>
+              <div style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 9, color: "var(--yellow)", marginBottom: 8, letterSpacing: 1 }}>🎁 BONUS DARI SELLER</div>
               <div style={{ fontSize: 11, color: "rgba(255,255,255,0.8)", lineHeight: 1.8 }}>{p.bonus.map((b) => `✓ ${b}`).join("\n")}</div>
             </div>
           )}
@@ -206,6 +230,23 @@ export default function DetailPage({ productId, allProducts, navigate, addToCart
                 <button id="btn-buy-now" aria-label="Beli Sekarang" onClick={handleBuyNow}  style={{ flex: 1, fontFamily: "'Press Start 2P',monospace", fontSize: 8, background: "var(--pink)", border: "2px solid var(--pink)", color: "#fff", padding: 14, cursor: "pointer", letterSpacing: 1, animation: "pulse-pink 2s infinite" }}>BELI SEKARANG</button>
               </>
             )}
+          </div>
+
+          {/* Share Buttons */}
+          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            <span style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", letterSpacing: 1 }}>BAGIKAN:</span>
+            <button
+              onClick={() => { navigator.clipboard.writeText(window.location.origin + '?product=' + p.id); showToast("✓ Link produk disalin!"); }}
+              style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.7)", padding: "6px 12px", cursor: "pointer", fontSize: 11, display: "flex", alignItems: "center", gap: 6 }}
+            >
+              📋 Copy Link
+            </button>
+            <button
+              onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(`Cek produk keren ini di NEXWEAR: ${p.name} - Rp ${fmt(p.price)} 🔥 ${window.location.origin}`)}`, '_blank')}
+              style={{ background: "rgba(37,211,102,0.15)", border: "1px solid rgba(37,211,102,0.4)", color: "#25d366", padding: "6px 12px", cursor: "pointer", fontSize: 11, display: "flex", alignItems: "center", gap: 6 }}
+            >
+              💬 WhatsApp
+            </button>
           </div>
         </div>
       </div>

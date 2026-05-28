@@ -1,12 +1,13 @@
 // ─────────────────────────────────────────
 //  src/components/SkeletonGrid.jsx
-//  Loading skeleton untuk product grid
+//  Loading skeleton untuk product grid — improved
 // ─────────────────────────────────────────
 
 const shimmer = {
   background: "linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%)",
   backgroundSize: "200% 100%",
   animation: "skshimmer 1.4s ease-in-out infinite",
+  borderRadius: 2,
 };
 
 // Inject keyframe sekali
@@ -17,27 +18,40 @@ if (typeof document !== "undefined" && !document.getElementById("sk-style")) {
   document.head.appendChild(s);
 }
 
-function SkeletonCard() {
+function SkeletonCard({ delay = 0 }) {
   return (
-    <div style={{ background: "var(--card)", border: "1px solid rgba(255,255,255,0.04)" }}>
+    <div style={{ background: "var(--card)", border: "1px solid rgba(255,255,255,0.04)", animationDelay: `${delay}ms` }}>
       {/* Image area */}
       <div style={{ height: 180, ...shimmer }} />
       {/* Info */}
-      <div style={{ padding: 10 }}>
-        <div style={{ height: 10, width: "70%", marginBottom: 8, ...shimmer }} />
-        <div style={{ height: 8,  width: "40%", marginBottom: 8, ...shimmer }} />
-        <div style={{ height: 13, width: "55%", marginBottom: 10, ...shimmer }} />
-        <div style={{ height: 8,  width: "90%", ...shimmer }} />
+      <div style={{ padding: 12 }}>
+        <div style={{ height: 12, width: "75%", marginBottom: 10, ...shimmer }} />
+        <div style={{ height: 9, width: "40%", marginBottom: 10, ...shimmer }} />
+        <div style={{ height: 16, width: "55%", marginBottom: 12, ...shimmer }} />
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ height: 10, width: "35%", ...shimmer }} />
+          <div style={{ height: 10, width: "25%", ...shimmer }} />
+        </div>
       </div>
     </div>
   );
 }
 
-export default function SkeletonGrid({ count = 10 }) {
+export default function SkeletonGrid({ count = 12 }) {
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 12, padding: "12px 12px 60px" }}>
+    <div
+      className="products-grid"
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(6, 1fr)",
+        gap: 2,
+        margin: "0 12px",
+        background: "rgba(0,245,255,0.04)",
+        border: "1px solid rgba(0,245,255,0.12)",
+      }}
+    >
       {Array.from({ length: count }).map((_, i) => (
-        <SkeletonCard key={i} />
+        <SkeletonCard key={i} delay={i * 80} />
       ))}
     </div>
   );
