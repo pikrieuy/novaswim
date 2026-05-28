@@ -161,7 +161,7 @@ export default function App() {
 
       case "cart":
         return (
-          <CartPage
+          <CartPageModule
             cart={store.cart}
             cartTotal={store.cartTotal}
             couponDiscount={store.couponDiscount}
@@ -204,23 +204,23 @@ export default function App() {
 
       case "orders":
         return (
-          <OrdersPage
+          <OrdersPageModule
             orders={store.orders}
-            cancelOrder={store.cancelOrder}      // ← FIX: ganti setOrders
-            completeOrder={store.completeOrder}  // ← FIX: tambah completeOrder
+            cancelOrder={store.cancelOrder}
+            completeOrder={store.completeOrder}
             navigate={navigate}
           />
         );
 
       case "seller":
         return (
-          <SellerPage
+          <SellerPageModule
             sellerProducts={store.sellerProducts}
             orders={store.orders}
             navigate={navigate}
             saveSellerProduct={store.saveSellerProduct}
             deleteSellerProduct={store.deleteSellerProduct}
-            currentUser={store.currentUser}      // ← FIX: tambah currentUser
+            currentUser={store.currentUser}
           />
         );
 
