@@ -149,7 +149,7 @@ function MainBar({ navigate, cartCount, searchVal, setSearchVal }) {
 /* ── Nav Tabs ── */
 function NavTabs({ currentPage, navigate }) {
   return (
-    <nav style={{ display: "flex", borderTop: "1px solid rgba(255,255,255,0.07)", overflowX: "auto", scrollbarWidth: "none" }}>
+    <nav style={{ display: "flex", justifyContent: "center", borderTop: "1px solid rgba(255,255,255,0.07)", overflowX: "auto", scrollbarWidth: "none" }}>
       {NAV_TABS.map((t) => (
         <div
           key={t.page}
@@ -158,7 +158,7 @@ function NavTabs({ currentPage, navigate }) {
           style={{
             fontFamily: "'Share Tech Mono', monospace", fontSize: 13,
             color: currentPage === t.page ? "var(--pink)" : "rgba(255,255,255,0.75)",
-            padding: "13px 18px", whiteSpace: "nowrap", cursor: "pointer",
+            padding: "13px 20px", whiteSpace: "nowrap", cursor: "pointer",
             borderBottom: currentPage === t.page ? "2px solid var(--pink)" : "2px solid transparent",
             background: currentPage === t.page ? "rgba(255,45,120,0.04)" : "transparent",
             transition: "all 0.2s", letterSpacing: 0.5,
