@@ -174,7 +174,7 @@ export default function App() {
 
       case "address":
         return (
-          <AddressPage
+          <AddressPageModule
             addresses={store.addresses}
             selectedAddressId={store.selectedAddressId}
             setSelectedAddressId={store.setSelectedAddressId}
@@ -186,7 +186,7 @@ export default function App() {
 
       case "checkout":
         return (
-          <CheckoutPage
+          <CheckoutPageModule
             cart={store.cart}
             cartTotal={store.cartTotal}
             couponDiscount={store.couponDiscount}
