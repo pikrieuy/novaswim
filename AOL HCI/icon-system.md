@@ -1,4 +1,4 @@
-# Sistem Ikon — Migrasi dari Emoji ke Lucide React
+# Sistem Ikon — Migrasi dari Emoji ke Google Material Design Icons
 
 ---
 
@@ -9,71 +9,72 @@ Pada initial design, NEXWEAR menggunakan emoji (🧥👜⌚🛒🏠) sebagai iko
 1. **Inkonsistensi visual** — emoji tampil berbeda di setiap OS/browser (Apple vs Android vs Windows)
 2. **Kesan tidak profesional** — emoji diasosiasikan dengan chat/messaging, bukan e-commerce profesional
 3. **Tidak scalable** — emoji tidak bisa di-style (warna, ukuran, stroke width)
-4. **Accessibility** — screen reader membaca emoji secara literal ("pile of poo" bukan "review")
+4. **Accessibility** — screen reader membaca emoji secara literal
 
-## Solusi: Lucide React
+## Solusi: Google Material Design Icons
 
-**Lucide** (https://lucide.dev) dipilih karena:
-- Open-source, community-maintained fork dari Feather Icons
-- 1600+ ikon SVG yang konsisten secara visual
+**Google Material Design Icons** (via `react-icons/md`) dipilih karena:
+- Dibuat oleh Google — standar industri untuk UI/UX
+- 2100+ ikon yang konsisten secara visual
+- Familiar bagi pengguna Android (2+ miliar device)
 - Tree-shakeable — hanya ikon yang diimport yang masuk bundle
-- Customizable: size, color, strokeWidth via props
-- Accessible: proper SVG semantics
+- Filled style yang bold dan mudah dikenali di ukuran kecil
+- Sumber: https://github.com/google/material-design-icons
 
 ## Mapping Ikon
 
 ### Bottom Navigation
-| Sebelum (Emoji) | Sesudah (Lucide) | Komponen |
-|-----------------|------------------|----------|
-| 🏠 | `<Home />` | Home |
-| 🔍 | `<Search />` | Cari |
-| 🛒 | `<ShoppingCart />` | Cart |
-| 📋 | `<ClipboardList />` | Pesanan |
-| 🏪 | `<Store />` | Jual |
+| Sebelum (Emoji) | Sesudah (Material) | Komponen |
+|-----------------|-------------------|----------|
+| 🏠 | `MdHome` | Home |
+| 🔍 | `MdSearch` | Cari |
+| 🛒 | `MdShoppingCart` | Cart |
+| 📋 | `MdReceipt` | Pesanan |
+| 🏪 | `MdStorefront` | Jual |
 
 ### Header
 | Sebelum | Sesudah | Fungsi |
 |---------|---------|--------|
-| 🛒 | `<ShoppingCart />` | Cart icon |
-| ❤️ | `<Heart />` | Wishlist |
-| 👤 | `<User />` | Profile |
-| ★ | `<Star />` | Free Ongkir badge |
+| 🛒 | `MdShoppingCart` | Cart icon |
+| ❤️ | `MdFavoriteBorder` | Wishlist |
+| 👤 | `MdPerson` | Profile |
+| ★ | `MdStar` | Free Ongkir badge |
 
 ### Category Strip
 | Sebelum | Sesudah | Kategori |
 |---------|---------|----------|
-| 🧥 | `<Shirt />` | Out Wear |
-| 👜 | `<Gem />` | Accessory |
-| ⌚ | `<Watch />` | Device |
-| 🧣 | `<Scissors />` | Utility |
-| 👗 | `<Shirt />` | Clothing |
-| 👠 | `<Footprints />` | Shoes |
-| 🛍️ | `<Package />` | Set |
-| 🆕 | `<Sparkles />` | New Arrivals |
-| 🏷️ | `<Tag />` | Sale |
+| 🧥 | `MdCheckroom` | Out Wear |
+| 👜 | `MdDiamond` | Accessory |
+| ⌚ | `MdWatch` | Device |
+| 🧣 | `MdContentCut` | Utility |
+| 👗 | `MdCheckroom` | Clothing |
+| 👠 | `MdDirectionsRun` | Shoes |
+| 🛍️ | `MdInventory2` | Set |
+| 🆕 | `MdAutoAwesome` | New Arrivals |
+| 🏷️ | `MdLocalOffer` | Sale |
 
 ### Mini Banners (Promo)
 | Sebelum | Sesudah | Promo |
 |---------|---------|-------|
-| 🎯 | `<Target />` | Cashback 25% |
-| 🚀 | `<Truck />` | Free Ongkir |
-| 🏷️ | `<Zap />` | Flash Sale |
-| 🏆 | `<Trophy />` | Top Brand |
+| 🎯 | `MdGpsFixed` | Cashback 25% |
+| 🚀 | `MdLocalShipping` | Free Ongkir |
+| 🏷️ | `MdFlashOn` | Flash Sale |
+| 🏆 | `MdEmojiEvents` | Top Brand |
 
 ## Justifikasi HCI
 
-- **Gestalt Principle of Similarity** — semua ikon sekarang memiliki style yang konsisten (stroke-based, same weight), memperkuat persepsi bahwa mereka adalah satu sistem visual
-- **Nielsen's Heuristic #4 (Consistency and Standards)** — ikon SVG konsisten di semua platform dan browser
-- **Color Theory** — ikon bisa diberi warna brand (cyan untuk navigasi, putih untuk aksi) yang tidak mungkin dengan emoji
-- **Norman's Signifier** — ikon SVG yang clean lebih jelas sebagai signifier interaktif dibanding emoji yang bisa terlihat dekoratif
+- **Gestalt Principle of Similarity** — semua ikon memiliki style filled yang konsisten, memperkuat persepsi satu sistem visual
+- **Nielsen's Heuristic #4 (Consistency and Standards)** — Material Design adalah standar yang dikenali 2+ miliar pengguna Android
+- **Mental Model** — pengguna sudah familiar dengan ikon Material dari Google apps (Gmail, Maps, Play Store)
+- **Norman's Signifier** — ikon filled yang bold lebih jelas sebagai signifier interaktif dibanding emoji
+- **Color Theory** — ikon bisa diberi warna brand (cyan untuk navigasi, putih untuk aksi)
 
 ## Impact pada Bundle Size
 
-| Metrik | Sebelum | Sesudah |
-|--------|---------|---------|
-| Bundle JS | 490 KB | 501 KB |
-| Tambahan | — | +11 KB (Lucide icons) |
+| Metrik | Emoji | Material Design Icons |
+|--------|-------|----------------------|
+| Bundle JS | 490 KB | 505 KB |
+| Tambahan | — | +15 KB |
 | Visual consistency | ❌ Beda per OS | ✅ Identik semua platform |
-| Customizability | ❌ Fixed | ✅ Size, color, stroke |
-
-Penambahan 11KB sangat worth it untuk konsistensi visual dan profesionalisme.
+| Customizability | ❌ Fixed | ✅ Size, color via props |
+| Profesionalisme | ❌ Casual | ✅ Industry standard |
