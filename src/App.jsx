@@ -21,6 +21,7 @@ import { CategoryPage, SearchPage }          from "./pages/CategoryPages";
 import { CartPage, AddressPage, CheckoutPage, SuccessPage } from "./pages/CheckoutPages";
 import { OrdersPage, SellerPage, NotifPage, ChatPage } from "./pages/OtherPages";
 import ProfilePage from "./pages/ProfilePage";
+import WishlistPage from "./pages/WishlistPage";
 
 import { CATEGORY_MAP } from "./data/products";
 
@@ -47,6 +48,7 @@ export default function App() {
   // ── Routing State ──
   const [currentPage,   setCurrentPage]   = useState("home");
   const [pageParam,     setPageParam]     = useState(null);
+  const [pageHistory,   setPageHistory]   = useState([]);
   const [cartPanelOpen, setCartPanelOpen] = useState(false);
   const [searchVal,     setSearchVal]     = useState("");
   const [globalToast,   setGlobalToast]   = useState("");
@@ -64,10 +66,24 @@ export default function App() {
 
   const navigate = useCallback((page, param) => {
     if (page === "cart_panel") { setCartPanelOpen(true); return; }
+    if (page === "back") {
+      // Go to previous page in history
+      setPageHistory(prev => {
+        if (prev.length === 0) { setCurrentPage("home"); setPageParam(null); return []; }
+        const newHistory = [...prev];
+        const last = newHistory.pop();
+        setCurrentPage(last.page);
+        setPageParam(last.param || null);
+        return newHistory;
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     window.scrollTo({ top: 0, behavior: "smooth" });
+    setPageHistory(prev => [...prev, { page: currentPage, param: pageParam }]);
     setCurrentPage(page);
     setPageParam(param || null);
-  }, []);
+  }, [currentPage, pageParam]);
 
   const handleAddCart = useCallback((product) => {
     store.addToCart(product);
@@ -75,6 +91,7 @@ export default function App() {
   }, [store]);
 
   const handleLogout = async () => {
+    if (!window.confirm("Yakin ingin logout dari NEXWEAR?")) return;
     await supabase.auth.signOut();
     setUser(null);
     navigate("home");
@@ -85,6 +102,8 @@ export default function App() {
     navigate,
     allProducts: store.allProducts,
     onAddCart:   handleAddCart,
+    isWishlisted: store.isWishlisted,
+    onToggleWishlist: store.toggleWishlist,
   };
 
   const renderPage = () => {
@@ -178,6 +197,18 @@ export default function App() {
 
       case "profile":
         return <ProfilePage user={user} navigate={navigate} />;
+
+      case "wishlist":
+        return (
+          <WishlistPage
+            allProducts={store.allProducts}
+            wishlist={store.wishlist}
+            toggleWishlist={store.toggleWishlist}
+            isWishlisted={store.isWishlisted}
+            navigate={navigate}
+            onAddCart={handleAddCart}
+          />
+        );
 
       case "notif":
         return <NotifPage navigate={navigate} />;

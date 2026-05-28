@@ -92,6 +92,51 @@ export function useStore() {
   useEffect(() => { cartRef.current = cart; }, [cart]);
 
   // ─────────────────────────────────────────
+  //  WISHLIST (Supabase + localStorage fallback)
+  // ─────────────────────────────────────────
+  const [wishlist, setWishlist] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('nexwear_wishlist') || '[]'); }
+    catch { return []; }
+  });
+
+  // Sync wishlist from Supabase when user logs in
+  useEffect(() => {
+    if (!currentUser) { setWishlist([]); return; }
+    supabase
+      .from('wishlist')
+      .select('product_id')
+      .eq('user_id', currentUser.id)
+      .then(({ data, error }) => {
+        if (error) { console.error('Wishlist error:', error); return; }
+        const ids = (data || []).map(w => w.product_id);
+        setWishlist(ids);
+        localStorage.setItem('nexwear_wishlist', JSON.stringify(ids));
+      });
+  }, [currentUser]);
+
+  useEffect(() => {
+    localStorage.setItem('nexwear_wishlist', JSON.stringify(wishlist));
+  }, [wishlist]);
+
+  const toggleWishlist = useCallback(async (productId) => {
+    const user = currentUserRef.current;
+    setWishlist(prev => {
+      if (prev.includes(productId)) {
+        // Remove from Supabase
+        if (user) supabase.from('wishlist').delete().eq('user_id', user.id).eq('product_id', productId).then(() => {});
+        return prev.filter(id => id !== productId);
+      }
+      // Add to Supabase
+      if (user) supabase.from('wishlist').insert({ user_id: user.id, product_id: productId }).then(() => {});
+      return [...prev, productId];
+    });
+  }, []);
+
+  const isWishlisted = useCallback((productId) => {
+    return wishlist.includes(productId);
+  }, [wishlist]);
+
+  // ─────────────────────────────────────────
   //  ORDERS
   // ─────────────────────────────────────────
   const [orders, setOrders] = useState([]);
@@ -502,6 +547,9 @@ export function useStore() {
     selectedAddressId,
     shippingCost,
     couponDiscount,
+    wishlist,
+    toggleWishlist,
+    isWishlisted,
     setOrders,
     setSelectedAddressId,
     setShippingCost,

@@ -19,6 +19,7 @@ export default function DetailPage({ productId, allProducts, navigate, addToCart
 
   const [qty,     setQty]     = useState(1);
   const [zoomImg, setZoomImg] = useState(false);
+  const [selectedSize, setSelectedSize] = useState("");
 
   const [selectedStar, setSelectedStar] = useState(0);
   const [reviewName,   setReviewName]   = useState("");
@@ -39,12 +40,14 @@ export default function DetailPage({ productId, allProducts, navigate, addToCart
   const isSoldOut = p.stock !== undefined && p.stock !== null && p.stock <= 0;
 
   const handleAddCart = () => {
-    addToCart(p, "", "", qty);
-    showToast(`✓ ${p.name} ditambahkan ke keranjang!`);
+    if (!selectedSize) { showToast("⚠️ Pilih ukuran dulu!"); return; }
+    addToCart(p, selectedSize, "", qty);
+    showToast(`✓ ${p.name} (${selectedSize}) ditambahkan ke keranjang!`);
   };
 
   const handleBuyNow = () => {
-    addToCart(p, "", "", qty);
+    if (!selectedSize) { showToast("⚠️ Pilih ukuran dulu!"); return; }
+    addToCart(p, selectedSize, "", qty);
     navigate("address");
   };
 
@@ -159,6 +162,28 @@ export default function DetailPage({ productId, allProducts, navigate, addToCart
           </div>
 
           <hr style={{ border: "none", borderTop: "1px solid rgba(255,255,255,0.07)", margin: "14px 0" }} />
+
+          {/* Size Selector */}
+          <span style={labelStyle}>PILIH UKURAN</span>
+          <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
+            {["S", "M", "L", "XL"].map((size) => (
+              <button
+                key={size}
+                onClick={() => setSelectedSize(size)}
+                style={{
+                  fontFamily: "'Orbitron', sans-serif", fontSize: 12, fontWeight: 700,
+                  width: 44, height: 44,
+                  background: selectedSize === size ? "var(--pink)" : "rgba(255,255,255,0.05)",
+                  border: selectedSize === size ? "2px solid var(--pink)" : "1px solid rgba(255,255,255,0.2)",
+                  color: selectedSize === size ? "#fff" : "rgba(255,255,255,0.7)",
+                  cursor: "pointer", transition: "all 0.2s",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}
+              >
+                {size}
+              </button>
+            ))}
+          </div>
 
           {/* Quantity */}
           <span style={labelStyle}>JUMLAH</span>

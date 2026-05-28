@@ -26,7 +26,7 @@ body {
   color: #fff;
   font-family: 'Share Tech Mono', monospace;
   overflow-x: hidden;
-  cursor: crosshair;
+  cursor: default;
   padding-bottom: var(--bh);
 }
 

@@ -11,9 +11,10 @@ const BADGE_COLORS = {
   "pcb-sale": { bg: "var(--yellow)", color: "#000" },
 };
 
-export default function ProductCard({ product: p, navigate, onAddCart }) {
+export default function ProductCard({ product: p, navigate, onAddCart, isWishlisted, onToggleWishlist }) {
   const badge = BADGE_COLORS[p.badgeClass] || { bg: "#333", color: "#fff" };
   const isSoldOut = p.stock !== undefined && p.stock !== null && p.stock <= 0;
+  const wishlisted = isWishlisted ? isWishlisted(p.id) : false;
 
   return (
     <div
@@ -25,8 +26,8 @@ export default function ProductCard({ product: p, navigate, onAddCart }) {
       <div
         style={{
           position: "absolute", top: 6, left: 6,
-          fontFamily: "'Press Start 2P', monospace", fontSize: 8,
-          padding: "3px 6px",
+          fontFamily: "'Press Start 2P', monospace", fontSize: 9,
+          padding: "4px 8px",
           background: isSoldOut ? "rgba(80,80,80,0.9)" : badge.bg,
           color: isSoldOut ? "#fff" : badge.color,
           zIndex: 5,
@@ -36,8 +37,8 @@ export default function ProductCard({ product: p, navigate, onAddCart }) {
       </div>
 
       {/* Wishlist */}
-      <div className="pc-wish" style={{ position: "absolute", top: 6, right: 6, zIndex: 5, fontSize: 14, cursor: "pointer" }}>
-        🤍
+      <div className="pc-wish" onClick={(e) => { e.stopPropagation(); onToggleWishlist && onToggleWishlist(p.id); }} style={{ position: "absolute", top: 6, right: 6, zIndex: 5, fontSize: 14, cursor: "pointer", transition: "transform 0.2s" }}>
+        {wishlisted ? "❤️" : "🤍"}
       </div>
 
       {/* Visual */}
@@ -84,7 +85,7 @@ export default function ProductCard({ product: p, navigate, onAddCart }) {
         </div>
 
         {p.oldPrice > 0 && (
-          <div style={{ fontSize: 9, color: "rgba(255,255,255,0.25)", textDecoration: "line-through", marginBottom: 2 }}>
+          <div style={{ fontSize: 10, color: "rgba(255,255,255,0.45)", textDecoration: "line-through", marginBottom: 2 }}>
             Rp {fmt(p.oldPrice)}
           </div>
         )}
@@ -94,8 +95,8 @@ export default function ProductCard({ product: p, navigate, onAddCart }) {
         </div>
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 6 }}>
-          <span style={{ fontSize: 12, color: "rgba(255,255,255,0.55)", letterSpacing: 0.5 }}>{p.sold} terjual</span>
-          <span style={{ fontSize: 9, color: "var(--yellow)" }}>
+          <span style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", letterSpacing: 0.5 }}>{p.sold} terjual</span>
+          <span style={{ fontSize: 10, color: "var(--yellow)" }}>
             {p.reviews && p.reviews.length > 0 ? starsStr(avgRating(p.reviews)) : starsStr(p.rating)}
           </span>
         </div>
@@ -111,9 +112,9 @@ export default function ProductCard({ product: p, navigate, onAddCart }) {
               onClick={(e) => { e.stopPropagation(); onAddCart(p); }}
               style={{
                 display: "block", width: "100%", marginTop: 8,
-                fontFamily: "'Press Start 2P', monospace", fontSize: 9,
+                fontFamily: "'Press Start 2P', monospace", fontSize: 10,
                 background: "var(--pink)", color: "#fff", border: "none",
-                padding: 7, cursor: "pointer", letterSpacing: 1,
+                padding: 8, cursor: "pointer", letterSpacing: 1,
               }}
             >
               + KERANJANG

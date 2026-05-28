@@ -363,7 +363,7 @@ export default function ProductFormModal({ isOpen, onClose, onSave, editProduct 
               />
             </FormField>
 
-            <FormField label="HARGA CORET (Rp)">
+            <FormField label="HARGA CORET (Rp) — OPSIONAL">
               <input
                 type="number"
                 value={form.oldPrice}

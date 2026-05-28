@@ -48,20 +48,20 @@ export function FlashSalePage({ allProducts, navigate, onAddCart }) {
 // ─────────────────────────────────────────
 //  CategoryPage
 // ─────────────────────────────────────────
-export function CategoryPage({ catKey, allProducts, navigate, onAddCart }) {
+export function CategoryPage({ catKey, allProducts, navigate, onAddCart, isWishlisted, onToggleWishlist }) {
   const info  = CATEGORY_MAP[catKey] || { title: "KOLEKSI", span: "PRODUK", cat: "all" };
   const items = info.cat === "all" ? allProducts : allProducts.filter((p) => p.cat === info.cat);
   return (
     <div className="page-anim">
-      <button onClick={() => navigate("home")} style={backBtnStyle}>← KEMBALI</button>
+      <button onClick={() => navigate("back")} style={backBtnStyle}>← KEMBALI</button>
       <div style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 24, fontWeight: 900, color: "#fff", textTransform: "uppercase", letterSpacing: 1, margin: "16px 12px 16px" }}>
         {info.title} <span style={{ color: "var(--pink)" }}>{info.span}</span>
       </div>
       {items.length === 0
-        ? <div style={{ margin: "0 12px", padding: 40, textAlign: "center", border: "1px dashed rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.3)", fontFamily: "'Press Start 2P',monospace", fontSize: 8, letterSpacing: 1, lineHeight: 2 }}>
+        ? <div style={{ margin: "0 12px", padding: 40, textAlign: "center", border: "1px dashed rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)", fontFamily: "'Press Start 2P',monospace", fontSize: 9, letterSpacing: 1, lineHeight: 2 }}>
             Belum ada produk di kategori ini.
           </div>
-        : <ProductGrid products={items} navigate={navigate} onAddCart={onAddCart} />
+        : <ProductGrid products={items} navigate={navigate} onAddCart={onAddCart} isWishlisted={isWishlisted} onToggleWishlist={onToggleWishlist} />
       }
     </div>
   );
@@ -70,7 +70,7 @@ export function CategoryPage({ catKey, allProducts, navigate, onAddCart }) {
 // ─────────────────────────────────────────
 //  SearchPage
 // ─────────────────────────────────────────
-export function SearchPage({ keyword, allProducts, navigate, onAddCart }) {
+export function SearchPage({ keyword, allProducts, navigate, onAddCart, isWishlisted, onToggleWishlist }) {
   const [localKw,  setLocalKw]  = useState(keyword || "");
   const [debouncedKw, setDebouncedKw] = useState(localKw);
   const [catFilter, setCatFilter] = useState("all");
@@ -207,9 +207,9 @@ export function SearchPage({ keyword, allProducts, navigate, onAddCart }) {
               <span style={{ fontSize: 7, color: "rgba(255,255,255,0.2)" }}>Coba kata kunci lain</span>
             </div>
             <div style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 14, fontWeight: 900, color: "var(--yellow)", textTransform: "uppercase", letterSpacing: 1, margin: "0 12px 16px" }}>🔥 REKOMENDASI TERLARIS</div>
-            <ProductGrid products={[...allProducts].sort((a,b) => (parseInt(b.sold)||0) - (parseInt(a.sold)||0)).slice(0, 6)} navigate={navigate} onAddCart={onAddCart} />
+            <ProductGrid products={[...allProducts].sort((a,b) => (parseInt(b.sold)||0) - (parseInt(a.sold)||0)).slice(0, 6)} navigate={navigate} onAddCart={onAddCart} isWishlisted={isWishlisted} onToggleWishlist={onToggleWishlist} />
           </div>
-        : <ProductGrid products={items} navigate={navigate} onAddCart={onAddCart} />
+        : <ProductGrid products={items} navigate={navigate} onAddCart={onAddCart} isWishlisted={isWishlisted} onToggleWishlist={onToggleWishlist} />
       }
     </div>
   );

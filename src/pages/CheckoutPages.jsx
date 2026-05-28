@@ -78,7 +78,7 @@ export function CartPage({ cart, cartTotal, couponDiscount, navigate, removeFrom
             <div style={{ display: "flex", margin: "14px 0" }}>
               <input value={couponInput} onChange={(e) => setCouponInput(e.target.value)} placeholder="KODE VOUCHER"
                 style={{ flex: 1, background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.15)", color: "#fff", fontFamily: "'Share Tech Mono',monospace", fontSize: 11, padding: "8px 12px", outline: "none" }} />
-              <button onClick={handleCoupon} style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 7, background: "var(--cyan)", color: "#000", border: "none", padding: "0 12px", cursor: "pointer" }}>PAKAI</button>
+              <button onClick={handleCoupon} style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 9, background: "var(--cyan)", color: "#000", border: "none", padding: "0 12px", cursor: "pointer" }}>PAKAI</button>
             </div>
             <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 12, marginTop: 4, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <span style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 14, fontWeight: 900, color: "#fff" }}>TOTAL</span>
@@ -111,7 +111,7 @@ function CartItem({ item: ci, onRemove, onQty }) {
             <input value={ci.qty} readOnly style={{ background: "var(--card)", borderTop: "1px solid rgba(255,255,255,0.15)", borderBottom: "1px solid rgba(255,255,255,0.15)", borderLeft: "none", borderRight: "none", color: "#fff", width: 40, textAlign: "center", fontFamily: "'Orbitron',monospace", fontSize: 12, height: 28 }} />
             <button onClick={() => onQty(ci.id, 1)}  style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", color: "#fff", width: 28, height: 28, fontSize: 16, cursor: "pointer" }}>+</button>
           </div>
-          <button onClick={() => { if(window.confirm("Yakin hapus produk ini dari keranjang?")) onRemove(ci.id) }} style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 6, background: "transparent", border: "1px solid rgba(255,45,120,0.3)", color: "var(--pink)", padding: "4px 8px", cursor: "pointer" }} className="glitch-btn">HAPUS</button>
+          <button onClick={() => { if(window.confirm("Yakin hapus produk ini dari keranjang?")) onRemove(ci.id) }} style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 8, background: "transparent", border: "1px solid rgba(255,45,120,0.3)", color: "var(--pink)", padding: "4px 8px", cursor: "pointer" }} className="glitch-btn">HAPUS</button>
         </div>
       </div>
       <div style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 14, fontWeight: 900, color: "var(--yellow)", textShadow: "0 0 8px rgba(255,229,0,0.4)", flexShrink: 0 }}>Rp {fmt(ci.price * ci.qty)}</div>
@@ -148,14 +148,14 @@ export function AddressPage({ addresses, selectedAddressId, setSelectedAddressId
         {/* Address List */}
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
           {addresses.length === 0
-            ? <div style={{ padding: 40, textAlign: "center", color: "rgba(255,255,255,0.3)", fontFamily: "'Press Start 2P',monospace", fontSize: 7, border: "1px dashed rgba(255,255,255,0.1)" }}>Belum ada alamat tersimpan</div>
+            ? <div style={{ padding: 40, textAlign: "center", color: "rgba(255,255,255,0.3)", fontFamily: "'Press Start 2P',monospace", fontSize: 9, border: "1px dashed rgba(255,255,255,0.1)" }}>Belum ada alamat tersimpan</div>
             : addresses.map((a) => (
               <div key={a.id} className="addr-card" onClick={() => setSelectedAddressId(a.id)}
                 style={{ background: a.id === selectedAddressId ? "rgba(0,245,255,0.05)" : "var(--card)", border: `2px solid ${a.id === selectedAddressId ? "var(--cyan)" : "rgba(255,255,255,0.07)"}`, padding: 16, cursor: "pointer", transition: "all 0.2s", position: "relative" }}>
-                {a.id === selectedAddressId && <span style={{ position: "absolute", top: 10, right: 10, fontFamily: "'Press Start 2P',monospace", fontSize: 6, color: "var(--cyan)", letterSpacing: 1 }}>✓ DIPILIH</span>}
+                {a.id === selectedAddressId && <span style={{ position: "absolute", top: 10, right: 10, fontFamily: "'Press Start 2P',monospace", fontSize: 8, color: "var(--cyan)", letterSpacing: 1 }}>✓ DIPILIH</span>}
                 <div style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 12, fontWeight: 700, color: "#fff", marginBottom: 4 }}>{a.name}</div>
                 <div style={{ fontSize: 10, color: "rgba(255,255,255,0.5)", lineHeight: 1.7, letterSpacing: 0.5 }}>{a.street}, {a.city}, {a.prov} {a.postal}<br />{a.phone}</div>
-                <button onClick={(e) => { e.stopPropagation(); deleteAddress(a.id); }} style={{ marginTop: 10, fontFamily: "'Press Start 2P',monospace", fontSize: 6, background: "transparent", border: "1px solid rgba(255,255,255,0.2)", color: "rgba(255,255,255,0.5)", padding: "4px 8px", cursor: "pointer" }}>🗑 HAPUS</button>
+                <button onClick={(e) => { e.stopPropagation(); deleteAddress(a.id); }} style={{ marginTop: 10, fontFamily: "'Press Start 2P',monospace", fontSize: 8, background: "transparent", border: "1px solid rgba(255,255,255,0.2)", color: "rgba(255,255,255,0.5)", padding: "4px 8px", cursor: "pointer" }}>🗑 HAPUS</button>
               </div>
             ))
           }
@@ -196,6 +196,7 @@ export function CheckoutPage({ cart, cartTotal, couponDiscount, addresses, selec
   // ── FIX: state untuk tracking pilihan kurir & pembayaran ──
   const [selectedShip, setSelectedShip] = useState("jne");
   const [selectedPay,  setSelectedPay]  = useState("transfer");
+  const [isOrdering,   setIsOrdering]   = useState(false);
 
   const addr  = addresses.find((a) => a.id === selectedAddressId);
   const total = Math.max(0, cartTotal - couponDiscount + shippingCost);
@@ -203,6 +204,7 @@ export function CheckoutPage({ cart, cartTotal, couponDiscount, addresses, selec
   // ── FIX: kirim semua data yang dibutuhkan ke placeOrder ──
   const handlePlaceOrder = async () => {
     if (!addr) { alert("Pilih alamat dulu!"); return; }
+    setIsOrdering(true);
     await placeOrder({
       total,
       courier: selectedShip,
@@ -210,6 +212,7 @@ export function CheckoutPage({ cart, cartTotal, couponDiscount, addresses, selec
       address: addr,
       
     });
+    setIsOrdering(false);
     navigate("success");
   };
 
@@ -337,7 +340,7 @@ export function CheckoutPage({ cart, cartTotal, couponDiscount, addresses, selec
             <span style={{ color: "rgba(255,255,255,0.3)" }}>Bayar: </span>
             <span style={{ color: "var(--pink)", fontWeight: 700 }}>{PAYMENTS.find(p => p.v === selectedPay)?.name}</span>
           </div>
-          <button onClick={handlePlaceOrder} style={{ display: "block", width: "100%", fontFamily: "'Press Start 2P',monospace", fontSize: 9, background: "var(--pink)", border: "none", color: "#fff", padding: 14, cursor: "pointer", letterSpacing: 1, animation: "pulse-pink 2s infinite" }}>BAYAR SEKARANG →</button>
+          <button onClick={handlePlaceOrder} disabled={isOrdering} style={{ display: "block", width: "100%", fontFamily: "'Press Start 2P',monospace", fontSize: 9, background: isOrdering ? "rgba(255,45,120,0.4)" : "var(--pink)", border: "none", color: "#fff", padding: 14, cursor: isOrdering ? "not-allowed" : "pointer", letterSpacing: 1, animation: isOrdering ? "none" : "pulse-pink 2s infinite" }}>{isOrdering ? "MEMPROSES..." : "BAYAR SEKARANG →"}</button>
           <div style={{ textAlign: "center", marginTop: 10, fontSize: 9, color: "rgba(255,255,255,0.3)", letterSpacing: 1 }}>🔒 Transaksi 100% Aman & Terlindungi</div>
         </div>
       </div>

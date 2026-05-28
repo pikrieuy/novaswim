@@ -127,6 +127,7 @@ function MainBar({ navigate, cartCount, searchVal, setSearchVal }) {
 
       {/* Icons */}
       <div style={{ display: "flex", gap: 24, alignItems: "center", flexShrink: 0 }}>
+        <HeaderIcon icon="❤️" label="WISH" onClick={() => navigate("wishlist")} />
         <HeaderIcon icon="🛒" badge={cartCount} label="CART" onClick={() => navigate("cart_panel")} />
       </div>
     </div>
@@ -148,7 +149,7 @@ function HeaderIcon({ icon, badge, label, onClick }) {
           style={{
             position: "absolute", top: -4, right: -6,
             background: "var(--pink)",
-            fontFamily: "'Press Start 2P', monospace", fontSize: 7,
+            fontFamily: "'Press Start 2P', monospace", fontSize: 9,
             minWidth: 18, height: 18,
             display: "flex", alignItems: "center", justifyContent: "center",
             animation: "pulse-pink 2s infinite",

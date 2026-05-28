@@ -10,7 +10,7 @@ export const backBtnStyle = {
   background: "transparent",
   border: "1px solid rgba(0,245,255,0.3)",
   color: "var(--cyan)",
-  padding: "8px 16px",
+  padding: "10px 18px",
   cursor: "pointer",
   margin: "16px 12px",
   display: "inline-block",
@@ -20,8 +20,8 @@ export const backBtnStyle = {
 
 export const labelStyle = {
   fontFamily: "'Press Start 2P', monospace",
-  fontSize: 9,
-  color: "rgba(255,255,255,0.65)",
+  fontSize: 10,
+  color: "rgba(255,255,255,0.7)",
   letterSpacing: 2,
   marginBottom: 8,
   textTransform: "uppercase",
@@ -66,8 +66,8 @@ export const formInputStyle = {
 
 export const formLabelStyle = {
   fontFamily: "'Press Start 2P', monospace",
-  fontSize: 8,
-  color: "rgba(255,255,255,0.65)",
+  fontSize: 9,
+  color: "rgba(255,255,255,0.7)",
   letterSpacing: 2,
   textTransform: "uppercase",
   display: "block",

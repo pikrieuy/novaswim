@@ -50,7 +50,7 @@ export default function CartPanel({ isOpen, onClose, cart, navigate }) {
           <button
             onClick={onClose}
             style={{
-              fontFamily: "'Press Start 2P', monospace", fontSize: 7,
+              fontFamily: "'Press Start 2P', monospace", fontSize: 9,
               background: "transparent", border: "1px solid rgba(255,45,120,0.4)",
               color: "var(--pink)", padding: "6px 10px", cursor: "pointer", letterSpacing: 1,
             }}
@@ -62,7 +62,7 @@ export default function CartPanel({ isOpen, onClose, cart, navigate }) {
         {/* Body */}
         <div style={{ flex: 1, overflowY: "auto", padding: 16, display: "flex", flexDirection: "column", gap: 12 }}>
           {cart.length === 0 ? (
-            <div style={{ textAlign: "center", padding: "40px 20px", color: "rgba(255,255,255,0.3)", fontFamily: "'Press Start 2P', monospace", fontSize: 7, letterSpacing: 1 }}>
+            <div style={{ textAlign: "center", padding: "40px 20px", color: "rgba(255,255,255,0.5)", fontFamily: "'Press Start 2P', monospace", fontSize: 9, letterSpacing: 1 }}>
               Keranjang kosong
             </div>
           ) : (
@@ -78,7 +78,7 @@ export default function CartPanel({ isOpen, onClose, cart, navigate }) {
             <button
               onClick={() => { onClose(); navigate("cart"); }}
               style={{
-                fontFamily: "'Press Start 2P', monospace", fontSize: 7,
+                fontFamily: "'Press Start 2P', monospace", fontSize: 9,
                 background: "transparent", border: "1px solid var(--cyan)",
                 color: "var(--cyan)", padding: 12, cursor: "pointer", letterSpacing: 1,
               }}
@@ -88,7 +88,7 @@ export default function CartPanel({ isOpen, onClose, cart, navigate }) {
             <button
               onClick={() => { onClose(); navigate("address"); }}
               style={{
-                fontFamily: "'Press Start 2P', monospace", fontSize: 7,
+                fontFamily: "'Press Start 2P', monospace", fontSize: 9,
                 background: "var(--pink)", border: "none",
                 color: "#fff", padding: 12, cursor: "pointer", letterSpacing: 1,
                 animation: "pulse-pink 2s infinite",

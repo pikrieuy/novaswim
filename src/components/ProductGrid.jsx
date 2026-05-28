@@ -5,14 +5,14 @@
 
 import ProductCard from "./ProductCard";
 
-export default function ProductGrid({ products, navigate, onAddCart }) {
+export default function ProductGrid({ products, navigate, onAddCart, isWishlisted, onToggleWishlist }) {
   if (!products.length) {
     return (
       <div
         style={{
           padding: 40, textAlign: "center",
-          color: "rgba(255,255,255,0.3)",
-          fontFamily: "'Press Start 2P', monospace", fontSize: 8,
+          color: "rgba(255,255,255,0.5)",
+          fontFamily: "'Press Start 2P', monospace", fontSize: 9,
           gridColumn: "1/-1",
         }}
       >
@@ -35,7 +35,7 @@ export default function ProductGrid({ products, navigate, onAddCart }) {
       }}
     >
       {products.map((p) => (
-        <ProductCard key={p.id} product={p} navigate={navigate} onAddCart={onAddCart} />
+        <ProductCard key={p.id} product={p} navigate={navigate} onAddCart={onAddCart} isWishlisted={isWishlisted} onToggleWishlist={onToggleWishlist} />
       ))}
     </div>
   );

@@ -37,7 +37,7 @@ export function OrdersPage({ orders, cancelOrder, completeOrder, navigate }) {
       <div style={{ display: "flex", gap: 0, margin: "0 12px 16px", borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
         {[{ k: "all", l: "SEMUA" }, { k: "Dikemas", l: "DIKEMAS" }, { k: "Dikirim", l: "DIKIRIM" }, { k: "Selesai", l: "SELESAI" }].map((t) => (
           <div key={t.k} onClick={() => setFilter(t.k)}
-            style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 7, padding: "10px 16px", color: filter === t.k ? "var(--pink)" : "rgba(255,255,255,0.65)", cursor: "pointer", borderBottom: filter === t.k ? "2px solid var(--pink)" : "2px solid transparent", letterSpacing: 1, transition: "all 0.2s" }}>
+            style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 9, padding: "10px 16px", color: filter === t.k ? "var(--pink)" : "rgba(255,255,255,0.65)", cursor: "pointer", borderBottom: filter === t.k ? "2px solid var(--pink)" : "2px solid transparent", letterSpacing: 1, transition: "all 0.2s" }}>
             {t.l}
           </div>
         ))}
@@ -45,7 +45,7 @@ export function OrdersPage({ orders, cancelOrder, completeOrder, navigate }) {
 
       <div style={{ padding: "0 12px", display: "flex", flexDirection: "column", gap: 12 }}>
         {filtered.length === 0
-          ? <div style={{ padding: 40, textAlign: "center", color: "rgba(255,255,255,0.3)", fontFamily: "'Press Start 2P',monospace", fontSize: 7, letterSpacing: 1, border: "1px dashed rgba(255,255,255,0.1)" }}>
+          ? <div style={{ padding: 40, textAlign: "center", color: "rgba(255,255,255,0.3)", fontFamily: "'Press Start 2P',monospace", fontSize: 9, letterSpacing: 1, border: "1px dashed rgba(255,255,255,0.1)" }}>
               Belum ada pesanan {filter !== "all" ? filter : ""}.
             </div>
           : [...filtered].map((o) => {
@@ -68,10 +68,10 @@ export function OrdersPage({ orders, cancelOrder, completeOrder, navigate }) {
               <div key={o.id} style={{ background: "var(--card)", border: "1px solid rgba(255,255,255,0.07)", padding: 16 }}>
                 {/* Header */}
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12, paddingBottom: 10, borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
-                  <div style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 7, color: "var(--yellow)" }}>
+                  <div style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 9, color: "var(--yellow)" }}>
                     ORDER #{String(o.id).slice(0, 8).toUpperCase()}
                   </div>
-                  <div style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 7, padding: "4px 10px", background: sc.bg, color: sc.color, border: `1px solid ${sc.border}` }}>
+                  <div style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 9, padding: "4px 10px", background: sc.bg, color: sc.color, border: `1px solid ${sc.border}` }}>
                     {(o.status || "DIKEMAS").toUpperCase()}
                   </div>
                 </div>
@@ -119,19 +119,19 @@ export function OrdersPage({ orders, cancelOrder, completeOrder, navigate }) {
                   <div style={{ display: "flex", gap: 8 }}>
                     {(o.status === "Dikemas" || o.status === "diproses") && (
                       <button onClick={() => window.print()}
-                        style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 6, background: "rgba(0,245,255,0.1)", border: "1px solid rgba(0,245,255,0.3)", color: "var(--cyan)", padding: "6px 10px", cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
+                        style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 8, background: "rgba(0,245,255,0.1)", border: "1px solid rgba(0,245,255,0.3)", color: "var(--cyan)", padding: "6px 10px", cursor: "pointer", display: "flex", alignItems: "center", gap: 6 }}>
                         <span style={{ fontSize: 10 }}>🖨️</span> CETAK RESI
                       </button>
                     )}
                     {(o.status === "Dikemas" || o.status === "diproses") && (
                       <button onClick={() => cancelOrder(o.id)}
-                        style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 6, background: "transparent", border: "1px solid rgba(255,45,120,0.4)", color: "var(--pink)", padding: "6px 10px", cursor: "pointer", display: "flex", alignItems: "center" }}>
+                        style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 8, background: "transparent", border: "1px solid rgba(255,45,120,0.4)", color: "var(--pink)", padding: "6px 10px", cursor: "pointer", display: "flex", alignItems: "center" }}>
                         BATAL
                       </button>
                     )}
                     {(o.status === "Dikirim" || o.status === "dikirim") && (
                       <button onClick={() => completeOrder(o.id)}
-                        style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 6, background: "transparent", border: "1px solid rgba(0,245,255,0.3)", color: "var(--cyan)", padding: "6px 10px", cursor: "pointer" }}>
+                        style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 8, background: "transparent", border: "1px solid rgba(0,245,255,0.3)", color: "var(--cyan)", padding: "6px 10px", cursor: "pointer" }}>
                         SELESAI
                       </button>
                     )}
@@ -204,7 +204,7 @@ export function SellerPage({ sellerProducts, orders, navigate, saveSellerProduct
 
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", margin: "0 12px 20px", paddingBottom: 16, borderBottom: "1px solid rgba(255,255,255,0.07)" }}>
         <div>
-          <div style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 7, color: "var(--cyan)", letterSpacing: 3, marginBottom: 6 }}>// SELLER CENTER</div>
+          <div style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 9, color: "var(--cyan)", letterSpacing: 3, marginBottom: 6 }}>// SELLER CENTER</div>
           <div style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 28, fontWeight: 900, color: "#fff", textTransform: "uppercase" }}>TOKO <span style={{ color: "var(--pink)" }}>KAMU</span></div>
         </div>
         <button onClick={() => { setEditProduct(null); setModalOpen(true); }}
@@ -224,14 +224,14 @@ export function SellerPage({ sellerProducts, orders, navigate, saveSellerProduct
           <div key={s.label} style={{ background: "var(--card)", border: "1px solid rgba(0,245,255,0.15)", padding: "24px 16px", textAlign: "center", boxShadow: "0 4px 20px rgba(0,245,255,0.05)" }}>
             <div style={{ fontSize: 36, marginBottom: 12 }}>{s.icon}</div>
             <div style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 24, fontWeight: 900, color: "var(--cyan)", marginBottom: 6 }}>{s.val}</div>
-            <div style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 7, color: "rgba(255,255,255,0.45)", letterSpacing: 1 }}>{s.label}</div>
+            <div style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 9, color: "rgba(255,255,255,0.45)", letterSpacing: 1 }}>{s.label}</div>
           </div>
         ))}
       </div>
 
       {/* CSS Graph */}
       <div style={{ background: "var(--card)", border: "1px solid rgba(0,245,255,0.15)", padding: 20, margin: "0 12px 24px", boxShadow: "0 4px 20px rgba(0,245,255,0.05)" }}>
-        <div style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 13, fontWeight: 700, color: "var(--cyan)", marginBottom: 16 }}>GRAFIK PENJUALAN MINGGUAN (SIMULASI)</div>
+        <div style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 13, fontWeight: 700, color: "var(--cyan)", marginBottom: 16 }}>GRAFIK PENJUALAN MINGGUAN <span style={{ fontSize: 9, color: "rgba(255,255,255,0.4)", fontFamily: "'Share Tech Mono',monospace", fontWeight: 400 }}>— SIMULASI DATA</span></div>
         <div style={{ display: "flex", alignItems: "flex-end", gap: 12, height: 120, paddingTop: 20, borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
           {[40, 70, 30, 90, 50, 100, 60].map((h, i) => (
             <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 8, height: "100%" }}>
@@ -246,15 +246,22 @@ export function SellerPage({ sellerProducts, orders, navigate, saveSellerProduct
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", margin: "0 12px 12px" }}>
         <div style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 14, fontWeight: 700, color: "#fff", textTransform: "uppercase", letterSpacing: 1 }}>PRODUK SAYA</div>
         {selectedDocs.length > 0 && (
-          <button onClick={handleBulkDelete} style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 6, background: "rgba(255,45,120,0.15)", border: "1px solid rgba(255,45,120,0.4)", color: "var(--pink)", padding: "8px 12px", cursor: "pointer", animation: "pulse-pink 1.5s infinite" }} className="glitch-btn">
+          <button onClick={handleBulkDelete} style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 8, background: "rgba(255,45,120,0.15)", border: "1px solid rgba(255,45,120,0.4)", color: "var(--pink)", padding: "8px 12px", cursor: "pointer", animation: "pulse-pink 1.5s infinite" }} className="glitch-btn">
             🗑 HAPUS {selectedDocs.length} TERPILIH
           </button>
         )}
       </div>
       <div style={{ padding: "0 12px", display: "flex", flexDirection: "column", gap: 10 }}>
         {myProducts.length === 0
-          ? <div style={{ textAlign: "center", padding: 40, color: "rgba(255,255,255,0.3)", fontFamily: "'Press Start 2P',monospace", fontSize: 7, letterSpacing: 1, lineHeight: 2, border: "1px dashed rgba(255,255,255,0.1)" }}>
-              Belum ada produk. Klik "+ TAMBAH PRODUK" untuk mulai berjualan!
+          ? <div style={{ textAlign: "center", padding: 40, color: "rgba(255,255,255,0.5)", fontFamily: "'Share Tech Mono',monospace", fontSize: 12, letterSpacing: 0.5, lineHeight: 2, border: "1px dashed rgba(0,245,255,0.2)", background: "rgba(0,245,255,0.02)" }}>
+              <div style={{ fontSize: 48, marginBottom: 12 }}>🚀</div>
+              <div style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 10, color: "var(--cyan)", marginBottom: 16 }}>MULAI BERJUALAN</div>
+              <div style={{ maxWidth: 400, margin: "0 auto", textAlign: "left" }}>
+                <div style={{ marginBottom: 8 }}>📦 <strong>Langkah 1:</strong> Klik tombol "+ TAMBAH PRODUK" di atas</div>
+                <div style={{ marginBottom: 8 }}>📸 <strong>Langkah 2:</strong> Upload foto dan isi detail produk</div>
+                <div style={{ marginBottom: 8 }}>💰 <strong>Langkah 3:</strong> Tentukan harga dan stok</div>
+                <div>✅ <strong>Langkah 4:</strong> Simpan dan produkmu langsung tayang!</div>
+              </div>
             </div>
           : myProducts.map((p) => (
             <div key={p.id} style={{ background: "var(--card)", border: "1px solid rgba(255,255,255,0.07)", padding: 16, display: "flex", alignItems: "center", gap: 16 }}>
@@ -276,12 +283,12 @@ export function SellerPage({ sellerProducts, orders, navigate, saveSellerProduct
                   <div style={{ fontSize: 9, color: "var(--yellow)", marginTop: 2 }}>⭐ {(p.reviews.reduce((a, r) => a + r.star, 0) / p.reviews.length).toFixed(1)} ({p.reviews.length} ulasan)</div>
                 )}
                 {p.bonus?.length > 0 && (
-                  <div style={{ display: "inline-block", background: "rgba(255,45,120,0.15)", border: "1px solid rgba(255,45,120,0.3)", color: "var(--pink)", fontFamily: "'Press Start 2P',monospace", fontSize: 6, padding: "2px 6px", marginTop: 4 }}>🎁 {p.bonus.length} BONUS</div>
+                  <div style={{ display: "inline-block", background: "rgba(255,45,120,0.15)", border: "1px solid rgba(255,45,120,0.3)", color: "var(--pink)", fontFamily: "'Press Start 2P',monospace", fontSize: 8, padding: "2px 6px", marginTop: 4 }}>🎁 {p.bonus.length} BONUS</div>
                 )}
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 6, flexShrink: 0 }}>
-                <button onClick={() => { setEditProduct(p); setModalOpen(true); }} style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 6, background: "rgba(0,245,255,0.15)", border: "1px solid rgba(0,245,255,0.4)", color: "var(--cyan)", padding: "6px 12px", cursor: "pointer" }}>✏ EDIT</button>
-                <button onClick={() => { deleteSellerProduct(p.id); showToast("✓ Produk dihapus."); }} style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 6, background: "rgba(255,45,120,0.15)", border: "1px solid rgba(255,45,120,0.4)", color: "var(--pink)", padding: "6px 12px", cursor: "pointer" }}>🗑 HAPUS</button>
+                <button onClick={() => { setEditProduct(p); setModalOpen(true); }} style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 8, background: "rgba(0,245,255,0.15)", border: "1px solid rgba(0,245,255,0.4)", color: "var(--cyan)", padding: "6px 12px", cursor: "pointer" }}>✏ EDIT</button>
+                <button onClick={() => { deleteSellerProduct(p.id); showToast("✓ Produk dihapus."); }} style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 8, background: "rgba(255,45,120,0.15)", border: "1px solid rgba(255,45,120,0.4)", color: "var(--pink)", padding: "6px 12px", cursor: "pointer" }}>🗑 HAPUS</button>
               </div>
             </div>
           ))

@@ -42,7 +42,7 @@ export default function ProfilePage({ user, navigate }) {
   return (
     <div className="page-anim">
       <Toast msg={toast} />
-      <button onClick={() => navigate("home")} style={backBtnStyle}>← KEMBALI</button>
+      <button onClick={() => navigate("back")} style={backBtnStyle}>← KEMBALI</button>
 
       <div style={{ maxWidth: 560, margin: "0 auto", padding: "0 12px 60px" }}>
         {/* Header */}

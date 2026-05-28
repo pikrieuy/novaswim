@@ -29,7 +29,7 @@ const SLIDES = [
   { bg:"linear-gradient(135deg,#100020,#3d0060,#200050)", eye:"// CYBER EDITION //",   title:"CYBER\nFASHION",        sub:"LIMITED · EXCLUSIVE · PIXEL STYLE",  cta:"LIHAT KOLEKSI →",  ctaPage:"clothing",    titleColor:"var(--purple)", ctaBg:"var(--purple)", deco:"🦋" },
 ];
 
-export default function HomePage({ allProducts, navigate, onAddCart }) {
+export default function HomePage({ allProducts, navigate, onAddCart, isWishlisted, onToggleWishlist }) {
   const [slide, setSlide] = useState(0);
   const [filter, setFilter] = useState("all");
   const [h, m, s] = useCountdown(8 * 3600 + 45 * 60 + 23);
@@ -79,7 +79,7 @@ export default function HomePage({ allProducts, navigate, onAddCart }) {
       {/* Product Grid */}
       {filteredProducts.length === 0
         ? <SkeletonGrid count={10} />
-        : <ProductGrid products={filteredProducts} navigate={navigate} onAddCart={onAddCart} />
+        : <ProductGrid products={filteredProducts} navigate={navigate} onAddCart={onAddCart} isWishlisted={isWishlisted} onToggleWishlist={onToggleWishlist} />
       }
 
       {/* Footer */}
@@ -99,7 +99,7 @@ function HeroBanner({ cur, slide, setSlide, navigate }) {
       <div style={{ flex: 1, position: "relative", height: 260, overflow: "hidden", border: "1px solid rgba(0,245,255,0.2)", cursor: "pointer" }}>
         <div style={{ position: "absolute", inset: 0, background: cur.bg, transition: "background 0.5s" }} />
         <div style={{ position: "relative", zIndex: 2, padding: 32, display: "flex", flexDirection: "column", justifyContent: "center", height: "100%" }}>
-          <span style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 7, color: "var(--yellow)", letterSpacing: 3, marginBottom: 12, display: "block" }}>{cur.eye}</span>
+          <span style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 9, color: "var(--yellow)", letterSpacing: 3, marginBottom: 12, display: "block" }}>{cur.eye}</span>
           <h1 style={{ fontFamily: "'Orbitron',sans-serif", fontSize: "clamp(22px,4vw,42px)", fontWeight: 900, lineHeight: 1, color: cur.titleColor, letterSpacing: -1, animation: "rgb-shift 3s infinite", marginBottom: 8, whiteSpace: "pre-line" }}>{cur.title}</h1>
           <p style={{ fontSize: 11, color: "rgba(255,255,255,0.5)", letterSpacing: 2, marginBottom: 20 }}>{cur.sub}</p>
           <button onClick={() => navigate(cur.ctaPage)} style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 8, background: cur.ctaBg, color: cur.titleColor === "var(--cyan)" ? "#000" : "#fff", border: "none", padding: "10px 20px", cursor: "pointer", letterSpacing: 1, animation: "pulse-pink 2s infinite", width: "fit-content" }}>{cur.cta}</button>
@@ -119,7 +119,7 @@ function HeroBanner({ cur, slide, setSlide, navigate }) {
           <div key={sp.page} onClick={() => navigate(sp.page)} style={{ flex: 1, position: "relative", overflow: "hidden", cursor: "pointer", border: "1px solid rgba(255,255,255,0.08)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 6 }}>
             <div style={{ position: "absolute", inset: 0, background: sp.bg }} />
             <span style={{ fontSize: 32, animation: "float 3s ease-in-out infinite", position: "relative", zIndex: 1 }}>{sp.icon}</span>
-            <span style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 7, color: "#fff", letterSpacing: 1, position: "relative", zIndex: 1 }}>{sp.label}</span>
+            <span style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 9, color: "#fff", letterSpacing: 1, position: "relative", zIndex: 1 }}>{sp.label}</span>
             <span style={{ fontSize: 9, color: "rgba(255,255,255,0.4)", letterSpacing: 1, position: "relative", zIndex: 1 }}>{sp.sub}</span>
           </div>
         ))}
@@ -221,7 +221,7 @@ function SiteFooter({ navigate }) {
           <div key={col.h}>
             <h4 style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 12, fontWeight: 700, color: "var(--cyan)", letterSpacing: 2, textTransform: "uppercase", marginBottom: 12 }}>{col.h}</h4>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
-              {col.links.map((l) => <li key={l}><a href="#" style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", textDecoration: "none", letterSpacing: 0.5 }}>{l}</a></li>)}
+              {col.links.map((l) => <li key={l}><a href="#" onClick={(e) => { e.preventDefault(); window.dispatchEvent(new CustomEvent('toast', { detail: '🚧 Fitur ini segera hadir!' })); }} style={{ fontSize: 12, color: "rgba(255,255,255,0.6)", textDecoration: "none", letterSpacing: 0.5 }}>{l}</a></li>)}
             </ul>
           </div>
         ))}
