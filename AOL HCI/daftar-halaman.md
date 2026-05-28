@@ -14,7 +14,7 @@
 |-------|---------|-----------|
 | home | Home Page | Landing page: hero, kategori, filter, product grid, footer |
 | search | Search Page | Pencarian dengan autocomplete, filter, sort, price range |
-| detail (+ id) | Detail Page | Info lengkap produk: gallery, size selector, review, share |
+| detail (+ id) | Detail Page | Info lengkap produk: gallery, size selector, color selector, size guide, review, share |
 | wishlist | Wishlist Page | Daftar produk yang di-wishlist user |
 
 ## Halaman Kategori
@@ -54,6 +54,8 @@
 
 | Trigger | Komponen | Deskripsi |
 |---------|----------|-----------|
-| cart_panel | Cart Panel | Drawer keranjang dari kanan |
+| cart_panel | Cart Panel | Drawer keranjang dari kanan (full-screen di mobile) |
 | (modal) | Product Form Modal | Form tambah/edit produk seller |
+| (modal) | Size Guide Modal | Tabel ukuran + cara mengukur |
 | (lightbox) | Image Zoom | Zoom gambar produk di detail |
+| (suspense) | PageLoader | Loading fallback saat lazy-load halaman |

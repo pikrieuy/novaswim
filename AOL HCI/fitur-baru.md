@@ -119,3 +119,94 @@ Dokumen ini mencatat fitur-fitur baru yang ditambahkan setelah evaluasi usabilit
 - Staggered animation menciptakan visual flow yang natural
 
 **Implementasi:** CSS shimmer animation dengan `animationDelay` per card.
+
+---
+
+## 9. Color Selector (Iterasi 3)
+
+**Deskripsi:** Pengguna dapat memilih warna produk sebelum menambahkan ke keranjang. Setiap produk memiliki array `colors` (contoh: ["Hitam", "Ungu", "Merah"]). Warna ditampilkan sebagai button swatches.
+
+**Justifikasi HCI:**
+- Norman's Constraints — memaksa user memilih parameter yang diperlukan
+- Mental Model — e-commerce fashion selalu punya color picker (Zalora, H&M, Uniqlo)
+- Nielsen's Heuristic #5 (Error Prevention) — mencegah order tanpa spesifikasi warna
+
+**Implementasi:** State `selectedColor` + button group di DetailPage. Validasi sebelum add-to-cart.
+
+---
+
+## 10. Size Guide Modal (Iterasi 3)
+
+**Deskripsi:** Modal yang menampilkan tabel ukuran (S/M/L/XL) dengan pengukuran dada, pinggang, dan panjang dalam centimeter. Termasuk section "Cara Mengukur".
+
+**Justifikasi HCI:**
+- Nielsen's Heuristic #10 (Help and Documentation) — bantuan tersedia saat dibutuhkan
+- Mengurangi return rate karena salah ukuran
+- Norman's Visibility — link "📏 Size Guide" terlihat jelas di samping size selector
+
+**Implementasi:** Komponen `SizeGuideModal.jsx` dengan tabel data + instruksi.
+
+---
+
+## 11. Code Splitting / Lazy Loading (Iterasi 3)
+
+**Deskripsi:** Semua halaman di-lazy load menggunakan `React.lazy()` + `Suspense`. Bundle dipecah menjadi 12 chunk terpisah yang dimuat on-demand.
+
+**Justifikasi HCI:**
+- Perceived performance — halaman pertama load lebih cepat
+- Nielsen's Heuristic #1 — PageLoader fallback menunjukkan loading state
+- Bundle utama: 505KB → 410KB (-19%), gzip: 139KB → 120KB (-14%)
+
+**Implementasi:** `React.lazy()` + dynamic import + `<Suspense fallback={<PageLoader />}>`.
+
+---
+
+## 12. WCAG Focus Indicators (Iterasi 3)
+
+**Deskripsi:** Semua elemen interaktif (button, input, link, select) mendapat visible focus indicator saat navigasi keyboard (`focus-visible`).
+
+**Justifikasi HCI:**
+- WCAG 2.1 AA Success Criterion 2.4.7 (Focus Visible)
+- Accessibility — pengguna keyboard/screen reader bisa melihat posisi fokus
+- Warna: cyan 2px outline untuk elemen umum, pink untuk nav tabs
+
+**Implementasi:** CSS `button:focus-visible` rules di `global.css`.
+
+---
+
+## 13. Mobile Full-Screen Cart (Iterasi 3)
+
+**Deskripsi:** Pada viewport ≤480px, cart panel drawer berubah menjadi full-screen overlay (100vw) alih-alih side drawer 400px.
+
+**Justifikasi HCI:**
+- Fitts' Law — area interaksi lebih besar di layar kecil
+- Menghindari partial visibility yang membingungkan di mobile
+- Touch target minimum 44px untuk semua button
+
+**Implementasi:** CSS media query `.panel-drawer { width: 100vw }` + `button { min-height: 44px }`.
+
+---
+
+## 14. Navigation Simplification (Iterasi 3)
+
+**Deskripsi:** Top bar header disederhanakan dari 5 item menjadi 2 item esensial (Lacak Pesanan, Seller Center). "Download App" dihapus karena non-functional.
+
+**Justifikasi HCI:**
+- Hick's Law — mengurangi jumlah pilihan = mempercepat keputusan
+- Nielsen's Heuristic #8 (Aesthetic and Minimalist Design) — hanya tampilkan yang relevan
+- 4/8 responden mengeluhkan terlalu banyak navigasi
+
+**Implementasi:** Hapus item non-esensial dari TopBar component.
+
+---
+
+## 15. Internationalization Readiness (Iterasi 3)
+
+**Deskripsi:** Semua user-facing strings (70+) diekstrak ke file `src/locale/id.js` sebagai persiapan multi-bahasa di masa depan.
+
+**Justifikasi HCI:**
+- Scalability — siap untuk ekspansi ke pasar internasional
+- Consistency — semua teks terpusat, mudah diaudit dan diubah
+- Best practice software engineering — separation of concerns
+
+**Implementasi:** File `src/locale/id.js` dengan object berisi semua strings terkelompok per fitur.

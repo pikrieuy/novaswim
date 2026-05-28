@@ -71,10 +71,11 @@ Pada initial design, NEXWEAR menggunakan emoji (🧥👜⌚🛒🏠) sebagai iko
 
 ## Impact pada Bundle Size
 
-| Metrik | Emoji | Material Design Icons |
+| Metrik | Emoji (awal) | Material Design Icons (sekarang) |
 |--------|-------|----------------------|
-| Bundle JS | 490 KB | 505 KB |
-| Tambahan | — | +15 KB |
+| Bundle JS (main) | 490 KB | 410 KB (code-split) |
+| Total chunks | 1 file | 13 files |
+| Initial gzip | ~134 KB | 120 KB |
 | Visual consistency | ❌ Beda per OS | ✅ Identik semua platform |
 | Customizability | ❌ Fixed | ✅ Size, color via props |
 | Profesionalisme | ❌ Casual | ✅ Industry standard |

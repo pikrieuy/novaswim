@@ -42,3 +42,14 @@ Dokumen ini merangkum semua perubahan yang dilakukan berdasarkan hasil data gath
 | StarField background | 9/10 positif; Aesthetic-Usability Effect |
 | Ticker marquee | Tidak ada keluhan; sesuai mental model e-commerce |
 | Product card structure | Gestalt Similarity; scanning cepat |
+
+| 21 | Ikon navigasi | Emoji (🏠🔍🛒) | Google Material Design Icons (MdHome, MdSearch, etc.) | Gestalt Similarity; Nielsen's Heuristic #4 (Consistency) |
+| 22 | Detail Page | Tidak ada color selector | Color swatch buttons, wajib pilih | Norman's Constraints; 5/8 responden keluhan |
+| 23 | Detail Page | Tidak ada size guide | Modal tabel ukuran + cara mengukur | Nielsen's Heuristic #10 (Help and Documentation) |
+| 24 | Code splitting | 1 bundle 505KB | 12 lazy-loaded chunks, main 410KB | Performance; Perceived speed |
+| 25 | Focus indicators | Tidak ada | 2px cyan outline pada focus-visible | WCAG 2.1 AA; Accessibility |
+| 26 | Cart panel mobile | Side drawer 400px | Full-screen overlay pada ≤480px | Fitts' Law; Mobile UX |
+| 27 | Touch target mobile | Varies | Min 44px height untuk semua button | WCAG 2.5.5; Fitts' Law |
+| 28 | Top bar | 5 item (Seller, Download, Lacak, Ongkir, Promo) | 2 item (Lacak Pesanan, Seller Center) | Hick's Law; mengurangi cognitive load |
+| 29 | i18n | Strings hardcoded di komponen | 70+ strings di src/locale/id.js | Internationalization readiness |
+| 30 | Product Not Found | Teks kecil "Produk tidak ditemukan" | Full page dengan ikon, pesan, dan CTA | Nielsen's Heuristic #9 (Help users recognize errors) |
