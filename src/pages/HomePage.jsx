@@ -139,8 +139,8 @@ function CategoryStrip({ navigate }) {
         return (
           <div key={i} className="cat-item" onClick={() => c.page && navigate(c.page)}
             style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, cursor: c.page ? "pointer" : "default", padding: "8px 4px" }}>
-            <div style={{ width: 48, height: 48, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%", background: "rgba(0,245,255,0.07)", border: "1px solid rgba(0,245,255,0.15)", transition: "all 0.2s" }}>
-              <IconComp className="cat-icon" size={24} color="var(--cyan)" style={{ filter: "drop-shadow(0 0 6px rgba(0,245,255,0.5))" }} />
+            <div style={{ width: 48, height: 48, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.15)", transition: "all 0.2s" }}>
+              <IconComp className="cat-icon" size={24} color="#fff" />
             </div>
             <span className="cat-label" style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: 13, color: "rgba(255,255,255,0.7)", textAlign: "center", letterSpacing: 0.5 }}>{c.label}</span>
           </div>
