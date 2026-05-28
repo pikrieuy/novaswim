@@ -4,7 +4,7 @@
 // ─────────────────────────────────────────
 
 import { NAV_TABS } from "../data/products";
-import { MdShoppingCart, MdFavoriteBorder, MdSearch, MdPerson, MdStar, MdFlashOn, MdLogout, MdNotifications } from "react-icons/md";
+import { MdShoppingCart, MdFavoriteBorder, MdSearch, MdPerson, MdStar, MdFlashOn, MdLogout, MdNotifications, MdChat } from "react-icons/md";
 
 export default function Header({ currentPage, navigate, cartCount, searchVal, setSearchVal, user, onLogout }) {
   return (
@@ -126,6 +126,10 @@ function MainBar({ navigate, cartCount, searchVal, setSearchVal }) {
 
       {/* Icons */}
       <div style={{ display: "flex", gap: 20, alignItems: "center", flexShrink: 0 }}>
+        <div onClick={() => navigate("chat")} style={{ position: "relative", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
+          <MdChat size={24} color="rgba(255,255,255,0.8)" />
+          <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: "rgba(255,255,255,0.7)", letterSpacing: 0.5 }}>CHAT</span>
+        </div>
         <div onClick={() => navigate("notif")} style={{ position: "relative", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
           <MdNotifications size={24} color="rgba(255,255,255,0.8)" />
           <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: "rgba(255,255,255,0.7)", letterSpacing: 0.5 }}>NOTIF</span>
