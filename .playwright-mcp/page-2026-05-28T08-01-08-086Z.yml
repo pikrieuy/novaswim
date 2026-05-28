@@ -1,0 +1,99 @@
+- generic [ref=e23]:
+  - banner [ref=e24]:
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - generic [ref=e27] [cursor=pointer]: // Seller Center
+        - generic [ref=e28]: ·
+        - generic [ref=e29] [cursor=pointer]: Download App
+        - generic [ref=e30]: ·
+        - generic [ref=e31] [cursor=pointer]: Lacak Pesanan
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - img [ref=e34]
+          - text: Free Ongkir
+        - generic [ref=e38] [cursor=pointer]:
+          - img [ref=e39]
+          - text: Promo Hari Ini
+        - generic [ref=e42]: "|"
+        - generic [ref=e43] [cursor=pointer]:
+          - img [ref=e44]
+          - text: pikri
+        - button "LOGOUT" [ref=e47] [cursor=pointer]
+    - generic [ref=e48]:
+      - generic [ref=e49] [cursor=pointer]:
+        - text: NEX
+        - emphasis [ref=e50]: WEAR
+      - generic [ref=e51]:
+        - textbox "CARI BAJU, SEPATU, AKSESORIS..." [ref=e52]
+        - button "[ CARI ]" [ref=e53] [cursor=pointer]
+      - generic [ref=e54]:
+        - generic [ref=e55] [cursor=pointer]:
+          - img [ref=e56]
+          - generic [ref=e59]: WISH
+        - generic [ref=e60] [cursor=pointer]:
+          - img [ref=e61]
+          - generic [ref=e64]: CART
+    - navigation [ref=e65]:
+      - generic [ref=e66] [cursor=pointer]: BERANDA
+      - generic [ref=e67] [cursor=pointer]: OUT WEAR
+      - generic [ref=e68] [cursor=pointer]: ACCESSORY
+      - generic [ref=e69] [cursor=pointer]: DEVICE
+      - generic [ref=e70] [cursor=pointer]: UTILITY
+      - generic [ref=e71] [cursor=pointer]: CLOTHING
+      - generic [ref=e72] [cursor=pointer]: SHOES
+      - generic [ref=e73] [cursor=pointer]: SET
+      - generic [ref=e74] [cursor=pointer]: NEW ARRIVALS
+      - generic [ref=e75] [cursor=pointer]: SALE
+      - generic [ref=e76] [cursor=pointer]: JUAL
+  - generic [ref=e78]:
+    - generic [ref=e79]: ★ GRATIS ONGKIR SETIAP HARI
+    - generic [ref=e80]: ◆ GARANSI UANG KEMBALI 30 HARI
+    - generic [ref=e81]: ★ KUALITAS PREMIUM BAHAN TERBAIK
+    - generic [ref=e82]: ◆ BAHAN SPACE-GRADE NANO-TECH
+    - generic [ref=e83]: ★ PIXEL COLLECTION 2077 TERSEDIA
+    - generic [ref=e84]: ◆ BAYAR DI TEMPAT TERSEDIA
+    - generic [ref=e85]: ★ GRATIS ONGKIR SETIAP HARI
+    - generic [ref=e86]: ◆ GARANSI UANG KEMBALI 30 HARI
+    - generic [ref=e87]: ★ KUALITAS PREMIUM BAHAN TERBAIK
+    - generic [ref=e88]: ◆ BAHAN SPACE-GRADE NANO-TECH
+    - generic [ref=e89]: ★ PIXEL COLLECTION 2077 TERSEDIA
+    - generic [ref=e90]: ◆ BAYAR DI TEMPAT TERSEDIA
+  - main [ref=e91]:
+    - generic [ref=e831]:
+      - button "← KEMBALI" [ref=e832] [cursor=pointer]
+      - generic [ref=e833]: LACAK PESANAN
+      - generic [ref=e834]:
+        - generic [ref=e835] [cursor=pointer]: SEMUA
+        - generic [ref=e836] [cursor=pointer]: DIKEMAS
+        - generic [ref=e837] [cursor=pointer]: DIKIRIM
+        - generic [ref=e838] [cursor=pointer]: SELESAI
+      - generic [ref=e840]: Belum ada pesanan .
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - text: KERANJANG
+          - generic: (0)
+        - button "[ TUTUP ]"
+      - generic:
+        - generic: Keranjang kosong
+      - generic:
+        - generic:
+          - button "LIHAT KERANJANG"
+          - button "CHECKOUT →"
+  - navigation [ref=e507]:
+    - button "HOME" [ref=e508] [cursor=pointer]:
+      - img [ref=e509]
+      - generic [ref=e512]: HOME
+    - button "CARI" [ref=e513] [cursor=pointer]:
+      - img [ref=e514]
+      - generic [ref=e517]: CARI
+    - button "CART" [ref=e518] [cursor=pointer]:
+      - img [ref=e520]
+      - generic [ref=e523]: CART
+    - button "PESANAN" [active] [ref=e524] [cursor=pointer]:
+      - img [ref=e525]
+      - generic [ref=e528]: PESANAN
+    - button "JUAL" [ref=e529] [cursor=pointer]:
+      - img [ref=e530]
+      - generic [ref=e533]: JUAL

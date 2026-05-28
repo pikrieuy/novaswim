@@ -1,0 +1,282 @@
+- generic [ref=e23]:
+  - banner [ref=e24]:
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - generic [ref=e27] [cursor=pointer]: // Seller Center
+        - generic [ref=e28]: ·
+        - generic [ref=e29] [cursor=pointer]: Download App
+        - generic [ref=e30]: ·
+        - generic [ref=e31] [cursor=pointer]: Lacak Pesanan
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - img [ref=e34]
+          - text: Free Ongkir
+        - generic [ref=e38] [cursor=pointer]:
+          - img [ref=e39]
+          - text: Promo Hari Ini
+        - generic [ref=e42]: "|"
+        - generic [ref=e43] [cursor=pointer]:
+          - img [ref=e44]
+          - text: pikri
+        - button "LOGOUT" [ref=e47] [cursor=pointer]
+    - generic [ref=e48]:
+      - generic [ref=e49] [cursor=pointer]:
+        - text: NEX
+        - emphasis [ref=e50]: WEAR
+      - generic [ref=e51]:
+        - textbox "CARI BAJU, SEPATU, AKSESORIS..." [ref=e52]
+        - button "[ CARI ]" [ref=e53] [cursor=pointer]
+      - generic [ref=e54]:
+        - generic [ref=e55] [cursor=pointer]:
+          - img [ref=e56]
+          - generic [ref=e59]: WISH
+        - generic [ref=e60] [cursor=pointer]:
+          - img [ref=e61]
+          - generic [ref=e64]: CART
+    - navigation [ref=e65]:
+      - generic [ref=e66] [cursor=pointer]: BERANDA
+      - generic [ref=e67] [cursor=pointer]: OUT WEAR
+      - generic [ref=e68] [cursor=pointer]: ACCESSORY
+      - generic [ref=e69] [cursor=pointer]: DEVICE
+      - generic [ref=e70] [cursor=pointer]: UTILITY
+      - generic [ref=e71] [cursor=pointer]: CLOTHING
+      - generic [ref=e72] [cursor=pointer]: SHOES
+      - generic [ref=e73] [cursor=pointer]: SET
+      - generic [ref=e74] [cursor=pointer]: NEW ARRIVALS
+      - generic [ref=e75] [cursor=pointer]: SALE
+      - generic [ref=e76] [cursor=pointer]: JUAL
+  - generic [ref=e78]:
+    - generic [ref=e79]: ★ GRATIS ONGKIR SETIAP HARI
+    - generic [ref=e80]: ◆ GARANSI UANG KEMBALI 30 HARI
+    - generic [ref=e81]: ★ KUALITAS PREMIUM BAHAN TERBAIK
+    - generic [ref=e82]: ◆ BAHAN SPACE-GRADE NANO-TECH
+    - generic [ref=e83]: ★ PIXEL COLLECTION 2077 TERSEDIA
+    - generic [ref=e84]: ◆ BAYAR DI TEMPAT TERSEDIA
+    - generic [ref=e85]: ★ GRATIS ONGKIR SETIAP HARI
+    - generic [ref=e86]: ◆ GARANSI UANG KEMBALI 30 HARI
+    - generic [ref=e87]: ★ KUALITAS PREMIUM BAHAN TERBAIK
+    - generic [ref=e88]: ◆ BAHAN SPACE-GRADE NANO-TECH
+    - generic [ref=e89]: ★ PIXEL COLLECTION 2077 TERSEDIA
+    - generic [ref=e90]: ◆ BAYAR DI TEMPAT TERSEDIA
+  - main [ref=e91]:
+    - generic [ref=e540]:
+      - button "← KEMBALI" [ref=e541] [cursor=pointer]
+      - textbox "Cari produk..." [active] [ref=e544]
+      - generic [ref=e545]:
+        - generic [ref=e546]: MAKS HARGA
+        - slider [ref=e547]: "1000000"
+        - generic [ref=e548]: Rp 1.000.000
+      - generic [ref=e549]:
+        - generic [ref=e550] [cursor=pointer]: 🔍 Semua
+        - generic [ref=e551] [cursor=pointer]: 🧥 Out Wear
+        - generic [ref=e552] [cursor=pointer]: 👕 Clothing
+        - generic [ref=e553] [cursor=pointer]: 👟 Shoes
+        - generic [ref=e554] [cursor=pointer]: 💍 Accessory
+        - generic [ref=e555] [cursor=pointer]: 📱 Device
+        - generic [ref=e556] [cursor=pointer]: 🛠️ Utility
+        - generic [ref=e557] [cursor=pointer]: 🎁 Set
+      - generic [ref=e558]:
+        - generic [ref=e559]:
+          - text: SEMUA PRODUK
+          - generic [ref=e560]: 15 produk
+        - combobox [ref=e561] [cursor=pointer]:
+          - option "🆕 Terbaru" [selected]
+          - option "🔥 Terpopuler"
+          - option "💲 Termurah"
+          - option "💎 Termahal"
+      - generic [ref=e562]:
+        - generic [ref=e563] [cursor=pointer]:
+          - generic [ref=e564]: NEW
+          - generic [ref=e565]: 🤍
+          - img "Ear-Cuff Winged Mecha" [ref=e570]
+          - generic [ref=e571]:
+            - generic [ref=e572]: Ear-Cuff Winged Mecha
+            - generic [ref=e573]: Rp 700.000
+            - generic [ref=e574]: Rp 650.000
+            - generic [ref=e575]:
+              - generic [ref=e576]: 0 terjual
+              - generic [ref=e577]: ★★★★★
+        - generic [ref=e578] [cursor=pointer]:
+          - generic [ref=e579]: NEW
+          - generic [ref=e580]: 🤍
+          - img "Cincin Armor Silver" [ref=e585]
+          - generic [ref=e586]:
+            - generic [ref=e587]: Cincin Armor Silver
+            - generic [ref=e588]: Rp 700.000
+            - generic [ref=e589]: Rp 650.000
+            - generic [ref=e590]:
+              - generic [ref=e591]: 0 terjual
+              - generic [ref=e592]: ★★★★★
+        - generic [ref=e593] [cursor=pointer]:
+          - generic [ref=e594]: NEW
+          - generic [ref=e595]: 🤍
+          - img "Kacamata Goggle Cyber-Frame" [ref=e600]
+          - generic [ref=e601]:
+            - generic [ref=e602]: Kacamata Goggle Cyber-Frame
+            - generic [ref=e603]: Rp 700.000
+            - generic [ref=e604]: Rp 650.000
+            - generic [ref=e605]:
+              - generic [ref=e606]: 0 terjual
+              - generic [ref=e607]: ★★★★★
+        - generic [ref=e608] [cursor=pointer]:
+          - generic [ref=e609]: NEW
+          - generic [ref=e610]: 🤍
+          - img "Headset LED Pink Neon" [ref=e615]
+          - generic [ref=e616]:
+            - generic [ref=e617]: Headset LED Pink Neon
+            - generic [ref=e618]: Rp 500.000
+            - generic [ref=e619]: Rp 450.000
+            - generic [ref=e620]:
+              - generic [ref=e621]: 0 terjual
+              - generic [ref=e622]: ★★★★★
+        - generic [ref=e623] [cursor=pointer]:
+          - generic [ref=e624]: NEW
+          - generic [ref=e625]: 🤍
+          - img "Masker Cyber-Oni Hitam Merah" [ref=e630]
+          - generic [ref=e631]:
+            - generic [ref=e632]: Masker Cyber-Oni Hitam Merah
+            - generic [ref=e633]: Rp 500.000
+            - generic [ref=e634]: Rp 450.000
+            - generic [ref=e635]:
+              - generic [ref=e636]: 0 terjual
+              - generic [ref=e637]: ★★★★★
+        - generic [ref=e638] [cursor=pointer]:
+          - generic [ref=e639]: NEW
+          - generic [ref=e640]: 🤍
+          - img "Helm Mecha White Fox" [ref=e645]
+          - generic [ref=e646]:
+            - generic [ref=e647]: Helm Mecha White Fox
+            - generic [ref=e648]: Rp 500.000
+            - generic [ref=e649]: Rp 450.000
+            - generic [ref=e650]:
+              - generic [ref=e651]: 0 terjual
+              - generic [ref=e652]: ★★★★★
+        - generic [ref=e653] [cursor=pointer]:
+          - generic [ref=e654]: NEW
+          - generic [ref=e655]: 🤍
+          - img "Scouter Eyewear Futuristik" [ref=e660]
+          - generic [ref=e661]:
+            - generic [ref=e662]: Scouter Eyewear Futuristik
+            - generic [ref=e663]: Rp 500.000
+            - generic [ref=e664]: Rp 450.000
+            - generic [ref=e665]:
+              - generic [ref=e666]: 0 terjual
+              - generic [ref=e667]: ★★★★★
+        - generic [ref=e668] [cursor=pointer]:
+          - generic [ref=e669]: NEW
+          - generic [ref=e670]: 🤍
+          - img "Cincin Butterfly Mecha" [ref=e675]
+          - generic [ref=e676]:
+            - generic [ref=e677]: Cincin Butterfly Mecha
+            - generic [ref=e678]: Rp 500.000
+            - generic [ref=e679]: Rp 460.000
+            - generic [ref=e680]:
+              - generic [ref=e681]: 1 terjual
+              - generic [ref=e682]: ★★★★★
+        - generic [ref=e683] [cursor=pointer]:
+          - generic [ref=e684]: NEW
+          - generic [ref=e685]: 🤍
+          - img "Aksesori Rambut Winged Crystal" [ref=e690]
+          - generic [ref=e691]:
+            - generic [ref=e692]: Aksesori Rambut Winged Crystal
+            - generic [ref=e693]: Rp 500.000
+            - generic [ref=e694]: Rp 450.000
+            - generic [ref=e695]:
+              - generic [ref=e696]: 0 terjual
+              - generic [ref=e697]: ★★★★★
+        - generic [ref=e698] [cursor=pointer]:
+          - generic [ref=e699]: NEW
+          - generic [ref=e700]: 🤍
+          - img "Helm Sailor Moon" [ref=e705]
+          - generic [ref=e706]:
+            - generic [ref=e707]: Helm Sailor Moon
+            - generic [ref=e708]: Rp 900.000
+            - generic [ref=e709]: Rp 870.000
+            - generic [ref=e710]:
+              - generic [ref=e711]: 0 terjual
+              - generic [ref=e712]: ★★★★★
+        - generic [ref=e713] [cursor=pointer]:
+          - generic [ref=e714]: NEW
+          - generic [ref=e715]: 🤍
+          - img "Headpiece Kuping Kucing" [ref=e720]
+          - generic [ref=e721]:
+            - generic [ref=e722]: Headpiece Kuping Kucing
+            - generic [ref=e723]: Rp 60.000
+            - generic [ref=e724]: Rp 570.000
+            - generic [ref=e725]:
+              - generic [ref=e726]: 0 terjual
+              - generic [ref=e727]: ★★★★★
+        - generic [ref=e728] [cursor=pointer]:
+          - generic [ref=e729]: NEW
+          - generic [ref=e730]: 🤍
+          - img "Sarung Tangan Iron Man" [ref=e735]
+          - generic [ref=e736]:
+            - generic [ref=e737]: Sarung Tangan Iron Man
+            - generic [ref=e738]: Rp 600.000
+            - generic [ref=e739]: Rp 560.000
+            - generic [ref=e740]:
+              - generic [ref=e741]: 0 terjual
+              - generic [ref=e742]: ★★★★★
+        - generic [ref=e743] [cursor=pointer]:
+          - generic [ref=e744]: NEW
+          - generic [ref=e745]: 🤍
+          - img "Antena Radar" [ref=e750]
+          - generic [ref=e751]:
+            - generic [ref=e752]: Antena Radar
+            - generic [ref=e753]: Rp 800.000
+            - generic [ref=e754]: Rp 750.000
+            - generic [ref=e755]:
+              - generic [ref=e756]: 0 terjual
+              - generic [ref=e757]: ★★★★★
+        - generic [ref=e758] [cursor=pointer]:
+          - generic [ref=e759]: NEW
+          - generic [ref=e760]: 🤍
+          - img "Masker Emo" [ref=e765]
+          - generic [ref=e766]:
+            - generic [ref=e767]: Masker Emo
+            - generic [ref=e768]: Rp 650.000
+            - generic [ref=e769]: Rp 567.000
+            - generic [ref=e770]:
+              - generic [ref=e771]: 1 terjual
+              - generic [ref=e772]: ★★★★★
+        - generic [ref=e773] [cursor=pointer]:
+          - generic [ref=e774]: SOLD
+          - generic [ref=e775]: 🤍
+          - generic [ref=e776]:
+            - img "Jacket putih" [ref=e780]
+            - generic [ref=e782]: SOLD OUT
+          - generic [ref=e783]:
+            - generic [ref=e784]: Jacket putih
+            - generic [ref=e785]: Rp 80.000
+            - generic [ref=e786]:
+              - generic [ref=e787]: 28 terjual
+              - generic [ref=e788]: ★★★★★
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - text: KERANJANG
+          - generic: (0)
+        - button "[ TUTUP ]"
+      - generic:
+        - generic: Keranjang kosong
+      - generic:
+        - generic:
+          - button "LIHAT KERANJANG"
+          - button "CHECKOUT →"
+  - navigation [ref=e507]:
+    - button "HOME" [ref=e508] [cursor=pointer]:
+      - img [ref=e509]
+      - generic [ref=e512]: HOME
+    - button "CARI" [ref=e513] [cursor=pointer]:
+      - img [ref=e514]
+      - generic [ref=e517]: CARI
+    - button "CART" [ref=e518] [cursor=pointer]:
+      - img [ref=e520]
+      - generic [ref=e523]: CART
+    - button "PESANAN" [ref=e524] [cursor=pointer]:
+      - img [ref=e525]
+      - generic [ref=e528]: PESANAN
+    - button "JUAL" [ref=e529] [cursor=pointer]:
+      - img [ref=e530]
+      - generic [ref=e533]: JUAL

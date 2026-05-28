@@ -2,7 +2,7 @@
 //  src/App.jsx
 // ─────────────────────────────────────────
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, lazy, Suspense } from "react";
 import { supabase } from "./supabase";
 import { useStore } from "./store/useStore";
 import "./styles/global.css";
@@ -14,16 +14,38 @@ import CartPanel  from "./components/CartPanel";
 import BottomNav  from "./components/BottomNav";
 import Toast      from "./components/Toast";
 
-import AuthPage    from "./pages/AuthPage";
-import HomePage    from "./pages/HomePage";
-import DetailPage  from "./pages/DetailPage";
-import { CategoryPage, SearchPage }          from "./pages/CategoryPages";
-import { CartPage, AddressPage, CheckoutPage, SuccessPage } from "./pages/CheckoutPages";
-import { OrdersPage, SellerPage, NotifPage, ChatPage } from "./pages/OtherPages";
-import ProfilePage from "./pages/ProfilePage";
-import WishlistPage from "./pages/WishlistPage";
+// Lazy-loaded pages for code splitting
+const AuthPage     = lazy(() => import("./pages/AuthPage"));
+const HomePage     = lazy(() => import("./pages/HomePage"));
+const DetailPage   = lazy(() => import("./pages/DetailPage"));
+const ProfilePage  = lazy(() => import("./pages/ProfilePage"));
+const WishlistPage = lazy(() => import("./pages/WishlistPage"));
+
+// These export multiple components, import them normally but lazy
+const CategoryPagesModule = lazy(() => import("./pages/CategoryPages").then(m => ({ default: m.CategoryPage })));
+const SearchPageModule    = lazy(() => import("./pages/CategoryPages").then(m => ({ default: m.SearchPage })));
+const CartPageModule      = lazy(() => import("./pages/CheckoutPages").then(m => ({ default: m.CartPage })));
+const AddressPageModule   = lazy(() => import("./pages/CheckoutPages").then(m => ({ default: m.AddressPage })));
+const CheckoutPageModule  = lazy(() => import("./pages/CheckoutPages").then(m => ({ default: m.CheckoutPage })));
+const SuccessPageModule   = lazy(() => import("./pages/CheckoutPages").then(m => ({ default: m.SuccessPage })));
+const OrdersPageModule    = lazy(() => import("./pages/OtherPages").then(m => ({ default: m.OrdersPage })));
+const SellerPageModule    = lazy(() => import("./pages/OtherPages").then(m => ({ default: m.SellerPage })));
+const NotifPageModule     = lazy(() => import("./pages/OtherPages").then(m => ({ default: m.NotifPage })));
+const ChatPageModule      = lazy(() => import("./pages/OtherPages").then(m => ({ default: m.ChatPage })));
 
 import { CATEGORY_MAP } from "./data/products";
+
+// Loading fallback for lazy pages
+function PageLoader() {
+  return (
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: 300, flexDirection: "column", gap: 12 }}>
+      <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: 10, color: "var(--pink)", letterSpacing: 2, animation: "pulse-pink 1.5s infinite" }}>LOADING</div>
+      <div style={{ width: 60, height: 3, background: "rgba(255,255,255,0.1)", overflow: "hidden" }}>
+        <div style={{ width: "40%", height: "100%", background: "var(--cyan)", animation: "marquee 1s linear infinite" }} />
+      </div>
+    </div>
+  );
+}
 
 export default function App() {
   const store = useStore();
@@ -115,7 +137,7 @@ export default function App() {
 
   const renderPage = () => {
     if (CATEGORY_MAP[currentPage]) {
-      return <CategoryPage catKey={currentPage} {...commonProps} />;
+      return <CategoryPagesModule catKey={currentPage} {...commonProps} />;
     }
 
     switch (currentPage) {
@@ -124,7 +146,7 @@ export default function App() {
 
 
       case "search":
-        return <SearchPage keyword={searchVal} {...commonProps} />;
+        return <SearchPageModule keyword={searchVal} {...commonProps} />;
 
       case "detail":
         return (
@@ -178,7 +200,7 @@ export default function App() {
         );
 
       case "success":
-        return <SuccessPage navigate={navigate} />;
+        return <SuccessPageModule navigate={navigate} />;
 
       case "orders":
         return (
@@ -218,10 +240,10 @@ export default function App() {
         );
 
       case "notif":
-        return <NotifPage navigate={navigate} />;
+        return <NotifPageModule navigate={navigate} />;
 
       case "chat":
-        return <ChatPage navigate={navigate} />;
+        return <ChatPageModule navigate={navigate} />;
 
       default:
         return <HomePage {...commonProps} />;
@@ -247,7 +269,9 @@ export default function App() {
     return (
       <>
         <StarField />
-        <AuthPage onLogin={setUser} />
+        <Suspense fallback={<PageLoader />}>
+          <AuthPage onLogin={setUser} />
+        </Suspense>
       </>
     );
   }
@@ -271,7 +295,9 @@ export default function App() {
       <Ticker />
 
       <main style={{ position: "relative", maxWidth: 1300, margin: "0 auto", padding: "0 0 40px" }}>
-        {renderPage()}
+        <Suspense fallback={<PageLoader />}>
+          {renderPage()}
+        </Suspense>
       </main>
 
       <CartPanel

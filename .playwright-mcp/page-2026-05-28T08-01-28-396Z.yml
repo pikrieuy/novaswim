@@ -1,0 +1,135 @@
+- generic [ref=e23]:
+  - banner [ref=e24]:
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - generic [ref=e27] [cursor=pointer]: // Seller Center
+        - generic [ref=e28]: ·
+        - generic [ref=e29] [cursor=pointer]: Download App
+        - generic [ref=e30]: ·
+        - generic [ref=e31] [cursor=pointer]: Lacak Pesanan
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - img [ref=e34]
+          - text: Free Ongkir
+        - generic [ref=e38] [cursor=pointer]:
+          - img [ref=e39]
+          - text: Promo Hari Ini
+        - generic [ref=e42]: "|"
+        - generic [ref=e43] [cursor=pointer]:
+          - img [ref=e44]
+          - text: pikri
+        - button "LOGOUT" [ref=e47] [cursor=pointer]
+    - generic [ref=e48]:
+      - generic [ref=e49] [cursor=pointer]:
+        - text: NEX
+        - emphasis [ref=e50]: WEAR
+      - generic [ref=e51]:
+        - textbox "CARI BAJU, SEPATU, AKSESORIS..." [ref=e52]
+        - button "[ CARI ]" [ref=e53] [cursor=pointer]
+      - generic [ref=e54]:
+        - generic [ref=e55] [cursor=pointer]:
+          - img [ref=e56]
+          - generic [ref=e59]: WISH
+        - generic [ref=e60] [cursor=pointer]:
+          - img [ref=e61]
+          - generic [ref=e64]: CART
+    - navigation [ref=e65]:
+      - generic [ref=e66] [cursor=pointer]: BERANDA
+      - generic [ref=e67] [cursor=pointer]: OUT WEAR
+      - generic [ref=e68] [cursor=pointer]: ACCESSORY
+      - generic [ref=e69] [cursor=pointer]: DEVICE
+      - generic [ref=e70] [cursor=pointer]: UTILITY
+      - generic [ref=e71] [cursor=pointer]: CLOTHING
+      - generic [ref=e72] [cursor=pointer]: SHOES
+      - generic [ref=e73] [cursor=pointer]: SET
+      - generic [ref=e74] [cursor=pointer]: NEW ARRIVALS
+      - generic [ref=e75] [cursor=pointer]: SALE
+      - generic [ref=e76] [cursor=pointer]: JUAL
+  - generic [ref=e78]:
+    - generic [ref=e79]: ★ GRATIS ONGKIR SETIAP HARI
+    - generic [ref=e80]: ◆ GARANSI UANG KEMBALI 30 HARI
+    - generic [ref=e81]: ★ KUALITAS PREMIUM BAHAN TERBAIK
+    - generic [ref=e82]: ◆ BAHAN SPACE-GRADE NANO-TECH
+    - generic [ref=e83]: ★ PIXEL COLLECTION 2077 TERSEDIA
+    - generic [ref=e84]: ◆ BAYAR DI TEMPAT TERSEDIA
+    - generic [ref=e85]: ★ GRATIS ONGKIR SETIAP HARI
+    - generic [ref=e86]: ◆ GARANSI UANG KEMBALI 30 HARI
+    - generic [ref=e87]: ★ KUALITAS PREMIUM BAHAN TERBAIK
+    - generic [ref=e88]: ◆ BAHAN SPACE-GRADE NANO-TECH
+    - generic [ref=e89]: ★ PIXEL COLLECTION 2077 TERSEDIA
+    - generic [ref=e90]: ◆ BAYAR DI TEMPAT TERSEDIA
+  - main [ref=e91]:
+    - generic [ref=e841]:
+      - button "← KEMBALI" [ref=e842] [cursor=pointer]
+      - generic [ref=e843]:
+        - generic [ref=e844]:
+          - generic [ref=e845]: // SELLER CENTER
+          - generic [ref=e846]: TOKO KAMU
+        - button "+ TAMBAH PRODUK" [ref=e847] [cursor=pointer]
+      - generic [ref=e848]:
+        - generic [ref=e849]:
+          - generic [ref=e850]: 📦
+          - generic [ref=e851]: "1"
+          - generic [ref=e852]: PRODUK AKTIF
+        - generic [ref=e853]:
+          - generic [ref=e854]: 🛒
+          - generic [ref=e855]: "0"
+          - generic [ref=e856]: TOTAL ORDER
+        - generic [ref=e857]:
+          - generic [ref=e858]: 💰
+          - generic [ref=e859]: Rp 2.240.000
+          - generic [ref=e860]: PENDAPATAN
+        - generic [ref=e861]:
+          - generic [ref=e862]: ⭐
+          - generic [ref=e863]: "0.0"
+          - generic [ref=e864]: RATING TOKO
+      - generic [ref=e865]:
+        - generic [ref=e866]: GRAFIK PENJUALAN MINGGUAN — SIMULASI DATA
+        - generic [ref=e867]:
+          - generic [ref=e870]: H1
+          - generic [ref=e873]: H2
+          - generic [ref=e876]: H3
+          - generic [ref=e879]: H4
+          - generic [ref=e882]: H5
+          - generic [ref=e885]: H6
+          - generic [ref=e888]: H7
+      - generic [ref=e890]: PRODUK SAYA
+      - generic [ref=e892]:
+        - checkbox [ref=e893] [cursor=pointer]
+        - img "Jacket putih" [ref=e896]
+        - generic [ref=e897]:
+          - generic [ref=e898]: Jacket putih
+          - generic [ref=e899]: Rp 80.000
+          - generic [ref=e900]: "Stok: 0 STOK KRITIS · Terjual: 28 · clothing"
+        - generic [ref=e901]:
+          - button "✏ EDIT" [ref=e902] [cursor=pointer]
+          - button "🗑 HAPUS" [ref=e903] [cursor=pointer]
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - text: KERANJANG
+          - generic: (0)
+        - button "[ TUTUP ]"
+      - generic:
+        - generic: Keranjang kosong
+      - generic:
+        - generic:
+          - button "LIHAT KERANJANG"
+          - button "CHECKOUT →"
+  - navigation [ref=e507]:
+    - button "HOME" [ref=e508] [cursor=pointer]:
+      - img [ref=e509]
+      - generic [ref=e512]: HOME
+    - button "CARI" [ref=e513] [cursor=pointer]:
+      - img [ref=e514]
+      - generic [ref=e517]: CARI
+    - button "CART" [ref=e518] [cursor=pointer]:
+      - img [ref=e520]
+      - generic [ref=e523]: CART
+    - button "PESANAN" [ref=e524] [cursor=pointer]:
+      - img [ref=e525]
+      - generic [ref=e528]: PESANAN
+    - button "JUAL" [active] [ref=e529] [cursor=pointer]:
+      - img [ref=e530]
+      - generic [ref=e533]: JUAL

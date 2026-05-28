@@ -7,6 +7,7 @@ import { useState } from "react";
 import { fmt, discPct, starsStr, avgRating, fmtDate } from "../utils";
 import { backBtnStyle, labelStyle, qtyBtnStyle } from "../styles/shared";
 import Toast from "../components/Toast";
+import SizeGuideModal from "../components/SizeGuideModal";
 
 const BADGE_COLORS = {
   "pcb-new":  { bg: "var(--cyan)",   color: "#000" },
@@ -21,6 +22,7 @@ export default function DetailPage({ productId, allProducts, navigate, addToCart
   const [zoomImg, setZoomImg] = useState(false);
   const [selectedSize, setSelectedSize] = useState("");
   const [activeImg, setActiveImg] = useState(0);
+  const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
 
   const [selectedStar, setSelectedStar] = useState(0);
   const [reviewName,   setReviewName]   = useState("");
@@ -71,6 +73,7 @@ export default function DetailPage({ productId, allProducts, navigate, addToCart
   return (
     <div className="page-anim">
       <Toast msg={toast} />
+      <SizeGuideModal isOpen={sizeGuideOpen} onClose={() => setSizeGuideOpen(false)} />
 
       {/* Lightbox */}
       {zoomImg && (
@@ -188,7 +191,12 @@ export default function DetailPage({ productId, allProducts, navigate, addToCart
           <hr style={{ border: "none", borderTop: "1px solid rgba(255,255,255,0.07)", margin: "14px 0" }} />
 
           {/* Size Selector */}
-          <span style={labelStyle}>PILIH UKURAN</span>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
+            <span style={labelStyle}>PILIH UKURAN</span>
+            <button onClick={() => setSizeGuideOpen(true)} style={{ fontFamily: "'Share Tech Mono',monospace", fontSize: 11, color: "var(--cyan)", background: "transparent", border: "none", cursor: "pointer", textDecoration: "underline", letterSpacing: 0.5 }}>
+              📏 Size Guide
+            </button>
+          </div>
           <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
             {["S", "M", "L", "XL"].map((size) => (
               <button
