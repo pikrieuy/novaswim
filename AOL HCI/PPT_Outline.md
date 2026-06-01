@@ -1,227 +1,194 @@
-# OUTLINE PPT — NEXWEAR HCI AOL
-## Human and Computer Interaction (COMP6846031)
-### Assessment of Learning — Review II
+# OUTLINE PPT — NEXWEAR
+## Human and Computer Interaction — AOL Review II
 
 ---
 
 ## SLIDE 1 — COVER
 
 **NEXWEAR**
-*Cyberpunk Fashion E-Commerce*
+Toko Fashion Online Bertema Cyberpunk
 
-Human and Computer Interaction
-BINUS University Bandung — Genap 2025/2026
+Mata Kuliah: Human and Computer Interaction
+BINUS University Bandung — 2025/2026
 
 [Nama Kelompok]
-[NIM]
 
 ---
 
-## SLIDE 2 — DESKRIPSI APLIKASI
+## SLIDE 2 — APA ITU NEXWEAR?
 
-**Apa itu NEXWEAR?**
+NEXWEAR adalah toko fashion online yang tampilannya beda dari yang lain — gelap, neon, futuristik.
 
-- Platform e-commerce fashion bertema **cyberpunk/futuristik**
-- Dual-role: pengguna bisa **belanja sekaligus berjualan**
-- Dibangun dengan React 19 + Supabase + Vercel
-- Live di: nexwear-store.vercel.app
+**Yang bisa dilakukan di NEXWEAR:**
+- Belanja baju, sepatu, aksesoris
+- Jual produk sendiri (jadi seller)
+- Simpan produk favorit ke wishlist
+- Bayar pakai GoPay, OVO, Transfer, COD, dll
 
-**Masalah yang diselesaikan:**
-- Marketplace konvensional terlalu generik (Shopee, Tokopedia)
-- Tidak ada platform khusus untuk komunitas streetwear/cyberpunk
-- UMKM fashion kesulitan berjualan online
+**Kenapa dibuat?**
+Marketplace biasa (Shopee, Tokopedia) tampilannya semua sama. NEXWEAR hadir untuk komunitas yang suka gaya streetwear dan cyberpunk.
 
-> 💡 *Gunakan screenshot homepage sebagai background slide*
-
----
-
-## SLIDE 3 — TARGET USER
-
-**2 User Persona**
-
-| | Persona 1 | Persona 2 |
-|---|---|---|
-| **Nama** | Raka Aditya | Sinta Maharani |
-| **Usia** | 21 tahun | 25 tahun |
-| **Pekerjaan** | Mahasiswa DKV | Content Creator |
-| **Goals** | Fashion unik & affordable | Berjualan + konten |
-| **Frustrasi** | E-commerce generik | Platform seller rumit |
-
-**Demografis:** Gen Z & Milenial, 17–30 tahun, urban Indonesia, mobile-first
+> 💡 *Pasang screenshot homepage di sini*
 
 ---
 
-## SLIDE 4 — FITUR UTAMA
+## SLIDE 3 — SIAPA PENGGUNANYA?
 
-**6 Kategori Fitur:**
+**Persona 1 — Raka, 21 tahun**
+Mahasiswa desain yang suka tampil beda. Mau cari baju unik tapi nggak mau keluar banyak uang.
 
-1. 🔐 **Autentikasi** — Login/Register via Supabase Auth
-2. 🔍 **Browsing** — 9 kategori, search autocomplete, filter & sort
-3. 🛍️ **Detail Produk** — Gallery, size selector, color selector, review, share
-4. 💳 **Checkout** — 4 langkah: Cart → Alamat → Bayar → Sukses
-5. ❤️ **Wishlist** — Simpan produk favorit (sync Supabase)
-6. 🏪 **Seller Center** — Dashboard, CRUD produk, upload gambar
+**Persona 2 — Sinta, 25 tahun**
+Content creator yang juga jualan online. Butuh platform yang gampang buat upload dan jual produk.
 
-> 💡 *Tampilkan screenshot product grid dan detail page*
+**Intinya:**
+Pengguna NEXWEAR adalah anak muda 17–30 tahun, tinggal di kota, aktif di media sosial, dan sering belanja online.
 
 ---
 
-## SLIDE 5 — INITIAL UI DESIGN
+## SLIDE 4 — FITUR-FITUR NEXWEAR
 
-**Halaman-halaman Utama:**
+| Fitur | Fungsi |
+|-------|--------|
+| Login / Daftar | Masuk ke akun |
+| Cari Produk | Search + filter kategori |
+| Detail Produk | Lihat foto, pilih ukuran & warna |
+| Keranjang & Checkout | Beli produk dalam 4 langkah |
+| Wishlist | Simpan produk yang disukai |
+| Seller Center | Jual produk sendiri |
+| Lacak Pesanan | Pantau status pengiriman |
 
-| Halaman | Fungsi |
-|---------|--------|
-| Auth Page | Login & Register |
-| Home Page | Hero carousel, kategori, product grid |
-| Detail Page | Info produk lengkap |
-| Cart → Checkout | Alur pembelian 4 langkah |
-| Seller Center | Dashboard penjual |
-| Wishlist | Produk favorit |
+> 💡 *Pasang screenshot product grid*
 
-**Prinsip HCI yang diterapkan:**
-- Nielsen's Heuristics #1, #3, #4, #7
-- Norman's Affordance & Feedback
-- Gestalt Proximity & Similarity
-- Fitts' Law (bottom nav, CTA full-width)
+---
+
+## SLIDE 5 — TAMPILAN APLIKASI
+
+**Halaman-halaman yang ada:**
+
+- **Beranda** — Banner promo, kategori, rekomendasi produk
+- **Detail Produk** — Foto, harga, pilih ukuran & warna, ulasan
+- **Checkout** — Pilih alamat → pilih kurir → bayar → selesai
+- **Seller Center** — Dashboard penjual dengan statistik
+- **Profil** — Edit nama dan foto
 
 > 💡 *Tampilkan grid screenshot semua halaman*
 
 ---
 
-## SLIDE 6 — DATA GATHERING
+## SLIDE 6 — CARA KAMI MENGUJI APLIKASI
 
-**Kombinasi 2 Teknik:**
+Kami pakai **2 cara** untuk tahu apakah aplikasi ini mudah dipakai:
 
-### Kuesioner SUS (System Usability Scale)
-- 8 responden, 10 pertanyaan standar + 5 spesifik
-- **Skor rata-rata: 76.6 / 100** (Acceptable)
-- Tertinggi: R3 = 90 | Terendah: R7 = 50
+**1. Kuesioner SUS**
+- 8 orang mengisi 15 pertanyaan
+- Hasilnya: **skor 76.6 dari 100** → tergolong "Bisa Diterima"
+- Skor tertinggi: 90 | Terendah: 50
 
-### Wawancara Semi-Terstruktur
-- 10 pertanyaan, 2 transkrip lengkap
-- Responden: Dina (Mhs Bisnis) & Galih (Software Engineer)
+**2. Wawancara**
+- Ngobrol langsung dengan 2 pengguna
+- Tanya pengalaman mereka pakai NEXWEAR
+- Dapat masukan yang lebih detail
 
-**Mengapa kombinasi?**
-- SUS → data kuantitatif (skor objektif)
-- Wawancara → data kualitatif (alasan & konteks)
-
-> 💡 *Tampilkan tabel skor SUS dan bar chart*
+> 💡 *Tampilkan tabel skor SUS*
 
 ---
 
-## SLIDE 7 — TEMUAN UTAMA
+## SLIDE 7 — APA YANG DITEMUKAN?
 
-**7 Temuan dari Testing:**
+Dari hasil testing, kami menemukan beberapa masalah:
 
-| # | Temuan | Severity | Status |
-|---|--------|----------|--------|
-| 1 | Tidak ada URL routing | Tinggi | Planning |
-| 2 | Navigasi 4 level | Sedang | ✅ Diperbaiki |
-| 3 | Tidak ada color selector | Sedang | ✅ Diperbaiki |
-| 4 | Seller Center kurang panduan | Sedang | ✅ Diperbaiki |
-| 5 | Font/kontras kurang | Tinggi | ✅ Diperbaiki |
-| 6 | Seller Center skor terendah (Q15=3.5) | Sedang | ✅ Diperbaiki |
-| 7 | Nama kategori ambigu | Rendah | Planning |
+| Masalah | Sudah Diperbaiki? |
+|---------|-----------------|
+| Tulisan terlalu kecil, susah dibaca | ✅ Ya |
+| Warna teks kurang kontras | ✅ Ya |
+| Navigasi terlalu banyak | ✅ Sebagian |
+| Tidak ada pilihan warna produk | ✅ Ya |
+| Seller Center membingungkan | ✅ Ya |
+| Nama kategori ambigu (Utility vs Accessory) | 🔄 Direncanakan |
+| Tidak bisa share link produk | 🔄 Direncanakan |
 
 ---
 
-## SLIDE 8 — PERUBAHAN DESAIN
+## SLIDE 8 — PERUBAHAN YANG DILAKUKAN
 
-**Sebelum vs Sesudah Testing:**
+**Sebelum testing vs Sesudah testing:**
 
-| Komponen | Sebelum | Sesudah |
-|----------|---------|---------|
-| Font pixel | 7–8px | 9–10px |
-| Opacity teks | 0.3–0.4 | 0.55+ |
-| Ikon navigasi | Emoji 🏠🛒 | Material Design Icons |
-| Detail produk | Tidak ada size/color | Size S/M/L/XL + Color swatch |
-| Seller Center | Teks kosong | Panduan 4 langkah |
-| Cart mobile | Side drawer | Full-screen overlay |
-| Bundle size | 505 KB | 410 KB (code splitting) |
+| Sebelum | Sesudah |
+|---------|---------|
+| Tulisan 7px, susah dibaca | Tulisan 10px, lebih jelas |
+| Ikon pakai emoji 🏠🛒 | Ikon pakai Material Design |
+| Tidak ada pilih warna | Ada tombol pilih warna |
+| Seller Center kosong | Ada panduan 4 langkah |
+| Aplikasi berat (505KB) | Lebih ringan (410KB) |
 
 > 💡 *Tampilkan before/after screenshot*
 
 ---
 
-## SLIDE 9 — JUSTIFIKASI HOMESCREEN
+## SLIDE 9 — KENAPA DESAIN HOMEPAGE SEPERTI INI?
 
-**Homescreen = Versi Final setelah Testing**
+Setiap elemen di homepage punya alasan berdasarkan teori HCI:
 
-**6 Teori HCI yang Digunakan:**
+- **Search bar lebar** → Lebih gampang diklik (Fitts' Law)
+- **Warna pink untuk tombol beli** → Menarik perhatian (Color Theory)
+- **Semua product card sama bentuknya** → Mudah di-scan mata (Gestalt Similarity)
+- **Notifikasi toast muncul** → Pengguna tahu aksinya berhasil (Norman's Feedback)
+- **Bottom nav di bawah** → Mudah dijangkau jempol (Fitts' Law)
 
-1. **Gestalt Proximity** → Grouping elemen terkait
-2. **Gestalt Similarity** → Product card identik
-3. **Fitts' Law** → Search bar lebar penuh, bottom nav di thumb zone
-4. **Norman's Feedback** → Toast, cart bounce, loading state
-5. **Nielsen's Heuristic #1** → Dot indicator carousel, badge count
-6. **Color Theory** → Pink=CTA, Cyan=info, Yellow=harga
+**Bukti dari testing:** 7 dari 8 pengguna bilang tampilan NEXWEAR menarik dan unik.
 
-**Data pendukung:**
-- 7/8 responden: visual menarik
-- Q12=3.9, Q13=4.1 — search & checkout sudah baik
-
-> 💡 *Tampilkan annotated screenshot homepage dengan panah ke setiap elemen*
+> 💡 *Tampilkan homepage dengan panah ke setiap elemen*
 
 ---
 
-## SLIDE 10 — PLANNING KE DEPAN
+## SLIDE 10 — RENCANA KE DEPAN
 
-**9 Requirements untuk Iterasi Berikutnya:**
+**Yang masih mau dikembangkan:**
 
-**Sprint 1 (Prioritas Tinggi):**
-- URL-Based Routing (React Router)
-- Navigasi simplifikasi (max 2 level)
-- Mobile UX polish
+**Segera:**
+- URL bisa di-share dan di-bookmark
+- Navigasi lebih simpel
 
-**Sprint 2 (Prioritas Sedang):**
-- WCAG AA full compliance
-- Size Guide modal ✅ *sudah done*
-- Color Selector ✅ *sudah done*
-- Error & Empty States
+**Berikutnya:**
+- Panduan ukuran lebih lengkap *(sudah ada)*
+- Tampilan mobile lebih nyaman *(sudah ada)*
 
-**Sprint 3 (Prioritas Rendah):**
-- Code Splitting ✅ *sudah done*
-- Internationalization (i18n)
+**Jangka panjang:**
+- Siap untuk multi-bahasa
+- Performa lebih cepat *(sudah ada)*
 
-**Target:** SUS Score > 80 (Grade A)
+**Target:** Skor SUS naik dari 76.6 → di atas 80
 
 ---
 
-## SLIDE 11 — DEMO / LIVE WEBSITE
+## SLIDE 11 — COBA LANGSUNG
 
 **nexwear-store.vercel.app**
 
-*[QR Code ke website]*
+*[QR Code]*
 
-**Tech Stack:**
-- React 19 + Vite 7
-- Supabase (Auth, DB, Storage, Realtime)
-- Google Material Design Icons
-- Deployed on Vercel
+Dibuat dengan:
+React · Supabase · Vercel
 
 ---
 
-## SLIDE 12 — PENUTUP
+## SLIDE 12 — KESIMPULAN
 
-**Kesimpulan:**
+- NEXWEAR adalah toko fashion online dengan tampilan yang beda dan unik
+- Sudah diuji oleh 8 pengguna, skor usability 76.6/100
+- Lebih dari 30 perbaikan dilakukan berdasarkan feedback
+- Masih ada rencana pengembangan ke depan
 
-- NEXWEAR berhasil dibangun sebagai platform e-commerce fashion cyberpunk
-- SUS Score 76.6 = Acceptable, dengan roadmap menuju Grade A
-- 30+ perubahan desain berdasarkan data testing
-- Semua fitur utama berfungsi dan sudah di-deploy
+**Terima Kasih!**
 
-**Terima Kasih**
-
-*[Nama Kelompok]*
-*Human and Computer Interaction — BINUS University Bandung*
+*[Nama Kelompok] — BINUS University Bandung*
 
 ---
 
-## TIPS DESAIN SLIDE
+## CATATAN DESAIN SLIDE
 
-- **Warna tema:** Background hitam (#05020f), aksen pink (#ff2d78) dan cyan (#00f5ff)
-- **Font:** Orbitron untuk heading, monospace untuk body
-- **Screenshot:** Gunakan folder `AOL HCI/screenshots/` untuk semua gambar
-- **Total slide:** 12 slide (~15-20 menit presentasi)
-- **Setiap slide:** Max 5-6 poin, jangan terlalu padat
+- Pakai background hitam, teks putih
+- Aksen warna: pink (#ff2d78) dan cyan (#00f5ff)
+- Jangan terlalu banyak teks per slide — cukup poin-poin singkat
+- Setiap slide ada 1 gambar/screenshot
+- Total: 12 slide, estimasi 15–20 menit presentasi
