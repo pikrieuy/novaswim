@@ -29,8 +29,8 @@ export default function CartPanel({ isOpen, onClose, cart, navigate }) {
         className="panel-drawer"
         style={{
           position: "absolute",
-          right: isOpen ? 0 : -420,
-          top: 0, bottom: 0, width: 400,
+          right: isOpen ? 0 : "-100%",
+          top: 0, bottom: 0, width: "100%", maxWidth: 400,
           background: "rgba(5,2,15,0.98)",
           borderLeft: "1px solid rgba(0,245,255,0.25)",
           display: "flex", flexDirection: "column",

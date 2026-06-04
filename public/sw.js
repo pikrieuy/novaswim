@@ -43,7 +43,7 @@ self.addEventListener('fetch', (event) => {
         }
         
         return networkResponse;
-      } catch (error) {
+      } catch {
         // Network fetch failed (e.g., offline)
         const cachedResponse = await caches.match(event.request);
         if (cachedResponse) {

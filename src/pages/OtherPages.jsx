@@ -111,7 +111,7 @@ export function OrdersPage({ orders, cancelOrder, completeOrder, navigate }) {
                 )}
 
                 {/* Footer */}
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
                   <div>
                     <div style={{ fontSize: 10, color: "rgba(255,255,255,0.65)" }}>{o.date} · {items.reduce((s, i) => s + i.qty, 0)} barang</div>
                     <div style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 14, fontWeight: 700, color: "var(--yellow)" }}>Rp {fmt(o.total)}</div>
@@ -219,7 +219,7 @@ export function SellerPage({ sellerProducts, orders, navigate, saveSellerProduct
       </div>
 
       {/* Stats */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12, margin: "0 12px 24px" }}>
+      <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12, margin: "0 12px 24px" }}>
         {[
           { icon: "📦", val: myProducts.length,        label: "PRODUK AKTIF" },
           { icon: "🛒", val: totalOrders,               label: "TOTAL ORDER"  },
@@ -248,7 +248,7 @@ export function SellerPage({ sellerProducts, orders, navigate, saveSellerProduct
       </div>
 
       {/* Product List */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", margin: "0 12px 12px" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", margin: "0 12px 12px", flexWrap: "wrap", gap: 10 }}>
         <div style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 14, fontWeight: 700, color: "#fff", textTransform: "uppercase", letterSpacing: 1 }}>PRODUK SAYA</div>
         {selectedDocs.length > 0 && (
           <button onClick={handleBulkDelete} style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 8, background: "rgba(255,45,120,0.15)", border: "1px solid rgba(255,45,120,0.4)", color: "var(--pink)", padding: "8px 12px", cursor: "pointer", animation: "pulse-pink 1.5s infinite" }} className="glitch-btn">

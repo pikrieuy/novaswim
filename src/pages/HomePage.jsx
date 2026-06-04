@@ -86,13 +86,13 @@ function HeroBanner({ cur, slide, setSlide, navigate }) {
       {/* Main Slide */}
       <div style={{ flex: 1, position: "relative", height: 260, overflow: "hidden", border: "1px solid rgba(0,245,255,0.2)", cursor: "pointer" }}>
         <div style={{ position: "absolute", inset: 0, background: cur.bg, transition: "background 0.5s" }} />
-        <div style={{ position: "relative", zIndex: 2, padding: 32, display: "flex", flexDirection: "column", justifyContent: "center", height: "100%" }}>
+        <div className="hero-content" style={{ position: "relative", zIndex: 2, padding: 32, display: "flex", flexDirection: "column", justifyContent: "center", height: "100%" }}>
           <span style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 9, color: "var(--yellow)", letterSpacing: 3, marginBottom: 12, display: "block" }}>{cur.eye}</span>
-          <h1 style={{ fontFamily: "'Orbitron',sans-serif", fontSize: "clamp(22px,4vw,42px)", fontWeight: 900, lineHeight: 1, color: cur.titleColor, letterSpacing: -1, animation: "rgb-shift 3s infinite", marginBottom: 8, whiteSpace: "pre-line" }}>{cur.title}</h1>
+          <h1 className="hero-title" style={{ fontFamily: "'Orbitron',sans-serif", fontSize: "clamp(22px,4vw,42px)", fontWeight: 900, lineHeight: 1, color: cur.titleColor, letterSpacing: -1, animation: "rgb-shift 3s infinite", marginBottom: 8, whiteSpace: "pre-line" }}>{cur.title}</h1>
           <p style={{ fontSize: 11, color: "rgba(255,255,255,0.5)", letterSpacing: 2, marginBottom: 20 }}>{cur.sub}</p>
           <button onClick={() => navigate(cur.ctaPage)} style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 8, background: cur.ctaBg, color: cur.titleColor === "var(--cyan)" ? "#000" : "#fff", border: "none", padding: "10px 20px", cursor: "pointer", letterSpacing: 1, animation: "pulse-pink 2s infinite", width: "fit-content" }}>{cur.cta}</button>
         </div>
-        <div style={{ position: "absolute", right: 30, top: "50%", transform: "translateY(-50%)", fontSize: 80, animation: "float 3s ease-in-out infinite", filter: "drop-shadow(0 0 20px rgba(255,45,120,0.6))", zIndex: 2 }}>{cur.deco}</div>
+        <div className="hero-deco" style={{ position: "absolute", right: 30, top: "50%", transform: "translateY(-50%)", fontSize: 80, animation: "float 3s ease-in-out infinite", filter: "drop-shadow(0 0 20px rgba(255,45,120,0.6))", zIndex: 2 }}>{cur.deco}</div>
         {/* Dots */}
         <div style={{ position: "absolute", bottom: 12, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 6, zIndex: 3 }}>
           {[0, 1, 2].map((i) => (

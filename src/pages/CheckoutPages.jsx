@@ -105,7 +105,7 @@ function CartItem({ item: ci, onRemove, onQty }) {
       <div style={{ flex: 1 }}>
         <div style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 11, fontWeight: 700, color: "#fff", textTransform: "uppercase", marginBottom: 4 }}>{ci.name}</div>
         <div style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 14, fontWeight: 900, color: "var(--yellow)", marginBottom: 8 }}>Rp {fmt(ci.price)}</div>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
           <div style={{ display: "flex", alignItems: "center" }}>
             <button onClick={() => onQty(ci.id, -1)} style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", color: "#fff", width: 28, height: 28, fontSize: 16, cursor: "pointer" }}>−</button>
             <input value={ci.qty} readOnly style={{ background: "var(--card)", borderTop: "1px solid rgba(255,255,255,0.15)", borderBottom: "1px solid rgba(255,255,255,0.15)", borderLeft: "none", borderRight: "none", color: "#fff", width: 40, textAlign: "center", fontFamily: "'Orbitron',monospace", fontSize: 12, height: 28 }} />
@@ -278,7 +278,7 @@ export function CheckoutPage({ cart, cartTotal, couponDiscount, addresses, selec
           {/* Payment — FIX: onChange update selectedPay */}
           <div style={cardStyle}>
             <div style={titleStyle}>💳 METODE PEMBAYARAN</div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+            <div className="payment-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
               {PAYMENTS.map((opt) => (
                 <label key={opt.v} style={{ display: "flex", alignItems: "center", gap: 10, cursor: "pointer", padding: "10px 12px", border: `1px solid ${selectedPay === opt.v ? "rgba(255,45,120,0.5)" : "rgba(255,255,255,0.07)"}` }}>
                   <input

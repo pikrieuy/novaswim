@@ -205,7 +205,7 @@ export default function DetailPage({ allProducts, navigate, addToCart, addReview
               📏 Size Guide
             </button>
           </div>
-          <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
+          <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
             {["S", "M", "L", "XL"].map((size) => (
               <button
                 key={size}

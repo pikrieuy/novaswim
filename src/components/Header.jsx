@@ -51,13 +51,13 @@ function TopBar({ navigate, user, onLogout }) {
         fontSize: 10, letterSpacing: "1.5px", color: "rgba(255,255,255,0.55)",
       }}
     >
-      <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+      <div className="top-bar-left" style={{ display: "flex", gap: 16, alignItems: "center" }}>
         <span onClick={() => navigate("orders")} style={{ cursor: "pointer" }}>Lacak Pesanan</span>
         <span style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
         <span onClick={() => navigate("seller")} style={{ cursor: "pointer" }}>Seller Center</span>
       </div>
 
-      <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
+      <div className="top-bar-right" style={{ display: "flex", gap: 16, alignItems: "center" }}>
         <span style={{ color: "var(--yellow)", display: "flex", alignItems: "center", gap: 4 }}><MdStar size={14} /> Free Ongkir</span>
         <span onClick={() => navigate("flash")} style={{ cursor: "pointer", display: "flex", alignItems: "center", gap: 4 }}><MdFlashOn size={14} /> Promo Hari Ini</span>
 
@@ -102,14 +102,43 @@ function TopBar({ navigate, user, onLogout }) {
 /* ── Main Bar ── */
 function MainBar({ navigate, cartCount, searchVal, setSearchVal }) {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 20, padding: "16px 24px" }}>
-      {/* Logo */}
-      <div className="logo" onClick={() => navigate("home")}>
-        NEX<em>WEAR</em>
+    <div className="main-bar" style={{ display: "flex", alignItems: "center", gap: 20, padding: "16px 24px" }}>
+      
+      <div className="main-bar-logo-icons">
+        {/* Logo */}
+        <div className="logo" onClick={() => navigate("home")}>
+          NEX<em>WEAR</em>
+        </div>
+
+        {/* Icons (Mobile: moved into logo-icons wrapper to stay top) */}
+        <div className="main-bar-icons desktop-only-reverse" style={{ display: "flex", gap: 20, alignItems: "center", flexShrink: 0 }}>
+          <div onClick={() => navigate("chat")} style={{ position: "relative", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
+            <MdChat size={24} color="rgba(255,255,255,0.8)" />
+            <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: "rgba(255,255,255,0.7)", letterSpacing: 0.5 }}>CHAT</span>
+          </div>
+          <div onClick={() => navigate("notif")} style={{ position: "relative", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
+            <MdNotifications size={24} color="rgba(255,255,255,0.8)" />
+            <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: "rgba(255,255,255,0.7)", letterSpacing: 0.5 }}>NOTIF</span>
+          </div>
+          <div onClick={() => navigate("wishlist")} style={{ position: "relative", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
+            <MdFavoriteBorder size={24} color="rgba(255,255,255,0.8)" />
+            <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: "rgba(255,255,255,0.7)", letterSpacing: 0.5 }}>WISH</span>
+          </div>
+          <div onClick={() => navigate("cart_panel")} className="cart-icon-bounce" style={{ position: "relative", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
+            <MdShoppingCart size={24} color="rgba(255,255,255,0.8)" />
+            {cartCount > 0 && (
+              <div style={{ position: "absolute", top: -4, right: -6, background: "var(--pink)", fontFamily: "'Press Start 2P', monospace", fontSize: 7, minWidth: 18, height: 18, display: "flex", alignItems: "center", justifyContent: "center", animation: "pulse-pink 2s infinite" }}>
+                {cartCount}
+              </div>
+            )}
+            <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: "rgba(255,255,255,0.7)", letterSpacing: 0.5 }}>CART</span>
+          </div>
+        </div>
       </div>
 
       {/* Search */}
       <div
+        className="main-bar-search"
         style={{
           flex: 1, display: "flex", height: 46,
           background: "rgba(255,255,255,0.05)",
@@ -125,12 +154,13 @@ function MainBar({ navigate, cartCount, searchVal, setSearchVal }) {
             flex: 1, background: "transparent", border: "none", outline: "none",
             color: "#fff", fontFamily: "'Share Tech Mono', monospace",
             fontSize: 13, padding: "0 16px", letterSpacing: 1,
+            minWidth: 0, /* Allow input to shrink on mobile */
           }}
         />
         <button
           onClick={() => navigate("search", searchVal)}
           style={{
-            background: "var(--pink)", border: "none", padding: "0 24px",
+            background: "var(--pink)", border: "none", padding: "0 16px",
             cursor: "pointer", fontFamily: "'Press Start 2P', monospace",
             fontSize: 9, color: "#fff", letterSpacing: 1, whiteSpace: "nowrap",
           }}
@@ -139,30 +169,6 @@ function MainBar({ navigate, cartCount, searchVal, setSearchVal }) {
         </button>
       </div>
 
-      {/* Icons */}
-      <div style={{ display: "flex", gap: 20, alignItems: "center", flexShrink: 0 }}>
-        <div onClick={() => navigate("chat")} style={{ position: "relative", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
-          <MdChat size={24} color="rgba(255,255,255,0.8)" />
-          <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: "rgba(255,255,255,0.7)", letterSpacing: 0.5 }}>CHAT</span>
-        </div>
-        <div onClick={() => navigate("notif")} style={{ position: "relative", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
-          <MdNotifications size={24} color="rgba(255,255,255,0.8)" />
-          <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: "rgba(255,255,255,0.7)", letterSpacing: 0.5 }}>NOTIF</span>
-        </div>
-        <div onClick={() => navigate("wishlist")} style={{ position: "relative", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
-          <MdFavoriteBorder size={24} color="rgba(255,255,255,0.8)" />
-          <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: "rgba(255,255,255,0.7)", letterSpacing: 0.5 }}>WISH</span>
-        </div>
-        <div onClick={() => navigate("cart_panel")} className="cart-icon-bounce" style={{ position: "relative", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
-          <MdShoppingCart size={24} color="rgba(255,255,255,0.8)" />
-          {cartCount > 0 && (
-            <div style={{ position: "absolute", top: -4, right: -6, background: "var(--pink)", fontFamily: "'Press Start 2P', monospace", fontSize: 7, minWidth: 18, height: 18, display: "flex", alignItems: "center", justifyContent: "center", animation: "pulse-pink 2s infinite" }}>
-              {cartCount}
-            </div>
-          )}
-          <span style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: "rgba(255,255,255,0.7)", letterSpacing: 0.5 }}>CART</span>
-        </div>
-      </div>
     </div>
   );
 }

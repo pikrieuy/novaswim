@@ -42,7 +42,7 @@ export default function ProductCard({ product: p, navigate, onAddCart, isWishlis
       </div>
 
       {/* Visual */}
-      <div style={{ height: 180, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
+      <div className="product-card-img-wrap" style={{ height: 180, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", overflow: "hidden" }}>
         {/* Background gradient */}
         <div style={{ position: "absolute", inset: 0, background: p.bg }} />
         {/* Scanline overlay */}
@@ -65,7 +65,7 @@ export default function ProductCard({ product: p, navigate, onAddCart, isWishlis
         {isSoldOut && (
           <div style={{ position: "absolute", inset: 0, zIndex: 10, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,0.55)" }}>
             <div style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 10, color: "#fff", letterSpacing: 2, background: "rgba(80,80,80,0.9)", padding: "8px 14px", border: "1px solid rgba(255,255,255,0.2)" }}>
-              SOLD OUT
+              SOLD
             </div>
           </div>
         )}
