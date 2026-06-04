@@ -5,25 +5,11 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { CAT_ITEMS } from "../data/products";
-import { fmt, discPct } from "../utils";
 import ProductGrid from "../components/ProductGrid";
 import SkeletonGrid from "../components/SkeletonGrid";
 import { MdCheckroom, MdDiamond, MdWatch, MdContentCut, MdDirectionsRun, MdInventory2, MdAutoAwesome, MdLocalOffer, MdCircle, MdGpsFixed, MdLocalShipping, MdFlashOn, MdEmojiEvents } from "react-icons/md";
 
 const ICON_MAP = { Shirt: MdCheckroom, Gem: MdDiamond, Watch: MdWatch, Scissors: MdContentCut, ShirtIcon: MdCheckroom, Footprints: MdDirectionsRun, Package: MdInventory2, Sparkles: MdAutoAwesome, Tag: MdLocalOffer, Circle: MdCircle };
-
-/* ── Countdown Hook ── */
-function useCountdown(initialSecs) {
-  const [secs, setSecs] = useState(initialSecs);
-  useEffect(() => {
-    const id = setInterval(() => setSecs((s) => Math.max(0, s - 1)), 1000);
-    return () => clearInterval(id);
-  }, []);
-  const h = String(Math.floor(secs / 3600)).padStart(2, "0");
-  const m = String(Math.floor((secs % 3600) / 60)).padStart(2, "0");
-  const s = String(secs % 60).padStart(2, "0");
-  return [h, m, s];
-}
 
 /* ── Slides Data ── */
 const SLIDES = [
@@ -35,7 +21,6 @@ const SLIDES = [
 export default function HomePage({ allProducts, navigate, onAddCart, isWishlisted, onToggleWishlist }) {
   const [slide, setSlide] = useState(0);
   const [filter, setFilter] = useState("all");
-  const [h, m, s] = useCountdown(8 * 3600 + 45 * 60 + 23);
 
   // Auto-advance carousel
   useEffect(() => {
@@ -205,7 +190,7 @@ function FilterTabs({ filter, setFilter }) {
   );
 }
 
-function SiteFooter({ navigate }) {
+function SiteFooter() {
   const COLS = [
     { h: "Kategori",  links: ["Out Wear", "Accessory", "Device", "Utility", "Clothing", "Shoes", "Set", "New Arrivals", "Sale"] },
     { h: "Layanan",   links: ["Size Guide", "Lacak Pesanan", "Return & Refund", "Live Chat", "FAQ"] },

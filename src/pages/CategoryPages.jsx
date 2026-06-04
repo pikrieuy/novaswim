@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { CATEGORY_MAP } from "../data/products";
 import { backBtnStyle } from "../styles/shared";
 import ProductGrid from "../components/ProductGrid";
+import EmptyState from "../components/EmptyState";
 
 // ─────────────────────────────────────────
 //  FlashSalePage
@@ -58,9 +59,7 @@ export function CategoryPage({ catKey, allProducts, navigate, onAddCart, isWishl
         {info.title} <span style={{ color: "var(--pink)" }}>{info.span}</span>
       </div>
       {items.length === 0
-        ? <div style={{ margin: "0 12px", padding: 40, textAlign: "center", border: "1px dashed rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)", fontFamily: "'Press Start 2P',monospace", fontSize: 9, letterSpacing: 1, lineHeight: 2 }}>
-            Belum ada produk di kategori ini.
-          </div>
+        ? <EmptyState type="empty" title="KATEGORI KOSONG" message="Belum ada produk di kategori ini. Silakan telusuri kategori lainnya." ctaText="LIHAT SEMUA" onCtaClick={() => navigate("home")} />
         : <ProductGrid products={items} navigate={navigate} onAddCart={onAddCart} isWishlisted={isWishlisted} onToggleWishlist={onToggleWishlist} />
       }
     </div>
@@ -93,6 +92,7 @@ export function SearchPage({ keyword, allProducts, navigate, onAddCart, isWishli
         return arr;
       });
     }
+     
   }, [debouncedKw]);
 
   const kw = debouncedKw.toLowerCase().trim();
@@ -201,12 +201,14 @@ export function SearchPage({ keyword, allProducts, navigate, onAddCart, isWishli
 
       {items.length === 0
         ? <div>
-            <div style={{ margin: "0 12px 24px", padding: 60, textAlign: "center", border: "1px dashed rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.3)", fontFamily: "'Press Start 2P',monospace", fontSize: 8, letterSpacing: 1, lineHeight: 2 }}>
-              <div style={{ fontSize: 48, marginBottom: 16 }}>🔍</div>
-              TIDAK ADA HASIL<br />
-              <span style={{ fontSize: 7, color: "rgba(255,255,255,0.2)" }}>Coba kata kunci lain</span>
-            </div>
-            <div style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 14, fontWeight: 900, color: "var(--yellow)", textTransform: "uppercase", letterSpacing: 1, margin: "0 12px 16px" }}>🔥 REKOMENDASI TERLARIS</div>
+            <EmptyState
+              type="search"
+              title="TIDAK ADA HASIL"
+              message={`Kami tidak menemukan produk untuk "${debouncedKw}". Coba gunakan kata kunci lain atau periksa ejaan Anda.`}
+              ctaText="LIHAT KATEGORI LAIN"
+              onCtaClick={() => navigate("home")}
+            />
+            <div style={{ fontFamily: "'Orbitron',sans-serif", fontSize: 14, fontWeight: 900, color: "var(--yellow)", textTransform: "uppercase", letterSpacing: 1, margin: "24px 12px 16px" }}>🔥 REKOMENDASI TERLARIS</div>
             <ProductGrid products={[...allProducts].sort((a,b) => (parseInt(b.sold)||0) - (parseInt(a.sold)||0)).slice(0, 6)} navigate={navigate} onAddCart={onAddCart} isWishlisted={isWishlisted} onToggleWishlist={onToggleWishlist} />
           </div>
         : <ProductGrid products={items} navigate={navigate} onAddCart={onAddCart} isWishlisted={isWishlisted} onToggleWishlist={onToggleWishlist} />

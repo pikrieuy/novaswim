@@ -5,6 +5,7 @@
 
 import { backBtnStyle } from "../styles/shared";
 import ProductGrid from "../components/ProductGrid";
+import EmptyState from "../components/EmptyState";
 
 export default function WishlistPage({ allProducts, wishlist, toggleWishlist, isWishlisted, navigate, onAddCart }) {
   const wishlistProducts = allProducts.filter(p => wishlist.includes(p.id));
@@ -21,18 +22,13 @@ export default function WishlistPage({ allProducts, wishlist, toggleWishlist, is
       </div>
 
       {wishlistProducts.length === 0 ? (
-        <div style={{ margin: "0 12px", padding: 60, textAlign: "center", border: "1px dashed rgba(255,255,255,0.1)" }}>
-          <div style={{ fontSize: 48, marginBottom: 16 }}>💝</div>
-          <div style={{ fontFamily: "'Press Start 2P',monospace", fontSize: 10, color: "rgba(255,255,255,0.5)", letterSpacing: 1, lineHeight: 2 }}>
-            WISHLIST KOSONG
-          </div>
-          <div style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", marginTop: 8 }}>
-            Klik ikon hati 🤍 pada produk untuk menyimpannya di sini
-          </div>
-          <button onClick={() => navigate("home")} style={{ marginTop: 20, fontFamily: "'Press Start 2P',monospace", fontSize: 9, background: "transparent", border: "2px solid var(--cyan)", color: "var(--cyan)", padding: "10px 24px", cursor: "pointer" }}>
-            JELAJAHI PRODUK
-          </button>
-        </div>
+        <EmptyState
+          type="empty"
+          title="BELUM ADA PRODUK FAVORIT"
+          message="Klik ikon hati 🤍 pada produk untuk menyimpannya di sini"
+          ctaText="JELAJAHI PRODUK"
+          onCtaClick={() => navigate("home")}
+        />
       ) : (
         <ProductGrid products={wishlistProducts} navigate={navigate} onAddCart={onAddCart} isWishlisted={isWishlisted} onToggleWishlist={toggleWishlist} />
       )}

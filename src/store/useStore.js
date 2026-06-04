@@ -101,7 +101,11 @@ export function useStore() {
 
   // Sync wishlist from Supabase when user logs in
   useEffect(() => {
-    if (!currentUser) { setWishlist([]); return; }
+    if (!currentUser) { 
+       
+      setWishlist([]); 
+      return; 
+    }
     supabase
       .from('wishlist')
       .select('product_id')
@@ -184,7 +188,9 @@ export function useStore() {
 
   useEffect(() => {
     if (!currentUser) {
+       
       setAddresses([]);
+       
       setSelectedAddressId(null);
       return;
     }

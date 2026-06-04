@@ -176,6 +176,28 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .star-pick { transition: color 0.15s; cursor: pointer; }
 .star-pick:hover { color: var(--yellow) !important; }
 
+/* ── Accessibility Engine (Req 3) ── */
+body {
+  font-size: 12px; /* Minimum body text */
+}
+.text-label, .text-small {
+  font-size: 10px; /* Minimum secondary text */
+}
+/* Ensure Press Start 2P is min 10px with letter-spacing */
+.press-start-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px !important;
+  letter-spacing: 1px;
+}
+/* Touch targets (Req 8) */
+@media (max-width: 768px) {
+  button, input, select, .nav-tab, .cat-item, .cart-icon-bounce, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .desktop-only { display: none !important; }
+}
+
 /* ── Responsive ── */
 @media (max-width: 1100px) {
   .products-grid { grid-template-columns: repeat(4,1fr) !important; }
@@ -188,8 +210,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .address-layout { grid-template-columns: 1fr !important; }
   .cat-strip { grid-template-columns: repeat(5,1fr) !important; }
 }
-@media (max-width: 700px) {
+@media (max-width: 768px) {
+  .desktop-only { display: none !important; }
   .products-grid { grid-template-columns: repeat(2,1fr) !important; }
+  .products-grid > div { min-width: 150px; } /* Req 8.3 */
+}
+@media (max-width: 700px) {
   .flash-products { grid-template-columns: repeat(2,1fr) !important; }
   .hero-side { display: none !important; }
   .footer-grid { grid-template-columns: 1fr !important; }
@@ -197,9 +223,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .logo { font-size: 12px !important; }
 }
 @media (max-width: 480px) {
-  .products-grid { grid-template-columns: repeat(2,1fr) !important; }
   .mini-banners { grid-template-columns: repeat(2,1fr) !important; }
   .cat-strip { grid-template-columns: repeat(3,1fr) !important; }
   .detail-layout { padding: 12px !important; gap: 16px !important; }
-  button { min-height: 44px; }
 }

@@ -3,6 +3,7 @@
 // ─────────────────────────────────────────
 
 import { useState, useCallback, useEffect, lazy, Suspense } from "react";
+import { Routes, Route, useNavigate, useLocation, Navigate } from "react-router-dom";
 import { supabase } from "./supabase";
 import { useStore } from "./store/useStore";
 import "./styles/global.css";
@@ -68,9 +69,8 @@ export default function App() {
   }, []);
 
   // ── Routing State ──
-  const [currentPage,   setCurrentPage]   = useState("home");
-  const [pageParam,     setPageParam]     = useState(null);
-  const [pageHistory,   setPageHistory]   = useState([]);
+  const navigateRouter = useNavigate();
+  const location = useLocation();
   const [cartPanelOpen, setCartPanelOpen] = useState(false);
   const [searchVal,     setSearchVal]     = useState("");
   const [globalToast,   setGlobalToast]   = useState("");
@@ -89,35 +89,32 @@ export default function App() {
   const navigate = useCallback((page, param) => {
     if (page === "cart_panel") { setCartPanelOpen(true); return; }
     if (page === "back") {
-      // Go to previous page in history
-      setPageHistory(prev => {
-        if (prev.length === 0) { setCurrentPage("home"); setPageParam(null); return []; }
-        const newHistory = [...prev];
-        const last = newHistory.pop();
-        setCurrentPage(last.page);
-        setPageParam(last.param || null);
-        return newHistory;
-      });
+      navigateRouter(-1);
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
+    
+    // Mapping from old page names to routes
+    let path = "/";
+    if (CATEGORY_MAP[page]) path = `/category/${page}`;
+    else if (page === "home") path = "/";
+    else if (page === "detail") path = `/detail/${param}`;
+    else path = `/${page}`;
+    
+    navigateRouter(path);
     window.scrollTo({ top: 0, behavior: "smooth" });
-    setPageHistory(prev => [...prev, { page: currentPage, param: pageParam }]);
-    setCurrentPage(page);
-    setPageParam(param || null);
-  }, [currentPage, pageParam]);
+  }, [navigateRouter]);
 
   const handleAddCart = useCallback((product) => {
     store.addToCart(product);
     showToast(`✓ ${product.name} ditambahkan ke keranjang!`);
-    // Trigger cart bounce animation
     const cartIcon = document.querySelector('.cart-icon-bounce');
     if (cartIcon) {
       cartIcon.style.animation = 'none';
       cartIcon.offsetHeight; // reflow
       cartIcon.style.animation = 'cartBounce 0.4s ease';
     }
-  }, [store]);
+  }, [store, showToast]);
 
   const handleLogout = async () => {
     if (!window.confirm("Yakin ingin logout dari NEXWEAR?")) return;
@@ -135,120 +132,12 @@ export default function App() {
     onToggleWishlist: store.toggleWishlist,
   };
 
-  const renderPage = () => {
-    if (CATEGORY_MAP[currentPage]) {
-      return <CategoryPagesModule catKey={currentPage} {...commonProps} />;
-    }
-
-    switch (currentPage) {
-      case "home":
-        return <HomePage {...commonProps} />;
-
-
-      case "search":
-        return <SearchPageModule keyword={searchVal} {...commonProps} />;
-
-      case "detail":
-        return (
-          <DetailPage
-            productId={pageParam}
-            allProducts={store.allProducts}
-            navigate={navigate}
-            addToCart={store.addToCart}
-            addReview={store.addReview}
-          />
-        );
-
-      case "cart":
-        return (
-          <CartPageModule
-            cart={store.cart}
-            cartTotal={store.cartTotal}
-            couponDiscount={store.couponDiscount}
-            navigate={navigate}
-            removeFromCart={store.removeFromCart}
-            updateCartQty={store.updateCartQty}
-            applyCoupon={store.applyCoupon}
-          />
-        );
-
-      case "address":
-        return (
-          <AddressPageModule
-            addresses={store.addresses}
-            selectedAddressId={store.selectedAddressId}
-            setSelectedAddressId={store.setSelectedAddressId}
-            saveAddress={store.saveAddress}
-            deleteAddress={store.deleteAddress}
-            navigate={navigate}
-          />
-        );
-
-      case "checkout":
-        return (
-          <CheckoutPageModule
-            cart={store.cart}
-            cartTotal={store.cartTotal}
-            couponDiscount={store.couponDiscount}
-            addresses={store.addresses}
-            selectedAddressId={store.selectedAddressId}
-            shippingCost={store.shippingCost}
-            setShippingCost={store.setShippingCost}
-            navigate={navigate}
-            placeOrder={store.placeOrder}
-          />
-        );
-
-      case "success":
-        return <SuccessPageModule navigate={navigate} />;
-
-      case "orders":
-        return (
-          <OrdersPageModule
-            orders={store.orders}
-            cancelOrder={store.cancelOrder}
-            completeOrder={store.completeOrder}
-            navigate={navigate}
-          />
-        );
-
-      case "seller":
-        return (
-          <SellerPageModule
-            sellerProducts={store.sellerProducts}
-            orders={store.orders}
-            navigate={navigate}
-            saveSellerProduct={store.saveSellerProduct}
-            deleteSellerProduct={store.deleteSellerProduct}
-            currentUser={store.currentUser}
-          />
-        );
-
-      case "profile":
-        return <ProfilePage user={user} navigate={navigate} />;
-
-      case "wishlist":
-        return (
-          <WishlistPage
-            allProducts={store.allProducts}
-            wishlist={store.wishlist}
-            toggleWishlist={store.toggleWishlist}
-            isWishlisted={store.isWishlisted}
-            navigate={navigate}
-            onAddCart={handleAddCart}
-          />
-        );
-
-      case "notif":
-        return <NotifPageModule navigate={navigate} />;
-
-      case "chat":
-        return <ChatPageModule navigate={navigate} />;
-
-      default:
-        return <HomePage {...commonProps} />;
-    }
-  };
+  // Parse current route to pass to components that still use `currentPage` prop (like Header/BottomNav)
+  const pathname = location.pathname;
+  let currentHeaderPage = "home";
+  if (pathname.startsWith('/category/')) currentHeaderPage = pathname.replace('/category/', '');
+  else if (pathname.startsWith('/detail/')) currentHeaderPage = "detail";
+  else if (pathname !== "/") currentHeaderPage = pathname.slice(1);
 
   // ── Loading ──
   if (authLoading) {
@@ -283,7 +172,7 @@ export default function App() {
       <Toast msg={globalToast} />
 
       <Header
-        currentPage={currentPage}
+        currentPage={currentHeaderPage}
         navigate={navigate}
         cartCount={store.cartCount}
         searchVal={searchVal}
@@ -296,7 +185,40 @@ export default function App() {
 
       <main style={{ position: "relative", maxWidth: 1300, margin: "0 auto", padding: "0 0 40px" }}>
         <Suspense fallback={<PageLoader />}>
-          {renderPage()}
+          <Routes>
+            <Route path="/" element={<HomePage {...commonProps} />} />
+            <Route path="/search" element={<SearchPageModule keyword={searchVal} {...commonProps} />} />
+            
+            {Object.keys(CATEGORY_MAP).map(key => (
+              <Route key={key} path={`/category/${key}`} element={<CategoryPagesModule catKey={key} {...commonProps} />} />
+            ))}
+            
+            <Route path="/detail/:id" element={
+              <DetailPage allProducts={store.allProducts} navigate={navigate} addToCart={store.addToCart} addReview={store.addReview} />
+            } />
+            
+            <Route path="/cart" element={
+              <CartPageModule cart={store.cart} cartTotal={store.cartTotal} couponDiscount={store.couponDiscount} navigate={navigate} removeFromCart={store.removeFromCart} updateCartQty={store.updateCartQty} applyCoupon={store.applyCoupon} />
+            } />
+            
+            <Route path="/address" element={
+              <AddressPageModule addresses={store.addresses} selectedAddressId={store.selectedAddressId} setSelectedAddressId={store.setSelectedAddressId} saveAddress={store.saveAddress} deleteAddress={store.deleteAddress} navigate={navigate} />
+            } />
+            
+            <Route path="/checkout" element={
+              <CheckoutPageModule cart={store.cart} cartTotal={store.cartTotal} couponDiscount={store.couponDiscount} addresses={store.addresses} selectedAddressId={store.selectedAddressId} shippingCost={store.shippingCost} setShippingCost={store.setShippingCost} navigate={navigate} placeOrder={store.placeOrder} />
+            } />
+            
+            <Route path="/success" element={<SuccessPageModule navigate={navigate} />} />
+            <Route path="/orders" element={<OrdersPageModule orders={store.orders} cancelOrder={store.cancelOrder} completeOrder={store.completeOrder} navigate={navigate} />} />
+            <Route path="/seller" element={<SellerPageModule sellerProducts={store.sellerProducts} orders={store.orders} navigate={navigate} saveSellerProduct={store.saveSellerProduct} deleteSellerProduct={store.deleteSellerProduct} currentUser={store.currentUser} />} />
+            <Route path="/profile" element={<ProfilePage user={user} navigate={navigate} />} />
+            <Route path="/wishlist" element={<WishlistPage allProducts={store.allProducts} wishlist={store.wishlist} toggleWishlist={store.toggleWishlist} isWishlisted={store.isWishlisted} navigate={navigate} onAddCart={handleAddCart} />} />
+            <Route path="/notif" element={<NotifPageModule navigate={navigate} />} />
+            <Route path="/chat" element={<ChatPageModule navigate={navigate} />} />
+            
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
         </Suspense>
       </main>
 
@@ -308,7 +230,7 @@ export default function App() {
       />
 
       <BottomNav
-        currentPage={currentPage}
+        currentPage={currentHeaderPage}
         navigate={navigate}
         cartCount={store.cartCount}
       />

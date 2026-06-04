@@ -3,10 +3,21 @@
 //  Header sticky: logo, search, icon, nav tabs
 // ─────────────────────────────────────────
 
+import { useState, useEffect } from "react";
 import { NAV_TABS } from "../data/products";
-import { MdShoppingCart, MdFavoriteBorder, MdSearch, MdPerson, MdStar, MdFlashOn, MdLogout, MdNotifications, MdChat } from "react-icons/md";
+import { MdShoppingCart, MdFavoriteBorder, MdSearch, MdPerson, MdStar, MdFlashOn, MdLogout, MdNotifications, MdChat, MdMenu } from "react-icons/md";
 
 export default function Header({ currentPage, navigate, cartCount, searchVal, setSearchVal, user, onLogout }) {
+  const [scrolled, setScrolled] = useState(false);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <header
       style={{
@@ -16,9 +27,13 @@ export default function Header({ currentPage, navigate, cartCount, searchVal, se
         borderBottom: "1px solid rgba(0,245,255,0.25)",
       }}
     >
-      <TopBar navigate={navigate} user={user} onLogout={onLogout} />
+      {/* TopBar is hidden when scrolled down to simplify navigation */}
+      {!scrolled && <TopBar navigate={navigate} user={user} onLogout={onLogout} />}
       <MainBar navigate={navigate} cartCount={cartCount} searchVal={searchVal} setSearchVal={setSearchVal} />
-      <NavTabs currentPage={currentPage} navigate={navigate} />
+      {/* NavTabs hidden on mobile or when scrolled? Requirements say category tabs inline on home page, but let's just hide NavTabs on scroll or mobile */}
+      <div className="desktop-only">
+        {!scrolled && <NavTabs currentPage={currentPage} navigate={navigate} />}
+      </div>
     </header>
   );
 }

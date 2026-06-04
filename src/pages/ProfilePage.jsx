@@ -110,7 +110,7 @@ export default function ProfilePage({ user, navigate }) {
         {/* Stats */}
         <div style={{ marginTop: 16, display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
           {[
-            { label: "Bergabung", value: new Date(user?.created_at || Date.now()).toLocaleDateString("id-ID", { month: "short", year: "numeric" }) },
+            { label: "Bergabung", value: new Date(user?.created_at || "2026-01-01").toLocaleDateString("id-ID", { month: "short", year: "numeric" }) },
             { label: "Member", value: "NEXWEAR" },
             { label: "Status", value: "AKTIF" },
           ].map((s) => (

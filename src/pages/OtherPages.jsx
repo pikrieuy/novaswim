@@ -6,6 +6,7 @@ import { fmt } from "../utils";
 import { backBtnStyle } from "../styles/shared";
 import ProductFormModal from "../components/ProductFormModal";
 import Toast from "../components/Toast";
+import EmptyState from "../components/EmptyState";
 
 const STATUS_STYLE = {
   Dikemas:  { bg: "rgba(255,229,0,0.15)", color: "var(--yellow)", border: "rgba(255,229,0,0.3)" },
@@ -45,9 +46,13 @@ export function OrdersPage({ orders, cancelOrder, completeOrder, navigate }) {
 
       <div style={{ padding: "0 12px", display: "flex", flexDirection: "column", gap: 12 }}>
         {filtered.length === 0
-          ? <div style={{ padding: 40, textAlign: "center", color: "rgba(255,255,255,0.3)", fontFamily: "'Press Start 2P',monospace", fontSize: 9, letterSpacing: 1, border: "1px dashed rgba(255,255,255,0.1)" }}>
-              Belum ada pesanan {filter !== "all" ? filter : ""}.
-            </div>
+          ? <EmptyState 
+              type="empty" 
+              title="BELUM ADA PESANAN" 
+              message={`Belum ada pesanan ${filter !== "all" ? filter : "di akun kamu"}. Mulai belanja produk favoritmu sekarang!`} 
+              ctaText="MULAI BELANJA" 
+              onCtaClick={() => navigate("home")} 
+            />
           : [...filtered].map((o) => {
             const items = o.order_items || o.items || [];
             
