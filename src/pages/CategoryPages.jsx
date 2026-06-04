@@ -5,6 +5,7 @@
 
 // ✅ SEMUA import harus di atas — tidak boleh inline di tengah file
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { CATEGORY_MAP } from "../data/products";
 import { backBtnStyle } from "../styles/shared";
 import ProductGrid from "../components/ProductGrid";
@@ -69,19 +70,36 @@ export function CategoryPage({ catKey, allProducts, navigate, onAddCart, isWishl
 // ─────────────────────────────────────────
 //  SearchPage
 // ─────────────────────────────────────────
-export function SearchPage({ keyword, allProducts, navigate, onAddCart, isWishlisted, onToggleWishlist }) {
-  const [localKw,  setLocalKw]  = useState(keyword || "");
-  const [debouncedKw, setDebouncedKw] = useState(localKw);
+export function SearchPage({ allProducts, navigate, onAddCart, isWishlisted, onToggleWishlist }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialKw = searchParams.get("q") || "";
+  
+  const [localKw,  setLocalKw]  = useState(initialKw);
+  const [debouncedKw, setDebouncedKw] = useState(initialKw);
   const [catFilter, setCatFilter] = useState("all");
   const [sortType, setSortType] = useState("newest");
   const [priceRange, setPriceRange] = useState(1000000);
   const [recentSearches, setRecentSearches] = useState(() => JSON.parse(localStorage.getItem('recentSearches') || '[]'));
   const [showSug, setShowSug] = useState(false);
 
+  // Sync back to localKw if URL changes (e.g. user hits back button)
   useEffect(() => {
-    const timer = setTimeout(() => setDebouncedKw(localKw), 300);
+    const q = searchParams.get("q") || "";
+    setLocalKw(q);
+    setDebouncedKw(q);
+  }, [searchParams]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedKw(localKw);
+      if (localKw.trim()) {
+        setSearchParams({ q: localKw.trim() }, { replace: true });
+      } else {
+        setSearchParams({}, { replace: true });
+      }
+    }, 300);
     return () => clearTimeout(timer);
-  }, [localKw]);
+  }, [localKw, setSearchParams]);
 
   useEffect(() => {
     const kwToSave = debouncedKw.trim();

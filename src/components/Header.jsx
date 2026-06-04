@@ -119,7 +119,7 @@ function MainBar({ navigate, cartCount, searchVal, setSearchVal }) {
         <input
           value={searchVal}
           onChange={(e) => setSearchVal(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && navigate("search")}
+          onKeyDown={(e) => e.key === "Enter" && navigate("search", searchVal)}
           placeholder="CARI BAJU, SEPATU, AKSESORIS..."
           style={{
             flex: 1, background: "transparent", border: "none", outline: "none",
@@ -128,7 +128,7 @@ function MainBar({ navigate, cartCount, searchVal, setSearchVal }) {
           }}
         />
         <button
-          onClick={() => navigate("search")}
+          onClick={() => navigate("search", searchVal)}
           style={{
             background: "var(--pink)", border: "none", padding: "0 24px",
             cursor: "pointer", fontFamily: "'Press Start 2P', monospace",

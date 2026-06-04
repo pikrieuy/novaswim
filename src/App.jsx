@@ -99,6 +99,7 @@ export default function App() {
     if (CATEGORY_MAP[page]) path = `/category/${page}`;
     else if (page === "home") path = "/";
     else if (page === "detail") path = `/detail/${param}`;
+    else if (page === "search") path = param ? `/search?q=${encodeURIComponent(param)}` : "/search";
     else path = `/${page}`;
     
     navigateRouter(path);
@@ -187,7 +188,7 @@ export default function App() {
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<HomePage {...commonProps} />} />
-            <Route path="/search" element={<SearchPageModule keyword={searchVal} {...commonProps} />} />
+            <Route path="/search" element={<SearchPageModule {...commonProps} />} />
             
             {Object.keys(CATEGORY_MAP).map(key => (
               <Route key={key} path={`/category/${key}`} element={<CategoryPagesModule catKey={key} {...commonProps} />} />

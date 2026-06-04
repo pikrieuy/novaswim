@@ -205,15 +205,18 @@ export function CheckoutPage({ cart, cartTotal, couponDiscount, addresses, selec
   const handlePlaceOrder = async () => {
     if (!addr) { alert("Pilih alamat dulu!"); return; }
     setIsOrdering(true);
-    await placeOrder({
+    const isSuccess = await placeOrder({
       total,
       courier: selectedShip,
       payment: selectedPay,
       address: addr,
-      
     });
     setIsOrdering(false);
-    navigate("success");
+    
+    // ── FIX: hanya navigate jika order berhasil dibuat ──
+    if (isSuccess) {
+      navigate("success");
+    }
   };
 
   const SHIPPING = [

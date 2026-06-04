@@ -17,6 +17,8 @@ export function useStore() {
   const cartRef        = useRef([]);
 
   useEffect(() => {
+    // Set ref to undefined initially to differentiate between loading and no user
+    currentUserRef.current = undefined;
     supabase.auth.getSession().then(({ data: { session } }) => {
       const user = session?.user ?? null;
       setCurrentUser(user);
@@ -101,8 +103,11 @@ export function useStore() {
 
   // Sync wishlist from Supabase when user logs in
   useEffect(() => {
-    if (!currentUser) { 
-       
+    // Only clear wishlist if explicitly loaded and no user
+    if (!currentUser && currentUserRef.current === undefined) { 
+      return; // Still initializing
+    }
+    if (!currentUser) {
       setWishlist([]); 
       return; 
     }
@@ -293,9 +298,37 @@ export function useStore() {
 
     console.log('🛒 placeOrder dipanggil, user:', user?.id, 'cart:', currentCart.length);
 
-    if (!user) { console.error('❌ User belum login!'); return; }
-    if (!currentCart.length) { console.error('❌ Cart kosong!'); return; }
+    if (!user) { console.error('❌ User belum login!'); return false; }
+    if (!currentCart.length) { console.error('❌ Cart kosong!'); return false; }
 
+    // PRE-FLIGHT CHECK: Cek semua stok barang SEBELUM order dibuat!
+    let allStockAvailable = true;
+    for (const item of currentCart) {
+      const pid       = String(item.productId || item.id);
+      const qtyBought = item.qty;
+
+      if (pid.startsWith('p')) {
+        const numericId = parseInt(pid.replace('p', ''));
+        const { data: freshProd } = await supabase.from('products').select('name, stock').eq('id', numericId).single();
+        if (freshProd && parseInt(freshProd.stock ?? 100, 10) < qtyBought) {
+          window.dispatchEvent(new CustomEvent('toast', { detail: `❌ Maaf, stok ${freshProd.name || item.name} tidak cukup. (Sisa: ${freshProd.stock})` }));
+          allStockAvailable = false;
+        }
+      } else {
+        const { data: freshProd } = await supabase.from('seller_products').select('name, stock').eq('id', pid).single();
+        if (freshProd && parseInt(freshProd.stock ?? 0, 10) < qtyBought) {
+          window.dispatchEvent(new CustomEvent('toast', { detail: `❌ Maaf, stok ${freshProd.name || item.name} tidak cukup. (Sisa: ${freshProd.stock})` }));
+          allStockAvailable = false;
+        }
+      }
+    }
+
+    if (!allStockAvailable) {
+      console.warn('⚠️ Order dibatalkan, ada barang yang stoknya kurang.');
+      return false;
+    }
+
+    // Jika aman, buat pesanan
     const newOrder = {
       total:   orderData.total,
       status:  'Dikemas',
@@ -308,7 +341,7 @@ export function useStore() {
 
     const { data, error } = await supabase
       .from('orders').insert(newOrder).select().single()
-    if (error) { console.error('❌ Gagal simpan order:', error); return; }
+    if (error) { console.error('❌ Gagal simpan order:', error); return false; }
     console.log('✅ Order tersimpan:', data.id)
 
     const items = currentCart.map(item => ({
@@ -325,26 +358,20 @@ export function useStore() {
     }))
 
     const { error: itemsError } = await supabase.from('order_items').insert(items)
-    if (itemsError) { console.error('❌ Gagal simpan items:', itemsError); return; }
+    if (itemsError) { console.error('❌ Gagal simpan items:', itemsError); return false; }
     console.log('✅ Items tersimpan, update sold/stock...')
 
-    // Update sold & stock — fetch fresh dari DB supaya tidak stale
+    // Update sold & stock
     for (const item of currentCart) {
       const pid       = String(item.productId || item.id);
       const qtyBought = item.qty;
 
       if (pid.startsWith('p')) {
         const numericId = parseInt(pid.replace('p', ''));
-        const { data: freshProd } = await supabase
-          .from('products').select('sold, stock').eq('id', numericId).single()
+        const { data: freshProd } = await supabase.from('products').select('sold, stock').eq('id', numericId).single();
         if (!freshProd) continue;
 
         const stockAvailable = parseInt(freshProd.stock ?? 100, 10);
-        if (stockAvailable < qtyBought) {
-          window.dispatchEvent(new CustomEvent('toast', { detail: `❌ Maaf, stok ${item.name} tidak cukup. (Sisa: ${stockAvailable})` }));
-          continue; // skip updating DB for this item, but since it's order_items, we should ideally rollback. We just skip negative stock here.
-        }
-
         const newSold  = parseInt(freshProd.sold || 0, 10) + qtyBought;
         const newStock = stockAvailable - qtyBought;
 
@@ -352,19 +379,11 @@ export function useStore() {
         setProducts(prev => prev.map(p =>
           p.id === pid ? { ...p, sold: newSold, stock: newStock } : p
         ));
-        console.log(`✅ ${pid}: sold=${newSold}, stock=${newStock}`)
-
       } else {
-        const { data: freshProd } = await supabase
-          .from('seller_products').select('sold, stock, revenue').eq('id', pid).single()
+        const { data: freshProd } = await supabase.from('seller_products').select('sold, stock, revenue').eq('id', pid).single();
         if (!freshProd) continue;
 
         const stockAvailable = parseInt(freshProd.stock ?? 0, 10);
-        if (stockAvailable < qtyBought) {
-          window.dispatchEvent(new CustomEvent('toast', { detail: `❌ Maaf, stok ${item.name} tidak cukup. (Sisa: ${stockAvailable})` }));
-          continue;
-        }
-
         const newSold    = parseInt(freshProd.sold || 0, 10) + qtyBought;
         const newStock   = stockAvailable - qtyBought;
         const newRevenue = (freshProd.revenue || 0) + (item.price * qtyBought);
@@ -373,7 +392,6 @@ export function useStore() {
         setSellerProducts(prev => prev.map(p =>
           p.id === pid ? { ...p, sold: newSold, stock: newStock, revenue: newRevenue } : p
         ));
-        console.log(`✅ seller ${pid}: sold=${newSold}, stock=${newStock}`)
       }
     }
 
@@ -381,55 +399,67 @@ export function useStore() {
     clearCart();
     setCouponDiscount(0);
     setShippingCost(0);
+    return true; // Sukses!
   }, [clearCart])
 
   // ─────────────────────────────────────────
   //  ORDER STATUS ACTIONS
   // ─────────────────────────────────────────
   const cancelOrder = useCallback(async (orderId) => {
-    // Cari data order untuk merevert stok
+    // FIX: Gunakan orders dari state terbaru (bisa diakses via callback atau ref)
+    // Di sini kita ambil pesanan terbaru dari current ref atau state 
+    // agar tidak melakukan operasi async di dalam setter React (anti-pattern)
+    let orderToCancel;
     setOrders(prev => {
-      const order = prev.find(o => o.id === orderId);
-      if (order && (order.order_items || order.items)) {
-        const items = order.order_items || order.items || [];
-        
-        // Group items to prevent concurrent read-modify-write on same product
-        const grouped = {};
-        items.forEach(item => {
-           const pid = String(item.product_id || item.productId || item.id);
-           if (!grouped[pid]) grouped[pid] = { ...item, totalRestoredQty: parseInt(item.qty, 10) };
-           else grouped[pid].totalRestoredQty += parseInt(item.qty, 10);
-        });
-
-        // Revert stock sequentially
-        const revertStock = async () => {
-          for (const pid of Object.keys(grouped)) {
-            const item = grouped[pid];
-            const qty = item.totalRestoredQty;
-            
-            if (pid.startsWith('p')) {
-              const numericId = parseInt(pid.replace('p', ''), 10);
-              const { data: freshProd } = await supabase.from('products').select('sold, stock').eq('id', numericId).single();
-              if (freshProd) {
-                 const newSold = Math.max(0, parseInt(freshProd.sold || 0, 10) - qty);
-                 const newStock = parseInt(freshProd.stock || 0, 10) + qty;
-                 await supabase.from('products').update({ sold: newSold, stock: newStock }).eq('id', numericId);
-              }
-            } else {
-              const { data: freshProd } = await supabase.from('seller_products').select('sold, stock, revenue').eq('id', pid).single();
-              if (freshProd) {
-                 const newSold = Math.max(0, parseInt(freshProd.sold || 0, 10) - qty);
-                 const newStock = parseInt(freshProd.stock || 0, 10) + qty;
-                 const newRev = Math.max(0, (parseFloat(freshProd.revenue) || 0) - (parseFloat(item.price) * qty));
-                 await supabase.from('seller_products').update({ sold: newSold, stock: newStock, revenue: newRev }).eq('id', pid);
-              }
-            }
-          }
-        };
-        revertStock();
-      }
-      return prev;
+      orderToCancel = prev.find(o => o.id === orderId);
+      return prev; // tidak mengubah state dulu
     });
+
+    if (orderToCancel && (orderToCancel.order_items || orderToCancel.items)) {
+      const items = orderToCancel.order_items || orderToCancel.items || [];
+      
+      // Group items to prevent concurrent read-modify-write on same product
+      const grouped = {};
+      items.forEach(item => {
+         const pid = String(item.product_id || item.productId || item.id);
+         if (!grouped[pid]) grouped[pid] = { ...item, totalRestoredQty: parseInt(item.qty, 10) };
+         else grouped[pid].totalRestoredQty += parseInt(item.qty, 10);
+      });
+
+      // Revert stock sequentially
+      for (const pid of Object.keys(grouped)) {
+        const item = grouped[pid];
+        const qty = item.totalRestoredQty;
+        
+        if (pid.startsWith('p')) {
+          const numericId = parseInt(pid.replace('p', ''), 10);
+          const { data: freshProd } = await supabase.from('products').select('sold, stock').eq('id', numericId).single();
+          if (freshProd) {
+             const newSold = Math.max(0, parseInt(freshProd.sold || 0, 10) - qty);
+             const newStock = parseInt(freshProd.stock || 0, 10) + qty;
+             await supabase.from('products').update({ sold: newSold, stock: newStock }).eq('id', numericId);
+             
+             // Update local state directly
+             setProducts(prev => prev.map(p => 
+               p.id === pid ? { ...p, sold: newSold, stock: newStock } : p
+             ));
+          }
+        } else {
+          const { data: freshProd } = await supabase.from('seller_products').select('sold, stock, revenue').eq('id', pid).single();
+          if (freshProd) {
+             const newSold = Math.max(0, parseInt(freshProd.sold || 0, 10) - qty);
+             const newStock = parseInt(freshProd.stock || 0, 10) + qty;
+             const newRev = Math.max(0, (parseFloat(freshProd.revenue) || 0) - (parseFloat(item.price) * qty));
+             await supabase.from('seller_products').update({ sold: newSold, stock: newStock, revenue: newRev }).eq('id', pid);
+             
+             // Update local state directly
+             setSellerProducts(prev => prev.map(p => 
+               p.id === pid ? { ...p, sold: newSold, stock: newStock, revenue: newRev } : p
+             ));
+          }
+        }
+      }
+    }
 
     const { error: itemsError } = await supabase.from('order_items').delete().eq('order_id', orderId);
     if (itemsError) { console.error('Gagal hapus order items:', itemsError); return; }
