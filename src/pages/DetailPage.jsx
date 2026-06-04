@@ -4,6 +4,7 @@
 // ─────────────────────────────────────────
 
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { fmt, discPct, starsStr, avgRating, fmtDate } from "../utils";
 import { backBtnStyle, labelStyle, qtyBtnStyle } from "../styles/shared";
 import Toast from "../components/Toast";
@@ -15,7 +16,8 @@ const BADGE_COLORS = {
   "pcb-sale": { bg: "var(--yellow)", color: "#000" },
 };
 
-export default function DetailPage({ productId, allProducts, navigate, addToCart, addReview }) {
+export default function DetailPage({ allProducts, navigate, addToCart, addReview }) {
+  const { id: productId } = useParams();
   const p = allProducts.find((x) => x.id === productId);
 
   const [qty,     setQty]     = useState(1);
