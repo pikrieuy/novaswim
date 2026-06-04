@@ -31,29 +31,40 @@ self.addEventListener('fetch', (event) => {
   // Skip: browser extensions
   if (!url.protocol.startsWith('http')) return;
 
-  // For everything else: network first, fallback to cache
   event.respondWith(
-    fetch(event.request)
-      .then((response) => {
+    (async () => {
+      try {
+        const networkResponse = await fetch(event.request);
+        
         // Only cache successful responses for same-origin assets
-        if (response.ok && url.origin === self.location.origin) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        if (networkResponse.ok && url.origin === self.location.origin) {
+          const cache = await caches.open(CACHE_NAME);
+          cache.put(event.request, networkResponse.clone());
         }
-        return response;
-      })
-      .catch(() => {
-        return caches.match(event.request).then((cachedResponse) => {
-          if (cachedResponse) return cachedResponse;
-          if (event.request.mode === 'navigate') {
-            return caches.match('/index.html');
+        
+        return networkResponse;
+      } catch (error) {
+        // Network fetch failed (e.g., offline)
+        const cachedResponse = await caches.match(event.request);
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+
+        // If it's a navigation request (SPA route like /detail/:id), fallback to index.html
+        if (event.request.mode === 'navigate') {
+          const indexResponse = await caches.match('/index.html') || await caches.match('/');
+          if (indexResponse) {
+            return indexResponse;
           }
-          return new Response('Network error', { 
-            status: 503, 
-            statusText: 'Service Unavailable',
-            headers: new Headers({ 'Content-Type': 'text/plain' })
-          });
+        }
+
+        // Ultimate fallback to prevent "TypeError: Failed to convert value to 'Response'"
+        return new Response('Network error or offline', {
+          status: 503,
+          statusText: 'Service Unavailable',
+          headers: new Headers({ 'Content-Type': 'text/plain' }),
         });
-      })
+      }
+    })()
   );
 });
